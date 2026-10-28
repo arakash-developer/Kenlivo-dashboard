@@ -283,17 +283,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   <ul className="sidebar-sub-menu">
                     <li className="sidemenu-item">
                       <Link
-                        href="/ecommerce/"
-                        className={`sidemenu-link ${
-                          pathname === "/ecommerce/" ? "active" : ""
-                        }`}
-                      >
-                        Products Grid
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
                         href="/ecommerce/products-list/"
                         className={`sidemenu-link ${
                           pathname === "/ecommerce/products-list/"
@@ -302,19 +291,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         }`}
                       >
                         Products List
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/ecommerce/products-list/details/"
-                        className={`sidemenu-link ${
-                          pathname === "/ecommerce/products-list/details/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Product Details
                       </Link>
                     </li>
 
@@ -341,6 +317,164 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         }`}
                       >
                         Edit Product
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                SETUP
+              </Typography>
+
+              <Accordion
+                expanded={expanded === "panel_setup_cat"}
+                onChange={handleChange("panel_setup_cat")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel_setup_cat-content"
+                  id="panel_setup_cat-header"
+                >
+                  <i className="material-symbols-outlined">category</i>
+                  <span className="title">Categories</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/ecommerce/categories/"
+                        className={`sidemenu-link ${
+                          pathname === "/ecommerce/categories/" ? "active" : ""
+                        }`}
+                      >
+                        All Categories
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                MODULES
+              </Typography>
+
+              <Accordion
+                expanded={expanded === "panel13"}
+                onChange={handleChange("panel13")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel13d-content"
+                  id="panel13d-header"
+                >
+                  <i className="material-symbols-outlined">person</i>
+                  <span className="title">Users</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/users/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/" ? "active" : ""
+                        }`}
+                      >
+                        Team Members
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/users/users-list/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/users-list/" ? "active" : ""
+                        }`}
+                      >
+                        Users List
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/users/add-user/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/add-user/" ? "active" : ""
+                        }`}
+                      >
+                        Add User
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                OTHERS
+              </Typography>
+
+              <Accordion
+                expanded={expanded === "panel5_ecommerce_extra"}
+                onChange={handleChange("panel5_ecommerce_extra")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel5_ecommerce_extrad-content"
+                  id="panel5_ecommerce_extrad-header"
+                >
+                  <i className="material-symbols-outlined">shopping_bag</i>
+                  <span className="title">eCommerce</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/ecommerce/"
+                        className={`sidemenu-link ${
+                          pathname === "/ecommerce/" ? "active" : ""
+                        }`}
+                      >
+                        Products Grid
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/ecommerce/products-list/details/"
+                        className={`sidemenu-link ${
+                          pathname === "/ecommerce/products-list/details/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Product Details
                       </Link>
                     </li>
 
@@ -501,121 +635,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                SETUP
-              </Typography>
-
-              <Accordion
-                expanded={expanded === "panel_setup_cat"}
-                onChange={handleChange("panel_setup_cat")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel_setup_cat-content"
-                  id="panel_setup_cat-header"
-                >
-                  <i className="material-symbols-outlined">category</i>
-                  <span className="title">Categories</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/ecommerce/categories/"
-                        className={`sidemenu-link ${
-                          pathname === "/ecommerce/categories/" ? "active" : ""
-                        }`}
-                      >
-                        All Categories
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                MODULES
-              </Typography>
-
-              <Accordion
-                expanded={expanded === "panel13"}
-                onChange={handleChange("panel13")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel13d-content"
-                  id="panel13d-header"
-                >
-                  <i className="material-symbols-outlined">person</i>
-                  <span className="title">Users</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/" ? "active" : ""
-                        }`}
-                      >
-                        Team Members
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/users-list/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/users-list/" ? "active" : ""
-                        }`}
-                      >
-                        Users List
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/add-user/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/add-user/" ? "active" : ""
-                        }`}
-                      >
-                        Add User
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                OTHERS
-              </Typography>
 
               <Accordion
                 expanded={expanded === "panel6"}
