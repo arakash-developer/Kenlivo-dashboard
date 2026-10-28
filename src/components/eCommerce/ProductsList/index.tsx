@@ -172,6 +172,11 @@ const ProductsList: React.FC = () => {
                   </TableCell>
                   <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
                     <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Link href={`/ecommerce/products-list/${row._id}/`}>
+                        <IconButton aria-label="view" color="primary" sx={{ padding: "5px" }}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>visibility</i>
+                        </IconButton>
+                      </Link>
                       <Link href={`/ecommerce/edit-product/${row._id}/`}>
                         <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>

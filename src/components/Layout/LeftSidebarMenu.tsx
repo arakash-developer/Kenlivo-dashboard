@@ -293,7 +293,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                       <Link
                         href="/ecommerce/products-list/"
                         className={`sidemenu-link ${
-                          pathname === "/ecommerce/products-list/" || pathname.startsWith("/ecommerce/edit-product/")
+                          pathname.startsWith("/ecommerce/products-list/") || pathname.startsWith("/ecommerce/edit-product/")
                             ? "active"
                             : ""
                         }`}
