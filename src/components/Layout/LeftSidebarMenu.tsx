@@ -266,91 +266,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
               </Typography>
 
               <Accordion
-                expanded={expanded === "panel2"}
-                onChange={handleChange("panel2")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel2d-content"
-                  id="panel2d-header"
-                >
-                  <i className="material-symbols-outlined">note_stack</i>
-                  <span className="title">Front Pages</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/"
-                        className={`sidemenu-link ${
-                          pathname === "/" ? "active" : ""
-                        }`}
-                      >
-                        Home
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/features/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/features/" ? "active" : ""
-                        }`}
-                      >
-                        Features
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/team/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/team/" ? "active" : ""
-                        }`}
-                      >
-                        Our Team
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/faq/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/faq/" ? "active" : ""
-                        }`}
-                      >
-                        FAQ's
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/contact/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/contact/" ? "active" : ""
-                        }`}
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                SETUP
-              </Typography>
-
-              <Accordion
                 expanded={expanded === "panel5"}
                 onChange={handleChange("panel5")}
                 className="mat-accordion"
@@ -586,6 +501,17 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                SETUP
+              </Typography>
 
               <Accordion
                 expanded={expanded === "panel6"}
