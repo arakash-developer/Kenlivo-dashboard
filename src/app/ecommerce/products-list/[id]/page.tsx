@@ -2,7 +2,8 @@ import * as React from "react";
 import NextLink from "next/link";
 import ViewProduct from "@/components/eCommerce/ViewProduct";
 
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   return (
     <>
       <div className="breadcrumb-card">
@@ -22,7 +23,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </ul>
       </div>
 
-      <ViewProduct id={params.id} />
+      <ViewProduct id={id} />
     </>
   );
 }

@@ -18,9 +18,10 @@ function collectionFor(entity: string): string | null {
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { entity: string } },
+  { params }: { params: Promise<{ entity: string }> },
 ) {
-  const col = collectionFor(params.entity);
+  const { entity } = await params;
+  const col = collectionFor(entity);
   if (!col) return NextResponse.json({ success: false, message: "Unknown entity" }, { status: 404 });
 
   const db = await getDb();
@@ -31,9 +32,10 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { entity: string } },
+  { params }: { params: Promise<{ entity: string }> },
 ) {
-  const col = collectionFor(params.entity);
+  const { entity } = await params;
+  const col = collectionFor(entity);
   if (!col) return NextResponse.json({ success: false, message: "Unknown entity" }, { status: 404 });
 
   const body = await req.json().catch(() => null);
@@ -63,9 +65,10 @@ export async function POST(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { entity: string } },
+  { params }: { params: Promise<{ entity: string }> },
 ) {
-  const col = collectionFor(params.entity);
+  const { entity } = await params;
+  const col = collectionFor(entity);
   if (!col) return NextResponse.json({ success: false, message: "Unknown entity" }, { status: 404 });
 
   const body = await req.json().catch(() => null);
@@ -91,9 +94,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { entity: string } },
+  { params }: { params: Promise<{ entity: string }> },
 ) {
-  const col = collectionFor(params.entity);
+  const { entity } = await params;
+  const col = collectionFor(entity);
   if (!col) return NextResponse.json({ success: false, message: "Unknown entity" }, { status: 404 });
 
   const { id } = await req.json().catch(() => ({}));

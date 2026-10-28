@@ -6,9 +6,10 @@ export const runtime = "nodejs";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const oid = (() => { try { return new ObjectId(params.id); } catch { return null; } })();
+  const { id } = await params;
+  const oid = (() => { try { return new ObjectId(id); } catch { return null; } })();
   if (!oid) return NextResponse.json({ success: false, message: "Invalid ID" }, { status: 400 });
 
   const db = await getDb();
