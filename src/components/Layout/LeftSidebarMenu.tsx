@@ -543,6 +543,17 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                MODULES
+              </Typography>
+
               <Accordion
                 expanded={expanded === "panel6"}
                 onChange={handleChange("panel6")}
@@ -1170,7 +1181,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                MODULES
+                OTHERS
               </Typography>
 
               <Link
@@ -1386,17 +1397,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                OTHERS
-              </Typography>
 
               <Accordion
                 expanded={expanded === "panel15"}
