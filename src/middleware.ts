@@ -1,22 +1,41 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { jwtVerify } from "jose";
 
-// Inlined (not imported from lib/session) to keep jsonwebtoken out of the
-// edge middleware bundle.
 const SESSION_COOKIE = "session";
 
-/**
- * Edge route protection. A valid, signature-verified session cookie with the
- * admin role is required to reach any /dashboard route. The cookie is issued by
- * /api/auth/login after checking the user's password directly against MongoDB.
- */
-
-const secret = new TextEncoder().encode(process.env.SESSION_SECRET);
-
+// Verify an HS256 JWT using the Web Crypto API (Edge-compatible, no jose needed).
 async function getRole(token: string): Promise<string | null> {
   try {
-    const { payload } = await jwtVerify(token, secret);
-    return (payload as { role?: string }).role ?? null;
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
+    const [headerB64, payloadB64, sigB64] = parts;
+
+    const key = await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(process.env.SESSION_SECRET ?? ""),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["verify"],
+    );
+
+    const sig = Uint8Array.from(
+      atob(sigB64.replace(/-/g, "+").replace(/_/g, "/")),
+      (c) => c.charCodeAt(0),
+    );
+    const valid = await crypto.subtle.verify(
+      "HMAC",
+      key,
+      sig,
+      new TextEncoder().encode(`${headerB64}.${payloadB64}`),
+    );
+    if (!valid) return null;
+
+    const payload = JSON.parse(
+      atob(payloadB64.replace(/-/g, "+").replace(/_/g, "/")),
+    ) as { role?: string; exp?: number };
+
+    if (payload.exp && payload.exp < Date.now() / 1000) return null;
+
+    return payload.role ?? null;
   } catch {
     return null;
   }
