@@ -2,9 +2,19 @@
 
 import * as React from "react";
 import { Card, Box, Typography } from "@mui/material";
-import Image from "next/image";
+import { useProfile } from "@/hooks/useProfile";
 
 const ProfileInformation: React.FC = () => {
+  const { user } = useProfile();
+  const roleLabel = user?.role === "admin" ? "Administrator" : "Customer";
+  const joinDate = user?.createdAt
+    ? new Date(user.createdAt).toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      })
+    : "—";
+
   return (
     <>
       <Card
@@ -37,7 +47,7 @@ const ProfileInformation: React.FC = () => {
             >
               User ID:
             </Typography>{" "}
-            7001
+            {user?.id ?? "—"}
           </Box>
 
           <Box className="text-black" sx={{ fontWeight: "500", mt: "10px" }}>
@@ -48,7 +58,7 @@ const ProfileInformation: React.FC = () => {
             >
               Full Name:
             </Typography>{" "}
-            Olivia John
+            {user?.name ?? "—"}
           </Box>
 
           <Box className="text-black" sx={{ fontWeight: "500", mt: "10px" }}>
@@ -59,7 +69,7 @@ const ProfileInformation: React.FC = () => {
             >
               Email:
             </Typography>{" "}
-            olivia&#64;trezo.com
+            {user?.email ?? "—"}
           </Box>
 
           <Box className="text-black" sx={{ fontWeight: "500", mt: "10px" }}>
@@ -70,7 +80,7 @@ const ProfileInformation: React.FC = () => {
             >
               Role:
             </Typography>{" "}
-            Administrator
+            {roleLabel}
           </Box>
 
           <Box className="text-black" sx={{ fontWeight: "500", mt: "10px" }}>
@@ -79,9 +89,9 @@ const ProfileInformation: React.FC = () => {
               className="text-body"
               sx={{ fontWeight: "normal" }}
             >
-              Location:
+              Phone:
             </Typography>{" "}
-            New York, USA
+            {user?.phone ?? "—"}
           </Box>
 
           <Box className="text-black" sx={{ fontWeight: "500", mt: "10px" }}>
@@ -92,7 +102,7 @@ const ProfileInformation: React.FC = () => {
             >
               Join Date:
             </Typography>{" "}
-            10 May 2022
+            {joinDate}
           </Box>
         </Box>
       </Card>

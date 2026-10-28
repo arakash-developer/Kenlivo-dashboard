@@ -3,8 +3,12 @@
 import * as React from "react";
 import { Card, Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useProfile } from "@/hooks/useProfile";
 
 const ProfileIntro: React.FC = () => {
+  const { user } = useProfile();
+  const roleLabel = user?.role === "admin" ? "Administrator" : "Customer";
+
   return (
     <>
       <Card
@@ -54,10 +58,10 @@ const ProfileIntro: React.FC = () => {
                 fontWeight={600}
                 className="text-black"
               >
-                Olivia John
+                {user?.name ?? "—"}
               </Typography>
 
-              <Typography>Marketing Manager</Typography>
+              <Typography>{roleLabel}</Typography>
             </Box>
           </Box>
 
