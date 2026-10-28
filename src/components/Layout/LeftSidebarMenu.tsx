@@ -339,7 +339,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                APPS
+                PAGES
               </Typography>
 
               <Link
@@ -564,7 +564,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                PAGES
+                MODULES
               </Typography>
 
               <Accordion
@@ -1442,7 +1442,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                MODULES
+                OTHERS
               </Typography>
 
               <Accordion
@@ -2387,17 +2387,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 <i className="material-symbols-outlined">people</i>
                 <span className="title">Members</span>
               </Link>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                OTHERS
-              </Typography>
 
               <Link
                 href="/my-profile/"
