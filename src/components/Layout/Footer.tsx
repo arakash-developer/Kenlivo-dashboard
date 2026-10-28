@@ -16,17 +16,7 @@ const Footer: React.FC = () => {
         }}
       >
         <Typography>
-          © <span className="text-purple">Kenlivo</span> is Proudly Owned by{" "}
-          <a
-            href="https://envytheme.com/"
-            target="_blank"
-            className="text-primary"
-            style={{
-              textDecoration: "none",
-            }}
-          >
-            EnvyTheme
-          </a>
+          © <span className="text-purple">Kenlivo</span> — Developed by Akash
         </Typography>
       </Box>
     </>
