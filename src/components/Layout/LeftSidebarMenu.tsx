@@ -1249,58 +1249,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
-              <Accordion
-                expanded={expanded === "panel14"}
-                onChange={handleChange("panel14")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel14d-content"
-                  id="panel14d-header"
-                >
-                  <i className="material-symbols-outlined">account_box</i>
-                  <span className="title">Profile</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/profile/"
-                        className={`sidemenu-link ${
-                          pathname === "/profile/" ? "active" : ""
-                        }`}
-                      >
-                        User Profile
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/profile/teams/"
-                        className={`sidemenu-link ${
-                          pathname === "/profile/teams/" ? "active" : ""
-                        }`}
-                      >
-                        Teams
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/profile/projects/"
-                        className={`sidemenu-link ${
-                          pathname === "/profile/projects/" ? "active" : ""
-                        }`}
-                      >
-                        Projects
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
               <Link
                 href="/starter/"
                 className={`sidebar-menu-link ${
@@ -2448,27 +2396,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 <span className="title">Maps</span>
               </Link>
 
-              <Link
-                href="/notifications/"
-                className={`sidebar-menu-link ${
-                  pathname === "/notifications/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">notifications</i>
-                <span className="title">Notifications</span>
-              </Link>
-
-
-              <Link
-                href="/my-profile/"
-                className={`sidebar-menu-link ${
-                  pathname === "/my-profile/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">account_circle</i>
-                <span className="title">My Profile</span>
-              </Link>
-
               <Accordion
                 expanded={expanded === "panel23"}
                 onChange={handleChange("panel23")}
@@ -2549,13 +2476,48 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
-              <Link
-                href="/authentication/logout/"
-                className="sidebar-menu-link"
+              <Accordion
+                expanded={expanded === "panel14"}
+                onChange={handleChange("panel14")}
+                className="mat-accordion"
               >
-                <i className="material-symbols-outlined">logout</i>
-                <span className="title">Logout</span>
-              </Link>
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel14d-content"
+                  id="panel14d-header"
+                >
+                  <i className="material-symbols-outlined">account_box</i>
+                  <span className="title">Profile</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/my-profile/"
+                        className={`sidemenu-link ${pathname === "/my-profile/" ? "active" : ""}`}
+                      >
+                        My Profile
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/notifications/"
+                        className={`sidemenu-link ${pathname === "/notifications/" ? "active" : ""}`}
+                      >
+                        Notifications
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link href="/authentication/logout/" className="sidemenu-link">
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
             </div>
           </div>
         </div>
