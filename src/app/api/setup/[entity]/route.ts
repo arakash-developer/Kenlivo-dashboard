@@ -61,6 +61,34 @@ export async function POST(
   );
 }
 
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { entity: string } },
+) {
+  const col = collectionFor(params.entity);
+  if (!col) return NextResponse.json({ success: false, message: "Unknown entity" }, { status: 404 });
+
+  const body = await req.json().catch(() => null);
+  if (!body?.id || !body?.name?.trim()) {
+    return NextResponse.json({ success: false, message: "ID and name are required" }, { status: 400 });
+  }
+
+  const { id, name, description = "", isActive = true } = body;
+  const oid = (() => { try { return new ObjectId(id); } catch { return null; } })();
+  if (!oid) return NextResponse.json({ success: false, message: "Invalid ID" }, { status: 400 });
+
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+  const db = await getDb();
+  const { matchedCount } = await db.collection(col).updateOne(
+    { _id: oid },
+    { $set: { name: name.trim(), slug, description: description.trim(), isActive, updatedAt: new Date() } },
+  );
+  if (!matchedCount) return NextResponse.json({ success: false, message: "Not found" }, { status: 404 });
+
+  return NextResponse.json({ success: true });
+}
+
 export async function DELETE(
   req: NextRequest,
   { params }: { params: { entity: string } },

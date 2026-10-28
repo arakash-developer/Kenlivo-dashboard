@@ -75,14 +75,10 @@ function BootstrapDialogTitle({ children, onClose, ...other }: BootstrapDialogTi
 }
 BootstrapDialogTitle.propTypes = { children: PropTypes.node, onClose: PropTypes.func.isRequired };
 
-interface PaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (event: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
-}
-
-function TablePaginationActions({ count, page, rowsPerPage, onPageChange }: PaginationActionsProps) {
+function TablePaginationActions({ count, page, rowsPerPage, onPageChange }: {
+  count: number; page: number; rowsPerPage: number;
+  onPageChange: (e: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
+}) {
   const theme = useTheme();
   return (
     <Box sx={{ flexShrink: 0, display: "flex", gap: "10px", padding: "0 20px" }}>
@@ -103,12 +99,22 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [open, setOpen] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState("");
-  const [formName, setFormName] = useState("");
-  const [formDescription, setFormDescription] = useState("");
-  const [formStatus, setFormStatus] = useState("active");
+  // Add modal
+  const [addOpen, setAddOpen] = useState(false);
+  const [addSubmitting, setAddSubmitting] = useState(false);
+  const [addError, setAddError] = useState("");
+  const [addName, setAddName] = useState("");
+  const [addDescription, setAddDescription] = useState("");
+  const [addStatus, setAddStatus] = useState("active");
+
+  // Edit modal
+  const [editOpen, setEditOpen] = useState(false);
+  const [editSubmitting, setEditSubmitting] = useState(false);
+  const [editError, setEditError] = useState("");
+  const [editId, setEditId] = useState("");
+  const [editName, setEditName] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editStatus, setEditStatus] = useState("active");
 
   const apiUrl = `/api/setup/${entity}`;
 
@@ -134,39 +140,127 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filtered.length) : 0;
 
-  const handleClickOpen = () => {
-    setFormName(""); setFormDescription(""); setFormStatus("active"); setFormError("");
-    setOpen(true);
+  // ── Add handlers ──
+  const openAdd = () => {
+    setAddName(""); setAddDescription(""); setAddStatus("active"); setAddError("");
+    setAddOpen(true);
   };
-  const handleClose = () => setOpen(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleAdd = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formName.trim()) { setFormError("Name is required"); return; }
-    setSubmitting(true);
-    setFormError("");
+    if (!addName.trim()) { setAddError("Name is required"); return; }
+    setAddSubmitting(true); setAddError("");
     try {
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: formName.trim(), description: formDescription.trim(), isActive: formStatus === "active" }),
+        body: JSON.stringify({ name: addName.trim(), description: addDescription.trim(), isActive: addStatus === "active" }),
       });
       const json = await res.json();
-      if (!res.ok) { setFormError(json.message ?? "Failed to create"); return; }
+      if (!res.ok) { setAddError(json.message ?? "Failed to create"); return; }
       await fetchItems();
-      handleClose();
+      setAddOpen(false);
     } catch {
-      setFormError("Network error. Please try again.");
+      setAddError("Network error. Please try again.");
     } finally {
-      setSubmitting(false);
+      setAddSubmitting(false);
     }
   };
 
+  // ── Edit handlers ──
+  const openEdit = (row: SetupItem) => {
+    setEditId(row._id);
+    setEditName(row.name);
+    setEditDescription(row.description ?? "");
+    setEditStatus(row.isActive ? "active" : "inactive");
+    setEditError("");
+    setEditOpen(true);
+  };
+
+  const handleEdit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editName.trim()) { setEditError("Name is required"); return; }
+    setEditSubmitting(true); setEditError("");
+    try {
+      const res = await fetch(apiUrl, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: editId, name: editName.trim(), description: editDescription.trim(), isActive: editStatus === "active" }),
+      });
+      const json = await res.json();
+      if (!res.ok) { setEditError(json.message ?? "Failed to update"); return; }
+      await fetchItems();
+      setEditOpen(false);
+    } catch {
+      setEditError("Network error. Please try again.");
+    } finally {
+      setEditSubmitting(false);
+    }
+  };
+
+  // ── Delete handler ──
   const handleDelete = async (id: string) => {
     if (!confirm(`Delete this ${label.toLowerCase()}?`)) return;
     await fetch(apiUrl, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
     fetchItems();
   };
+
+  const modalFields = (
+    name: string, setName: (v: string) => void,
+    description: string, setDescription: (v: string) => void,
+    status: string, setStatus: (v: string) => void,
+    error: string,
+    submitting: boolean,
+    onCancel: () => void,
+    submitLabel: string,
+  ) => (
+    <Grid container alignItems="center" spacing={2}>
+      <Grid item xs={12} md={6}>
+        <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Name *</Typography>
+        <TextField
+          required fullWidth label="Enter name" autoFocus
+          value={name} onChange={(e) => setName(e.target.value)}
+          InputProps={{ style: { borderRadius: 8 } }}
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Status</Typography>
+        <FormControl fullWidth>
+          <InputLabel id="status-label">Select</InputLabel>
+          <Select labelId="status-label" value={status} label="Select"
+            onChange={(e: SelectChangeEvent) => setStatus(e.target.value)} sx={{ borderRadius: 2 }}>
+            <MenuItem value="active">Active</MenuItem>
+            <MenuItem value="inactive">Inactive</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Description</Typography>
+        <textarea
+          placeholder="Description" rows={4}
+          value={description} onChange={(e) => setDescription(e.target.value)}
+          style={{ width: "100%", borderRadius: "6px", padding: "10px 15px", border: "1px solid #D5D9E2", outline: "none", fontFamily: "inherit", fontSize: 14 }}
+        />
+      </Grid>
+      {error && (
+        <Grid item xs={12}>
+          <Typography color="error" sx={{ fontSize: "13px" }}>{error}</Typography>
+        </Grid>
+      )}
+      <Grid item xs={12} mt={1}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", gap: "10px" }}>
+          <Button onClick={onCancel} variant="outlined" color="error" disabled={submitting}
+            sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px" }}>
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" disabled={submitting}
+            sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px", color: "#fff !important" }}>
+            {submitting ? <CircularProgress size={18} color="inherit" /> : submitLabel}
+          </Button>
+        </Box>
+      </Grid>
+    </Grid>
+  );
 
   return (
     <>
@@ -182,12 +276,9 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
               onChange={(e) => { setSearch(e.target.value); setPage(0); }}
             />
           </form>
-          <Button
-            onClick={handleClickOpen}
-            variant="outlined"
+          <Button onClick={openAdd} variant="outlined"
             sx={{ textTransform: "capitalize", borderRadius: "7px", fontWeight: "500", fontSize: "13px", padding: "6px 13px" }}
-            color="primary"
-          >
+            color="primary">
             <AddIcon sx={{ position: "relative", top: "-1px" }} /> Add New {label}
           </Button>
         </Box>
@@ -204,13 +295,9 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
 
             <TableBody>
               {loading ? (
-                <TableRow>
-                  <TableCell colSpan={6} align="center" sx={{ py: 4 }}><CircularProgress size={28} /></TableCell>
-                </TableRow>
+                <TableRow><TableCell colSpan={6} align="center" sx={{ py: 4 }}><CircularProgress size={28} /></TableCell></TableRow>
               ) : filtered.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={6} align="center" sx={{ py: 4, color: "#888" }}>No {label.toLowerCase()} found.</TableCell>
-                </TableRow>
+                <TableRow><TableCell colSpan={6} align="center" sx={{ py: 4, color: "#888" }}>No {label.toLowerCase()} found.</TableCell></TableRow>
               ) : (
                 (rowsPerPage > 0 ? filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : filtered).map((row) => (
                   <TableRow key={row._id}>
@@ -227,7 +314,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
                     </TableCell>
                     <TableCell sx={{ padding: "15px 20px" }} className="border-bottom">
                       <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }}>
+                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }} onClick={() => openEdit(row)}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
                         </IconButton>
                         <IconButton aria-label="delete" color="error" sx={{ padding: "5px" }} onClick={() => handleDelete(row._id)}>
@@ -245,10 +332,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={6}
-                  count={filtered.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
+                  colSpan={6} count={filtered.length} rowsPerPage={rowsPerPage} page={page}
                   slotProps={{ select: { inputProps: { "aria-label": "rows per page" }, native: true } }}
                   onPageChange={(_, newPage) => setPage(newPage)}
                   onRowsPerPageChange={(e) => { setRowsPerPage(parseInt(e.target.value, 10)); setPage(0); }}
@@ -261,74 +345,38 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
         </TableContainer>
       </Card>
 
-      {/* Add Modal */}
-      <BootstrapDialog onClose={handleClose} open={open} className="rmu-modal">
+      {/* ── Add Modal ── */}
+      <BootstrapDialog onClose={() => setAddOpen(false)} open={addOpen} className="rmu-modal">
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
             <Typography variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
               Add New {label}
             </Typography>
-            <IconButton aria-label="remove" size="small" onClick={handleClose}><ClearIcon /></IconButton>
+            <IconButton aria-label="remove" size="small" onClick={() => setAddOpen(false)}><ClearIcon /></IconButton>
           </Box>
-
           <Box className="rmu-modal-content">
-            <Box component="form" noValidate onSubmit={handleSubmit}>
+            <Box component="form" noValidate onSubmit={handleAdd}>
               <Box sx={{ padding: "25px", borderRadius: "8px" }} className="bg-white">
-                <Grid container alignItems="center" spacing={2}>
+                {modalFields(addName, setAddName, addDescription, setAddDescription, addStatus, setAddStatus, addError, addSubmitting, () => setAddOpen(false), "Create")}
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </BootstrapDialog>
 
-                  <Grid item xs={12} md={6}>
-                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Name *</Typography>
-                    <TextField
-                      required fullWidth label="Enter name" autoFocus
-                      value={formName} onChange={(e) => setFormName(e.target.value)}
-                      InputProps={{ style: { borderRadius: 8 } }}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Status</Typography>
-                    <FormControl fullWidth>
-                      <InputLabel id="status-label">Select</InputLabel>
-                      <Select
-                        labelId="status-label" value={formStatus} label="Select"
-                        onChange={(e: SelectChangeEvent) => setFormStatus(e.target.value)}
-                        sx={{ borderRadius: 2 }}
-                      >
-                        <MenuItem value="active">Active</MenuItem>
-                        <MenuItem value="inactive">Inactive</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Description</Typography>
-                    <textarea
-                      placeholder="Description" rows={4}
-                      value={formDescription} onChange={(e) => setFormDescription(e.target.value)}
-                      style={{ width: "100%", borderRadius: "6px", padding: "10px 15px", border: "1px solid #D5D9E2", outline: "none", fontFamily: "inherit", fontSize: 14 }}
-                    />
-                  </Grid>
-
-                  {formError && (
-                    <Grid item xs={12}>
-                      <Typography color="error" sx={{ fontSize: "13px" }}>{formError}</Typography>
-                    </Grid>
-                  )}
-
-                  <Grid item xs={12} mt={1}>
-                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", gap: "10px" }}>
-                      <Button onClick={handleClose} variant="outlined" color="error" disabled={submitting}
-                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px" }}>
-                        Cancel
-                      </Button>
-                      <Button type="submit" variant="contained" disabled={submitting}
-                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px", color: "#fff !important" }}>
-                        {submitting ? <CircularProgress size={18} color="inherit" /> : <><AddIcon sx={{ position: "relative", top: "-2px" }} className="mr-5px" /> Create</>}
-                      </Button>
-                    </Box>
-                  </Grid>
-
-                </Grid>
+      {/* ── Edit Modal ── */}
+      <BootstrapDialog onClose={() => setEditOpen(false)} open={editOpen} className="rmu-modal">
+        <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
+            <Typography variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
+              Edit {label}
+            </Typography>
+            <IconButton aria-label="remove" size="small" onClick={() => setEditOpen(false)}><ClearIcon /></IconButton>
+          </Box>
+          <Box className="rmu-modal-content">
+            <Box component="form" noValidate onSubmit={handleEdit}>
+              <Box sx={{ padding: "25px", borderRadius: "8px" }} className="bg-white">
+                {modalFields(editName, setEditName, editDescription, setEditDescription, editStatus, setEditStatus, editError, editSubmitting, () => setEditOpen(false), "Save Changes")}
               </Box>
             </Box>
           </Box>

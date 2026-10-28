@@ -127,11 +127,20 @@ const CategoriesTable: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
-
   const [status, setStatus] = useState<string>("active");
   const [formName, setFormName] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formImage, setFormImage] = useState("");
+
+  // Edit modal
+  const [editOpen, setEditOpen] = useState(false);
+  const [editSubmitting, setEditSubmitting] = useState(false);
+  const [editError, setEditError] = useState("");
+  const [editId, setEditId] = useState("");
+  const [editName, setEditName] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editImage, setEditImage] = useState("");
+  const [editStatus, setEditStatus] = useState("active");
 
   const fetchCategories = async () => {
     setLoading(true);
@@ -199,6 +208,43 @@ const CategoriesTable: React.FC = () => {
       setFormError("Network error. Please try again.");
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const openEdit = (row: Category) => {
+    setEditId(row._id);
+    setEditName(row.name);
+    setEditDescription(row.description ?? "");
+    setEditImage(row.image ?? "");
+    setEditStatus(row.isActive ? "active" : "inactive");
+    setEditError("");
+    setEditOpen(true);
+  };
+
+  const handleEditSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!editName.trim()) { setEditError("Name is required"); return; }
+    setEditSubmitting(true); setEditError("");
+    try {
+      const res = await fetch("/api/categories", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: editId,
+          name: editName.trim(),
+          description: editDescription.trim(),
+          image: editImage.trim() || null,
+          isActive: editStatus === "active",
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok) { setEditError(json.message ?? "Failed to update"); return; }
+      await fetchCategories();
+      setEditOpen(false);
+    } catch {
+      setEditError("Network error. Please try again.");
+    } finally {
+      setEditSubmitting(false);
     }
   };
 
@@ -316,7 +362,7 @@ const CategoriesTable: React.FC = () => {
                         <IconButton aria-label="view" color="primary" sx={{ padding: "5px" }}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>visibility</i>
                         </IconButton>
-                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }}>
+                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }} onClick={() => openEdit(row)}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
                         </IconButton>
                         <IconButton aria-label="delete" color="error" sx={{ padding: "5px" }} onClick={() => handleDelete(row._id)}>
@@ -353,6 +399,76 @@ const CategoriesTable: React.FC = () => {
           </Table>
         </TableContainer>
       </Card>
+
+      {/* Edit Category Modal */}
+      <BootstrapDialog onClose={() => setEditOpen(false)} aria-labelledby="edit-dialog-title" open={editOpen} className="rmu-modal">
+        <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
+            <Typography id="edit-dialog-title" variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
+              Edit Category
+            </Typography>
+            <IconButton aria-label="remove" size="small" onClick={() => setEditOpen(false)}>
+              <ClearIcon />
+            </IconButton>
+          </Box>
+
+          <Box className="rmu-modal-content">
+            <Box component="form" noValidate onSubmit={handleEditSubmit}>
+              <Box sx={{ padding: "25px", borderRadius: "8px" }} className="bg-white">
+                <Grid container alignItems="center" spacing={2}>
+
+                  <Grid item xs={12} md={12} lg={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Name *</Typography>
+                    <TextField required fullWidth label="Enter name" value={editName} onChange={(e) => setEditName(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                  </Grid>
+
+                  <Grid item xs={12} md={12} lg={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Status</Typography>
+                    <FormControl fullWidth>
+                      <InputLabel id="edit-status-label">Select</InputLabel>
+                      <Select labelId="edit-status-label" value={editStatus} label="Select" onChange={(e: SelectChangeEvent) => setEditStatus(e.target.value)} sx={{ borderRadius: 2 }}>
+                        <MenuItem value="active">Active</MenuItem>
+                        <MenuItem value="inactive">Inactive</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Description</Typography>
+                    <textarea placeholder="Description" rows={4} value={editDescription} onChange={(e) => setEditDescription(e.target.value)}
+                      style={{ width: "100%", borderRadius: "6px", padding: "10px 15px", border: "1px solid #D5D9E2", outline: "none", fontFamily: "inherit", fontSize: 14 }} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Image URL</Typography>
+                    <TextField fullWidth label="https://..." value={editImage} onChange={(e) => setEditImage(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                  </Grid>
+
+                  {editError && (
+                    <Grid item xs={12}>
+                      <Typography color="error" sx={{ fontSize: "13px" }}>{editError}</Typography>
+                    </Grid>
+                  )}
+
+                  <Grid item xs={12} mt={1}>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", gap: "10px" }}>
+                      <Button onClick={() => setEditOpen(false)} variant="outlined" color="error" disabled={editSubmitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px" }}>
+                        Cancel
+                      </Button>
+                      <Button type="submit" variant="contained" disabled={editSubmitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px", color: "#fff !important" }}>
+                        {editSubmitting ? <CircularProgress size={18} color="inherit" /> : "Save Changes"}
+                      </Button>
+                    </Box>
+                  </Grid>
+
+                </Grid>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </BootstrapDialog>
 
       {/* Add Category Modal */}
       <BootstrapDialog
