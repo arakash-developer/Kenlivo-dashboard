@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/lib/auth-client";
+import { authApi } from "@/lib/api/auth";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();
@@ -32,14 +32,16 @@ const SignInForm: React.FC = () => {
 
     setError(null);
     setLoading(true);
-    const { error: authError } = await signIn.email({ email, password });
-    setLoading(false);
-
-    if (authError) {
-      setError(authError.message || "Invalid email or password.");
-      return;
+    try {
+      // The login route verifies the password against MongoDB and only issues a
+      // session for admins (otherwise it throws with a message).
+      await authApi.login({ email, password });
+      router.push("/dashboard/ecommerce/");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Invalid email or password.");
+    } finally {
+      setLoading(false);
     }
-    router.push("/dashboard/ecommerce/");
   };
 
   return (

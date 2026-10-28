@@ -1,19 +1,33 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
+import { jwtVerify } from "jose";
+
+// Inlined (not imported from lib/session) to keep jsonwebtoken out of the
+// edge middleware bundle.
+const SESSION_COOKIE = "session";
 
 /**
- * Edge route protection. A valid better-auth session cookie must be present to
- * reach any /dashboard route; otherwise the user is sent to the sign-in page.
- *
- * This only checks for the cookie's presence (fast, edge-safe). The session is
- * still fully validated server-side by better-auth on every API call.
+ * Edge route protection. A valid, signature-verified session cookie with the
+ * admin role is required to reach any /dashboard route. The cookie is issued by
+ * /api/auth/login after checking the user's password directly against MongoDB.
  */
-export function middleware(req: NextRequest) {
-  const sessionCookie = getSessionCookie(req);
 
-  if (!sessionCookie) {
-    const signInUrl = new URL("/authentication/sign-in/", req.url);
-    return NextResponse.redirect(signInUrl);
+const secret = new TextEncoder().encode(process.env.SESSION_SECRET);
+
+async function getRole(token: string): Promise<string | null> {
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return (payload as { role?: string }).role ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function middleware(req: NextRequest) {
+  const token = req.cookies.get(SESSION_COOKIE)?.value;
+  const role = token ? await getRole(token) : null;
+
+  if (role !== "admin") {
+    return NextResponse.redirect(new URL("/authentication/sign-in/", req.url));
   }
 
   return NextResponse.next();

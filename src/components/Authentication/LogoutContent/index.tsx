@@ -4,12 +4,12 @@ import * as React from "react";
 import { Grid, Button, Box, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut } from "@/lib/auth-client";
+import { authApi } from "@/lib/api/auth";
 
 const LogoutContent: React.FC = () => {
   // Destroy the session as soon as the logout screen is shown.
   React.useEffect(() => {
-    signOut();
+    authApi.logout();
   }, []);
 
   return (

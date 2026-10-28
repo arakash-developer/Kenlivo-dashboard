@@ -11,36 +11,15 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { signUp } from "@/lib/auth-client";
-
 const SignUpForm: React.FC = () => {
-  const router = useRouter();
-  const [loading, setLoading] = React.useState(false);
+  const [loading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const name = String(form.get("fullName") || "");
-    const email = String(form.get("email") || "");
-    const password = String(form.get("password") || "");
-
-    if (!name || !email || !password) {
-      setError("Please fill in all fields.");
-      return;
-    }
-
-    setError(null);
-    setLoading(true);
-    const { error: authError } = await signUp.email({ name, email, password });
-    setLoading(false);
-
-    if (authError) {
-      setError(authError.message || "Could not create account.");
-      return;
-    }
-    router.push("/dashboard/ecommerce/");
+    // This is an admin-only dashboard; accounts are provisioned by an
+    // administrator, so self sign-up is disabled.
+    setError("Account creation is managed by an administrator. Please sign in.");
   };
 
   return (
