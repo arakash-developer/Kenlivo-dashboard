@@ -1,15 +1,22 @@
 "use client";
 
 import styles from "@/components/Users/Search.module.css";
-import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
   Box,
   Button,
   Card,
+  CircularProgress,
+  Dialog,
+  FormControl,
+  Grid,
   IconButton,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -18,699 +25,304 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  TextField,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import Image from "next/image";
+import { SelectChangeEvent, styled, useTheme } from "@mui/material";
 import Link from "next/link";
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number,
-  ) => void;
+interface UserRow {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
+  phone?: string;
+  isActive?: boolean;
+  createdAt?: string;
 }
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": { padding: theme.spacing(2) },
+  "& .MuiDialogActions-root": { padding: theme.spacing(1) },
+}));
+
+function TablePaginationActions({ count, page, rowsPerPage, onPageChange }: {
+  count: number; page: number; rowsPerPage: number;
+  onPageChange: (e: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
+}) {
   const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page + 1);
-  };
-
   return (
-    <Box
-      sx={{
-        flexShrink: 0,
-        display: "flex",
-        gap: "10px",
-        padding: "14px 20px",
-      }}
-    >
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
-        className="border"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
+    <Box sx={{ flexShrink: 0, display: "flex", gap: "10px", padding: "0 20px" }}>
+      <IconButton onClick={(e) => onPageChange(e, page - 1)} disabled={page === 0} sx={{ borderRadius: "4px", padding: "6px" }} className="border">
+        {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
       </IconButton>
-
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
-        className="border"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
+      <IconButton onClick={(e) => onPageChange(e, page + 1)} disabled={page >= Math.ceil(count / rowsPerPage) - 1} sx={{ borderRadius: "4px", padding: "6px" }} className="border">
+        {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
       </IconButton>
     </Box>
   );
 }
 
-function createData(
-  userId: string,
-  userImage: string,
-  userName: string,
-  email: string,
-  location: string,
-  phone: string,
-  projects: number,
-  joinDate: string,
-) {
-  return {
-    userId,
-    userImage,
-    userName,
-    email,
-    location,
-    phone,
-    projects,
-    joinDate,
-  };
-}
-
-const rows = [
-  createData(
-    "#JAN-158",
-    "/images/users/user6.jpg",
-    "Marcia Baker",
-    "marcia@kenlivo.com",
-    "Washington D.C",
-    "+1 555-445-4455",
-    6,
-    "01 Dec 2024",
-  ),
-  createData(
-    "#JAN-157",
-    "/images/users/user7.jpg",
-    "Carolyn Barnes",
-    "carolyn@kenlivo.com",
-    "Chicago",
-    "+1 555-455-9966",
-    10,
-    "02 Dec 2024",
-  ),
-  createData(
-    "#JAN-156",
-    "/images/users/user8.jpg",
-    "Donna Miller",
-    "donna@kenlivo.com",
-    "San Diego",
-    "+1 555-445-7788",
-    4,
-    "03 Dec 2024",
-  ),
-  createData(
-    "#JAN-155",
-    "/images/users/user9.jpg",
-    "Barbara Cros",
-    "barbara@kenlivo.com",
-    "San Diego",
-    "+1 555-445-778",
-    4,
-    "04 Dec 2024",
-  ),
-  createData(
-    "#JAN-154",
-    "/images/users/user10.jpg",
-    "Rebecca Block",
-    "rebecca@kenlivo.com",
-    "Los Angeles",
-    "+1 555-333-2288",
-    2,
-    "05 Dec 2024",
-  ),
-  createData(
-    "#JAN-153",
-    "/images/users/user11.jpg",
-    "Ramiro McCarty",
-    "ramiro@kenlivo.com",
-    "Las Vegas",
-    "+1 555-445-4455",
-    8,
-    "06 Dec 2024",
-  ),
-  createData(
-    "#JAN-152",
-    "/images/users/user12.jpg",
-    "Robert Fairweather",
-    "robert@kenlivo.com",
-    "San Francisco",
-    "+1 555-555-9922",
-    6,
-    "07 Dec 2024",
-  ),
-  createData(
-    "#JAN-151",
-    "/images/users/user13.jpg",
-    "Marcelino Haddock",
-    "marcelino@kenlivo.com",
-    "Washington D.C",
-    "+1 555-455-9966",
-    9,
-    "08 Dec 2024",
-  ),
-  createData(
-    "#JAN-150",
-    "/images/users/user14.jpg",
-    "Thomas Wilson",
-    "thomas@kenlivo.com",
-    "San Dieg",
-    "+1 555-333-2288",
-    5,
-    "09 Dec 2024",
-  ),
-  createData(
-    "#JAN-149",
-    "/images/users/user15.jpg",
-    "Nathaniel Hulsey",
-    "nathaniel@kenlivo.com",
-    "Chicago",
-    "+1 555-445-7788",
-    6,
-    "10 Dec 2024",
-  ),
-  createData(
-    "#JAN-148",
-    "/images/users/user16.jpg",
-    "Marcia Baker",
-    "marcia@kenlivo.com",
-    "Washington D.C",
-    "+1 555-543-4455",
-    1,
-    "11 Dec 2024",
-  ),
-  createData(
-    "#JAN-147",
-    "/images/users/user17.jpg",
-    "Carolyn Barnes",
-    "carolyn@kenlivo.com",
-    "Chicago",
-    "+1 555-763-9966",
-    2,
-    "12 Dec 2024",
-  ),
-  createData(
-    "#JAN-146",
-    "/images/users/user18.jpg",
-    "Donna Miller",
-    "donna@kenlivo.com",
-    "San Diego",
-    "+1 555-237-7788",
-    3,
-    "13 Dec 2024",
-  ),
-  createData(
-    "#JAN-145",
-    "/images/users/user19.jpg",
-    "Barbara Cros",
-    "barbara@kenlivo.com",
-    "San Diego",
-    "+1 555-963-778",
-    4,
-    "14 Dec 2024",
-  ),
-  createData(
-    "#JAN-144",
-    "/images/users/user20.jpg",
-    "Rebecca Block",
-    "rebecca@kenlivo.com",
-    "Los Angeles",
-    "+1 555-946-2288",
-    5,
-    "15 Dec 2024",
-  ),
-  createData(
-    "#JAN-143",
-    "/images/users/user21.jpg",
-    "Ramiro McCarty",
-    "ramiro@kenlivo.com",
-    "Las Vegas",
-    "+1 555-456-4455",
-    6,
-    "16 Dec 2024",
-  ),
-  createData(
-    "#JAN-142",
-    "/images/users/user22.jpg",
-    "Robert Fairweather",
-    "robert@kenlivo.com",
-    "San Francisco",
-    "+1 555-247-9922",
-    7,
-    "17 Dec 2024",
-  ),
-  createData(
-    "#JAN-141",
-    "/images/users/user23.jpg",
-    "Marcelino Haddock",
-    "marcelino@kenlivo.com",
-    "Washington D.C",
-    "+1 555-456-9966",
-    8,
-    "18 Dec 2024",
-  ),
-  createData(
-    "#JAN-140",
-    "/images/users/user24.jpg",
-    "Thomas Wilson",
-    "thomas@kenlivo.com",
-    "San Dieg",
-    "+1 555-987-2288",
-    9,
-    "19 Dec 2024",
-  ),
-  createData(
-    "#JAN-139",
-    "/images/users/user25.jpg",
-    "Nathaniel Hulsey",
-    "nathaniel@kenlivo.com",
-    "Chicago",
-    "+1 555-345-7788",
-    6,
-    "20 Dec 2024",
-  ),
-].sort((b, a) => (a.userId < b.userId ? -1 : 1));
-
 const UsersList: React.FC = () => {
-  // Table
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [users, setUsers] = useState<UserRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  // Edit modal
+  const [editOpen, setEditOpen] = useState(false);
+  const [editSubmitting, setEditSubmitting] = useState(false);
+  const [editError, setEditError] = useState("");
+  const [editId, setEditId] = useState("");
+  const [editName, setEditName] = useState("");
+  const [editEmail, setEditEmail] = useState("");
+  const [editPhone, setEditPhone] = useState("");
+  const [editRole, setEditRole] = useState("admin");
+  const [editStatus, setEditStatus] = useState("active");
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/users");
+      const json = await res.json();
+      setUsers(json.data ?? []);
+    } catch {
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  useEffect(() => { fetchUsers(); }, []);
+
+  const filtered = users.filter((u) =>
+    u.name.toLowerCase().includes(search.toLowerCase()) ||
+    u.email.toLowerCase().includes(search.toLowerCase()) ||
+    (u.role ?? "").toLowerCase().includes(search.toLowerCase())
+  );
+
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filtered.length) : 0;
+
+  const openEdit = (u: UserRow) => {
+    setEditId(u._id);
+    setEditName(u.name);
+    setEditEmail(u.email);
+    setEditPhone(u.phone ?? "");
+    setEditRole(u.role ?? "admin");
+    setEditStatus(u.isActive !== false ? "active" : "inactive");
+    setEditError("");
+    setEditOpen(true);
+  };
+
+  const handleEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editName.trim() || !editEmail.trim()) { setEditError("Name and email are required"); return; }
+    setEditSubmitting(true); setEditError("");
+    try {
+      const res = await fetch("/api/users", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: editId, name: editName.trim(), email: editEmail.trim(), phone: editPhone.trim(), role: editRole, isActive: editStatus === "active" }),
+      });
+      const json = await res.json();
+      if (!res.ok) { setEditError(json.message ?? "Failed to update"); return; }
+      await fetchUsers();
+      setEditOpen(false);
+    } catch {
+      setEditError("Network error. Please try again.");
+    } finally {
+      setEditSubmitting(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this user?")) return;
+    await fetch("/api/users", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
+    fetchUsers();
+  };
+
+  const roleLabel = (role: string) => {
+    if (role === "super_admin") return "Super Admin";
+    if (role === "admin") return "Admin";
+    return role.charAt(0).toUpperCase() + role.slice(1);
   };
 
   return (
     <>
-      <Card
-        sx={{
-          boxShadow: "none",
-          borderRadius: "7px",
-          mb: "25px",
-          padding: { xs: "18px", sm: "20px", lg: "25px" },
-        }}
-        className="rmui-card"
-      >
+      <Card sx={{ boxShadow: "none", borderRadius: "7px", mb: "25px", padding: { xs: "18px", sm: "20px", lg: "25px" } }} className="rmui-card">
+        <Box sx={{ display: { xs: "block", sm: "flex" }, alignItems: "center", justifyContent: "space-between", mb: "25px" }}>
+          <form className={styles.searchBox} onSubmit={(e) => e.preventDefault()}>
+            <label><i className="material-symbols-outlined">search</i></label>
+            <input
+              type="text"
+              className={styles.inputSearch}
+              placeholder="Search users here..."
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(0); }}
+            />
+          </form>
+          <Button
+            component={Link}
+            href="/users/add-user/"
+            variant="outlined"
+            sx={{ textTransform: "capitalize", borderRadius: "7px", fontWeight: "500", fontSize: "13px", padding: "6px 13px" }}
+            color="primary"
+          >
+            + Add New User
+          </Button>
+        </Box>
+
+        <TableContainer component={Paper} sx={{ boxShadow: "none", borderRadius: "7px" }} className="rmui-table border">
+          <Table sx={{ minWidth: 700 }} aria-label="Users Table">
+            <TableHead className="bg-f6f7f9">
+              <TableRow>
+                {["#", "Name", "Email", "Phone", "Role", "Status", "Joined", "Action"].map((h) => (
+                  <TableCell key={h} sx={{ fontWeight: "500", padding: "10px 20px", fontSize: "14px" }} className="text-black border-bottom">{h}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {loading ? (
+                <TableRow><TableCell colSpan={8} align="center" sx={{ py: 4 }}><CircularProgress size={28} /></TableCell></TableRow>
+              ) : filtered.length === 0 ? (
+                <TableRow><TableCell colSpan={8} align="center" sx={{ py: 4, color: "#888" }}>No users found.</TableCell></TableRow>
+              ) : (
+                (rowsPerPage > 0 ? filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : filtered).map((row, idx) => (
+                  <TableRow key={row._id}>
+                    <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
+                      {page * rowsPerPage + idx + 1}
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px", fontSize: "14px", fontWeight: 500 }} className="text-black border-bottom">
+                      {row.name}
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.email}
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.phone || "—"}
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
+                      <span style={{
+                        background: row.role === "super_admin" ? "#7c3aed22" : row.role === "admin" ? "#2563eb22" : "#e5e7eb",
+                        color: row.role === "super_admin" ? "#7c3aed" : row.role === "admin" ? "#2563eb" : "#374151",
+                        padding: "3px 10px", borderRadius: "20px", fontSize: "12px", fontWeight: 500,
+                      }}>
+                        {roleLabel(row.role)}
+                      </span>
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
+                      <div className={`kenlivo-badge ${row.isActive !== false ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                        {row.isActive !== false ? "Active" : "Inactive"}
+                      </div>
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : "—"}
+                    </TableCell>
+                    <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }} onClick={() => openEdit(row)}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
+                        </IconButton>
+                        <IconButton aria-label="delete" color="error" sx={{ padding: "5px" }} onClick={() => handleDelete(row._id)}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete</i>
+                        </IconButton>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+              {emptyRows > 0 && <TableRow style={{ height: 53 * emptyRows }}><TableCell colSpan={8} /></TableRow>}
+            </TableBody>
+
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                  colSpan={8} count={filtered.length} rowsPerPage={rowsPerPage} page={page}
+                  slotProps={{ select: { inputProps: { "aria-label": "rows per page" }, native: true } }}
+                  onPageChange={(_, newPage) => setPage(newPage)}
+                  onRowsPerPageChange={(e) => { setRowsPerPage(parseInt(e.target.value, 10)); setPage(0); }}
+                  ActionsComponent={TablePaginationActions}
+                  sx={{ border: "none" }}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </TableContainer>
+      </Card>
+
+      {/* Edit Modal */}
+      <BootstrapDialog onClose={() => setEditOpen(false)} open={editOpen} className="rmu-modal">
         <Box>
-          <Box
-            sx={{
-              display: { xs: "block", sm: "flex" },
-              alignItems: "center",
-              justifyContent: "space-between",
-              mb: "25px",
-            }}
-          >
-            <Box
-              component="form"
-              className={styles.searchBox}
-              sx={{
-                width: "265px",
-              }}
-            >
-              <label>
-                <i className="material-symbols-outlined">search</i>
-              </label>
-              <input
-                type="text"
-                className={styles.inputSearch}
-                placeholder="Search here..."
-              />
-            </Box>
-
-            <Link href="/users/add-user">
-              <Button
-                variant="outlined"
-                sx={{
-                  textTransform: "capitalize",
-                  borderRadius: "7px",
-                  fontWeight: "500",
-                  fontSize: "13px",
-                  padding: "6px 13px",
-                }}
-                color="primary"
-              >
-                <AddIcon sx={{ position: "relative", top: "-1px" }} /> Add New
-                User
-              </Button>
-            </Link>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
+            <Typography variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
+              Edit User
+            </Typography>
+            <IconButton aria-label="remove" size="small" onClick={() => setEditOpen(false)}><ClearIcon /></IconButton>
           </Box>
-
-          {/* Table */}
-          <Box
-            sx={{
-              marginLeft: "-25px",
-              marginRight: "-25px",
-            }}
-          >
-            <TableContainer
-              component={Paper}
-              sx={{
-                boxShadow: "none",
-                borderRadius: "0",
-              }}
-              className="rmui-table"
-            >
-              <Table sx={{ minWidth: 1250 }} aria-label="Table">
-                <TableHead className="bg-primary-50">
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      User ID
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      User
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      Email
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      Location
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      Phone
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      Projects
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      Join Date
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        fontWeight: "500",
-                        padding: "10px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      Action
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-
-                <TableBody>
-                  {(rowsPerPage > 0
-                    ? rows.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage,
-                      )
-                    : rows
-                  ).map((row) => (
-                    <TableRow key={row.userId}>
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="border-bottom"
-                      >
-                        {row.userId}
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="border-bottom"
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "13px",
-                          }}
-                        >
-                          <Box sx={{ flexShrink: "0" }}>
-                            <Image
-                              src={row.userImage}
-                              alt="Product"
-                              width={40}
-                              height={40}
-                              style={{ borderRadius: "100px" }}
-                            />
-                          </Box>
-
-                          <Box>
-                            <Typography
-                              sx={{
-                                fontSize: "15px",
-                                fontWeight: "500",
-                              }}
-                              className="text-black"
-                            >
-                              {row.userName}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="text-black border-bottom"
-                      >
-                        {row.email}
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="text-black border-bottom"
-                      >
-                        {row.location}
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="text-black border-bottom"
-                      >
-                        {row.phone}
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="text-black border-bottom"
-                      >
-                        {row.projects}
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                          fontSize: "14px",
-                        }}
-                        className="text-black border-bottom"
-                      >
-                        {row.joinDate}
-                      </TableCell>
-
-                      <TableCell
-                        sx={{
-                          padding: "14px 20px",
-                        }}
-                        className="border-bottom"
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                        >
-                          <IconButton
-                            aria-label="view"
-                            color="primary"
-                            sx={{ padding: "5px" }}
-                          >
-                            <i
-                              className="material-symbols-outlined"
-                              style={{ fontSize: "16px" }}
-                            >
-                              visibility
-                            </i>
-                          </IconButton>
-
-                          <IconButton
-                            aria-label="edit"
-                            color="secondary"
-                            sx={{ padding: "5px" }}
-                          >
-                            <i
-                              className="material-symbols-outlined"
-                              style={{ fontSize: "16px" }}
-                            >
-                              edit
-                            </i>
-                          </IconButton>
-
-                          <IconButton
-                            aria-label="delete"
-                            color="error"
-                            sx={{ padding: "5px" }}
-                          >
-                            <i
-                              className="material-symbols-outlined"
-                              style={{ fontSize: "16px" }}
-                            >
-                              delete
-                            </i>
-                          </IconButton>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={8} />
-                    </TableRow>
+          <Box className="rmu-modal-content">
+            <Box component="form" noValidate onSubmit={handleEdit}>
+              <Box sx={{ padding: "25px", borderRadius: "8px" }} className="bg-white">
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Name *</Typography>
+                    <TextField required fullWidth label="Full name" value={editName} onChange={(e) => setEditName(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Email *</Typography>
+                    <TextField required fullWidth label="Email address" type="email" value={editEmail} onChange={(e) => setEditEmail(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Phone</Typography>
+                    <TextField fullWidth label="Phone number" value={editPhone} onChange={(e) => setEditPhone(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Role</Typography>
+                    <FormControl fullWidth>
+                      <InputLabel>Role</InputLabel>
+                      <Select value={editRole} label="Role" onChange={(e: SelectChangeEvent) => setEditRole(e.target.value)} sx={{ borderRadius: 2 }}>
+                        <MenuItem value="admin">Admin</MenuItem>
+                        <MenuItem value="super_admin">Super Admin</MenuItem>
+                        <MenuItem value="customer">Customer</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Status</Typography>
+                    <FormControl fullWidth>
+                      <InputLabel>Status</InputLabel>
+                      <Select value={editStatus} label="Status" onChange={(e: SelectChangeEvent) => setEditStatus(e.target.value)} sx={{ borderRadius: 2 }}>
+                        <MenuItem value="active">Active</MenuItem>
+                        <MenuItem value="inactive">Inactive</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  {editError && (
+                    <Grid item xs={12}>
+                      <Typography color="error" sx={{ fontSize: "13px" }}>{editError}</Typography>
+                    </Grid>
                   )}
-                </TableBody>
-
-                <TableFooter>
-                  <TableRow>
-                    <TablePagination
-                      rowsPerPageOptions={[
-                        5,
-                        10,
-                        25,
-                        { label: "All", value: -1 },
-                      ]}
-                      colSpan={8}
-                      count={rows.length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      slotProps={{
-                        select: {
-                          inputProps: {
-                            "aria-label": "rows per page",
-                          },
-                          native: true,
-                        },
-                      }}
-                      onPageChange={handleChangePage}
-                      onRowsPerPageChange={handleChangeRowsPerPage}
-                      ActionsComponent={TablePaginationActions}
-                      sx={{
-                        border: "none",
-                      }}
-                    />
-                  </TableRow>
-                </TableFooter>
-              </Table>
-            </TableContainer>
+                  <Grid item xs={12} mt={1}>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", gap: "10px" }}>
+                      <Button onClick={() => setEditOpen(false)} variant="outlined" color="error" disabled={editSubmitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px" }}>
+                        Cancel
+                      </Button>
+                      <Button type="submit" variant="contained" disabled={editSubmitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px", color: "#fff !important" }}>
+                        {editSubmitting ? <CircularProgress size={18} color="inherit" /> : "Save Changes"}
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
           </Box>
         </Box>
-      </Card>
+      </BootstrapDialog>
     </>
   );
 };

@@ -71,6 +71,14 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
   const pathname = usePathname();
 
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
+  const [isSuperAdmin, setIsSuperAdmin] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((j) => { if (j.data?.role === "super_admin") setIsSuperAdmin(true); })
+      .catch(() => {});
+  }, []);
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
@@ -475,6 +483,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 MODULES
               </Typography>
 
+              {isSuperAdmin && (
               <Accordion
                 expanded={expanded === "panel13"}
                 onChange={handleChange("panel13")}
@@ -491,17 +500,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
 
                 <AccordionDetails className="mat-details">
                   <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/" ? "active" : ""
-                        }`}
-                      >
-                        Team Members
-                      </Link>
-                    </li>
-
                     <li className="sidemenu-item">
                       <Link
                         href="/users/users-list/"
@@ -526,6 +524,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
+              )}
 
               <Link
                 href="/members/"

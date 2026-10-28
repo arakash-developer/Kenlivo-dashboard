@@ -7,7 +7,7 @@ export interface SessionUser {
   id: string;
   name: string;
   email: string;
-  role: "customer" | "admin";
+  role: "customer" | "admin" | "super_admin";
 }
 
 function secret(): string {

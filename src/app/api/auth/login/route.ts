@@ -10,7 +10,7 @@ interface UserDoc {
   name: string;
   email: string;
   password: string;
-  role: "customer" | "admin";
+  role: "customer" | "admin" | "super_admin";
   isActive?: boolean;
 }
 
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     );
   }
 
-  if (user.role !== "admin") {
+  if (user.role !== "admin" && user.role !== "super_admin") {
     return NextResponse.json(
       { success: false, message: "This dashboard is for administrators only" },
       { status: 403 },

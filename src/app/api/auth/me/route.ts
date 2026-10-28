@@ -10,7 +10,7 @@ interface UserDoc {
   _id: ObjectId;
   name: string;
   email: string;
-  role: "customer" | "admin";
+  role: "customer" | "admin" | "super_admin";
   phone?: string;
   isActive?: boolean;
   createdAt?: Date;

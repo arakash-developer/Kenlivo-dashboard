@@ -26,7 +26,18 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
   const role = token ? await getRole(token) : null;
 
-  if (role !== "admin") {
+  const { pathname } = req.nextUrl;
+
+  // /users/* is super_admin only
+  if (pathname.startsWith("/users")) {
+    if (role !== "super_admin") {
+      return NextResponse.redirect(new URL("/authentication/sign-in/", req.url));
+    }
+    return NextResponse.next();
+  }
+
+  // /dashboard/* and /my-profile/* require admin or super_admin
+  if (role !== "admin" && role !== "super_admin") {
     return NextResponse.redirect(new URL("/authentication/sign-in/", req.url));
   }
 
@@ -34,5 +45,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/my-profile/:path*"],
+  matcher: ["/dashboard/:path*", "/my-profile/:path*", "/users/:path*"],
 };
