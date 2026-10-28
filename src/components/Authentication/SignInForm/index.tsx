@@ -11,8 +11,37 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/auth-client";
 
 const SignInForm: React.FC = () => {
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = String(form.get("email") || "");
+    const password = String(form.get("password") || "");
+
+    if (!email || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    setError(null);
+    setLoading(true);
+    const { error: authError } = await signIn.email({ email, password });
+    setLoading(false);
+
+    if (authError) {
+      setError(authError.message || "Invalid email or password.");
+      return;
+    }
+    router.push("/dashboard/ecommerce/");
+  };
+
   return (
     <>
       <Box
@@ -164,7 +193,20 @@ const SignInForm: React.FC = () => {
                   </Button>
                 </Box>
 
-                <Box component="form">
+                <Box component="form" onSubmit={handleSubmit}>
+                  {error && (
+                    <Typography
+                      sx={{
+                        color: "#dc3545",
+                        fontSize: "14px",
+                        mb: "15px",
+                        fontWeight: "500",
+                      }}
+                    >
+                      {error}
+                    </Typography>
+                  )}
+
                   <Box mb="15px">
                     <FormControl fullWidth>
                       <Typography
@@ -256,6 +298,7 @@ const SignInForm: React.FC = () => {
                     <Button
                       type="submit"
                       variant="contained"
+                      disabled={loading}
                       sx={{
                         textTransform: "capitalize",
                         borderRadius: "6px",
@@ -268,7 +311,7 @@ const SignInForm: React.FC = () => {
                       }}
                     >
                       <i className="material-symbols-outlined mr-5">login</i>
-                      Sign In
+                      {loading ? "Signing In..." : "Sign In"}
                     </Button>
                   </Box>
 

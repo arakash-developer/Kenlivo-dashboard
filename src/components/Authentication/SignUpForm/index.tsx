@@ -11,8 +11,38 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { signUp } from "@/lib/auth-client";
 
 const SignUpForm: React.FC = () => {
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const name = String(form.get("fullName") || "");
+    const email = String(form.get("email") || "");
+    const password = String(form.get("password") || "");
+
+    if (!name || !email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    setError(null);
+    setLoading(true);
+    const { error: authError } = await signUp.email({ name, email, password });
+    setLoading(false);
+
+    if (authError) {
+      setError(authError.message || "Could not create account.");
+      return;
+    }
+    router.push("/dashboard/ecommerce/");
+  };
+
   return (
     <>
       <Box
@@ -164,7 +194,20 @@ const SignUpForm: React.FC = () => {
                   </Button>
                 </Box>
 
-                <Box component="form">
+                <Box component="form" onSubmit={handleSubmit}>
+                  {error && (
+                    <Typography
+                      sx={{
+                        color: "#dc3545",
+                        fontSize: "14px",
+                        mb: "15px",
+                        fontWeight: "500",
+                      }}
+                    >
+                      {error}
+                    </Typography>
+                  )}
+
                   <Box mb="15px">
                     <FormControl fullWidth>
                       <Typography
@@ -281,6 +324,7 @@ const SignUpForm: React.FC = () => {
                     <Button
                       type="submit"
                       variant="contained"
+                      disabled={loading}
                       sx={{
                         textTransform: "capitalize",
                         borderRadius: "6px",
@@ -293,7 +337,7 @@ const SignUpForm: React.FC = () => {
                       }}
                     >
                       <i className="material-symbols-outlined mr-5">person_4</i>
-                      Sign Up
+                      {loading ? "Creating Account..." : "Sign Up"}
                     </Button>
                   </Box>
 
