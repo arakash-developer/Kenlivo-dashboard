@@ -364,6 +364,106 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
+              <Accordion
+                expanded={expanded === "panel_setup_tags"}
+                onChange={handleChange("panel_setup_tags")}
+                className="mat-accordion"
+              >
+                <AccordionSummary className="mat-summary" aria-controls="panel_setup_tags-content" id="panel_setup_tags-header">
+                  <i className="material-symbols-outlined">label</i>
+                  <span className="title">Tags</span>
+                </AccordionSummary>
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link href="/ecommerce/setup/tags/" className={`sidemenu-link ${pathname === "/ecommerce/setup/tags/" ? "active" : ""}`}>
+                        All Tags
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                expanded={expanded === "panel_setup_collections"}
+                onChange={handleChange("panel_setup_collections")}
+                className="mat-accordion"
+              >
+                <AccordionSummary className="mat-summary" aria-controls="panel_setup_collections-content" id="panel_setup_collections-header">
+                  <i className="material-symbols-outlined">collections_bookmark</i>
+                  <span className="title">Collections</span>
+                </AccordionSummary>
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link href="/ecommerce/setup/collections/" className={`sidemenu-link ${pathname === "/ecommerce/setup/collections/" ? "active" : ""}`}>
+                        All Collections
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                expanded={expanded === "panel_setup_vendors"}
+                onChange={handleChange("panel_setup_vendors")}
+                className="mat-accordion"
+              >
+                <AccordionSummary className="mat-summary" aria-controls="panel_setup_vendors-content" id="panel_setup_vendors-header">
+                  <i className="material-symbols-outlined">storefront</i>
+                  <span className="title">Vendors</span>
+                </AccordionSummary>
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link href="/ecommerce/setup/vendors/" className={`sidemenu-link ${pathname === "/ecommerce/setup/vendors/" ? "active" : ""}`}>
+                        All Vendors
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                expanded={expanded === "panel_setup_brands"}
+                onChange={handleChange("panel_setup_brands")}
+                className="mat-accordion"
+              >
+                <AccordionSummary className="mat-summary" aria-controls="panel_setup_brands-content" id="panel_setup_brands-header">
+                  <i className="material-symbols-outlined">branding_watermark</i>
+                  <span className="title">Brand Names</span>
+                </AccordionSummary>
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link href="/ecommerce/setup/brands/" className={`sidemenu-link ${pathname === "/ecommerce/setup/brands/" ? "active" : ""}`}>
+                        All Brands
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                expanded={expanded === "panel_setup_product_types"}
+                onChange={handleChange("panel_setup_product_types")}
+                className="mat-accordion"
+              >
+                <AccordionSummary className="mat-summary" aria-controls="panel_setup_product_types-content" id="panel_setup_product_types-header">
+                  <i className="material-symbols-outlined">inventory_2</i>
+                  <span className="title">Product Types</span>
+                </AccordionSummary>
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link href="/ecommerce/setup/product-types/" className={`sidemenu-link ${pathname === "/ecommerce/setup/product-types/" ? "active" : ""}`}>
+                        All Product Types
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
               <Typography
                 className="sub-title"
                 sx={{

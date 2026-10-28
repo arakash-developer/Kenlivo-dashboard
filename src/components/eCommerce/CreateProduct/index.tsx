@@ -31,12 +31,21 @@ interface Category {
   isActive: boolean;
 }
 
-const TAG_OPTIONS = ["Watch", "Electronics", "Sports", "Fashion", "Jewellery"];
+interface SetupItem {
+  _id: string;
+  name: string;
+  isActive: boolean;
+}
 
 const CreateProduct: React.FC = () => {
   const router = useRouter();
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [tagOptions, setTagOptions] = useState<SetupItem[]>([]);
+  const [collectionOptions, setCollectionOptions] = useState<SetupItem[]>([]);
+  const [vendorOptions, setVendorOptions] = useState<SetupItem[]>([]);
+  const [brandOptions, setBrandOptions] = useState<SetupItem[]>([]);
+  const [productTypeOptions, setProductTypeOptions] = useState<SetupItem[]>([]);
 
   const [productTitle, setProductTitle] = useState("");
   const [productType, setProductType] = useState("");
@@ -62,10 +71,15 @@ const CreateProduct: React.FC = () => {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    fetch("/api/categories")
-      .then((r) => r.json())
-      .then((json) => setCategories((json.data ?? []).filter((c: Category) => c.isActive)))
-      .catch(() => {});
+    const load = (url: string, setter: (d: SetupItem[]) => void) =>
+      fetch(url).then((r) => r.json()).then((j) => setter((j.data ?? []).filter((x: SetupItem) => x.isActive))).catch(() => {});
+
+    fetch("/api/categories").then((r) => r.json()).then((j) => setCategories((j.data ?? []).filter((c: Category) => c.isActive))).catch(() => {});
+    load("/api/setup/tags", setTagOptions);
+    load("/api/setup/collections", setCollectionOptions);
+    load("/api/setup/vendors", setVendorOptions);
+    load("/api/setup/brands", setBrandOptions);
+    load("/api/setup/product-types", setProductTypeOptions);
   }, []);
 
   const handleMultipleSelectChange = (event: SelectChangeEvent<string[]>) => {
@@ -190,8 +204,8 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setProductType(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value="digital">Digital Product</MenuItem>
-                        <MenuItem value="physical">Physical Product</MenuItem>
+                        {productTypeOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {productTypeOptions.map((t) => <MenuItem key={t._id} value={t._id}>{t.name}</MenuItem>)}
                       </Select>
                     </FormControl>
                   </Box>
@@ -236,11 +250,8 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setBrandName(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value="Emburo">Emburo</MenuItem>
-                        <MenuItem value="Fediz">Fediz</MenuItem>
-                        <MenuItem value="Debilop">Debilop</MenuItem>
-                        <MenuItem value="Canin">Canin</MenuItem>
-                        <MenuItem value="Kenlivo">Kenlivo</MenuItem>
+                        {brandOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {brandOptions.map((b) => <MenuItem key={b._id} value={b._id}>{b.name}</MenuItem>)}
                       </Select>
                     </FormControl>
                   </Box>
@@ -537,11 +548,8 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setVendor(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value="Dennis Matthews">Dennis Matthews</MenuItem>
-                        <MenuItem value="Susan Rader">Susan Rader</MenuItem>
-                        <MenuItem value="Douglas Harvey">Douglas Harvey</MenuItem>
-                        <MenuItem value="John Valdez">John Valdez</MenuItem>
-                        <MenuItem value="Kathryn Turner">Kathryn Turner</MenuItem>
+                        {vendorOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {vendorOptions.map((v) => <MenuItem key={v._id} value={v._id}>{v.name}</MenuItem>)}
                       </Select>
                     </FormControl>
                   </Box>
@@ -562,11 +570,8 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setCollection(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value="collection-1">Collection 1</MenuItem>
-                        <MenuItem value="collection-2">Collection 2</MenuItem>
-                        <MenuItem value="collection-3">Collection 3</MenuItem>
-                        <MenuItem value="collection-4">Collection 4</MenuItem>
-                        <MenuItem value="collection-5">Collection 5</MenuItem>
+                        {collectionOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {collectionOptions.map((c) => <MenuItem key={c._id} value={c._id}>{c.name}</MenuItem>)}
                       </Select>
                     </FormControl>
                   </Box>
@@ -588,10 +593,10 @@ const CreateProduct: React.FC = () => {
                         input={<OutlinedInput label="Select" />}
                         renderValue={(selected) => selected.join(", ")}
                       >
-                        {TAG_OPTIONS.map((option) => (
-                          <MenuItem key={option} value={option}>
-                            <Checkbox checked={selectedTags.indexOf(option) > -1} />
-                            <ListItemText primary={option} />
+                        {tagOptions.map((t) => (
+                          <MenuItem key={t._id} value={t._id}>
+                            <Checkbox checked={selectedTags.indexOf(t._id) > -1} />
+                            <ListItemText primary={t.name} />
                           </MenuItem>
                         ))}
                       </Select>
