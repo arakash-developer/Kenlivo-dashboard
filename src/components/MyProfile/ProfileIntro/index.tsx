@@ -44,9 +44,9 @@ const ProfileIntro: React.FC = () => {
           >
             <Box className="image">
               <Image
-                src="/images/admin.png"
+                src={user?.image || "/images/admin.png"}
                 className="rounded-circle"
-                alt="admin-image"
+                alt="user-avatar"
                 width={75}
                 height={75}
               />

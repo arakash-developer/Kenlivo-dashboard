@@ -8,6 +8,7 @@ export interface ProfileUser {
   email: string;
   role: "customer" | "admin";
   phone: string | null;
+  image: string | null;
   createdAt: string | null;
 }
 
