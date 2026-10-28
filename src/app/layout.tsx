@@ -23,6 +23,9 @@ import * as React from "react";
 export const metadata = {
   title: "Kenlivo - React Nextjs 14+ Material Design Admin Dashboard Template",
   description: "React Nextjs 14+ Material Design Admin Dashboard Template",
+  icons: {
+    icon: "/images/logo-icon.svg",
+  },
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {
