@@ -2478,6 +2478,17 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                SETUP
+              </Typography>
+
               <Link
                 href="/authentication/logout/"
                 className="sidebar-menu-link"
