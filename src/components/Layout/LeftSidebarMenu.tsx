@@ -514,6 +514,36 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
               </Typography>
 
               <Accordion
+                expanded={expanded === "panel_setup_cat"}
+                onChange={handleChange("panel_setup_cat")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel_setup_cat-content"
+                  id="panel_setup_cat-header"
+                >
+                  <i className="material-symbols-outlined">category</i>
+                  <span className="title">Categories</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/ecommerce/categories/"
+                        className={`sidemenu-link ${
+                          pathname === "/ecommerce/categories/" ? "active" : ""
+                        }`}
+                      >
+                        All Categories
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
                 expanded={expanded === "panel6"}
                 onChange={handleChange("panel6")}
                 className="mat-accordion"
@@ -2395,36 +2425,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         }`}
                       >
                         Terms & Conditions
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Accordion
-                expanded={expanded === "panel_setup_cat"}
-                onChange={handleChange("panel_setup_cat")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel_setup_cat-content"
-                  id="panel_setup_cat-header"
-                >
-                  <i className="material-symbols-outlined">category</i>
-                  <span className="title">Categories</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/ecommerce/categories/"
-                        className={`sidemenu-link ${
-                          pathname === "/ecommerce/categories/" ? "active" : ""
-                        }`}
-                      >
-                        All Categories
                       </Link>
                     </li>
                   </ul>
