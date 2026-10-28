@@ -103,6 +103,31 @@ export async function PUT(req: NextRequest) {
   return NextResponse.json({ success: true });
 }
 
+export async function PATCH(req: NextRequest) {
+  const session = await requireSuperAdmin();
+  if (!session) return NextResponse.json({ success: false, message: "Forbidden" }, { status: 403 });
+
+  const body = await req.json().catch(() => null);
+  const { id, password } = body ?? {};
+
+  if (!id || !password?.trim()) {
+    return NextResponse.json({ success: false, message: "ID and password are required" }, { status: 400 });
+  }
+
+  const oid = (() => { try { return new ObjectId(id); } catch { return null; } })();
+  if (!oid) return NextResponse.json({ success: false, message: "Invalid ID" }, { status: 400 });
+
+  const hashed = await bcrypt.hash(password, 12);
+  const db = await getDb();
+  const { matchedCount } = await db.collection("users").updateOne(
+    { _id: oid },
+    { $set: { password: hashed, updatedAt: new Date() } },
+  );
+  if (!matchedCount) return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
+
+  return NextResponse.json({ success: true });
+}
+
 export async function DELETE(req: NextRequest) {
   const session = await requireSuperAdmin();
   if (!session) return NextResponse.json({ success: false, message: "Forbidden" }, { status: 403 });

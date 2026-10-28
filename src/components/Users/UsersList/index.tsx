@@ -13,6 +13,7 @@ import {
   FormControl,
   Grid,
   IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Paper,
@@ -26,8 +27,11 @@ import {
   TablePagination,
   TableRow,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { SelectChangeEvent, styled, useTheme } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -71,6 +75,19 @@ const UsersList: React.FC = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
+  // Change password modal
+  const [pwOpen, setPwOpen] = useState(false);
+  const [pwUserId, setPwUserId] = useState("");
+  const [pwUserName, setPwUserName] = useState("");
+  const [pwValue, setPwValue] = useState("");
+  const [pwConfirm, setPwConfirm] = useState("");
+  const [pwShow, setPwShow] = useState(false);
+  const [pwConfirmShow, setPwConfirmShow] = useState(false);
+  const [pwSubmitting, setPwSubmitting] = useState(false);
+  const [pwError, setPwError] = useState("");
+  const [pwSuccess, setPwSuccess] = useState("");
 
   // Edit modal
   const [editOpen, setEditOpen] = useState(false);
@@ -97,7 +114,13 @@ const UsersList: React.FC = () => {
     }
   };
 
-  useEffect(() => { fetchUsers(); }, []);
+  useEffect(() => {
+    fetchUsers();
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((j) => { if (j.data?.role === "super_admin") setIsSuperAdmin(true); })
+      .catch(() => {});
+  }, []);
 
   const filtered = users.filter((u) =>
     u.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -144,6 +167,41 @@ const UsersList: React.FC = () => {
     if (!confirm("Delete this user?")) return;
     await fetch("/api/users", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
     fetchUsers();
+  };
+
+  const openChangePassword = (u: UserRow) => {
+    setPwUserId(u._id);
+    setPwUserName(u.name);
+    setPwValue("");
+    setPwConfirm("");
+    setPwShow(false);
+    setPwConfirmShow(false);
+    setPwError("");
+    setPwSuccess("");
+    setPwOpen(true);
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!pwValue.trim()) { setPwError("Password is required"); return; }
+    if (pwValue.length < 6) { setPwError("Password must be at least 6 characters"); return; }
+    if (pwValue !== pwConfirm) { setPwError("Passwords do not match"); return; }
+    setPwSubmitting(true); setPwError(""); setPwSuccess("");
+    try {
+      const res = await fetch("/api/users", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: pwUserId, password: pwValue }),
+      });
+      const json = await res.json();
+      if (!res.ok) { setPwError(json.message ?? "Failed to update password"); return; }
+      setPwSuccess("Password updated successfully.");
+      setPwValue(""); setPwConfirm("");
+    } catch {
+      setPwError("Network error. Please try again.");
+    } finally {
+      setPwSubmitting(false);
+    }
   };
 
   const roleLabel = (role: string) => {
@@ -229,6 +287,13 @@ const UsersList: React.FC = () => {
                         <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }} onClick={() => openEdit(row)}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
                         </IconButton>
+                        {isSuperAdmin && (
+                          <Tooltip title="Change Password">
+                            <IconButton aria-label="change-password" color="primary" sx={{ padding: "5px" }} onClick={() => openChangePassword(row)}>
+                              <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>key</i>
+                            </IconButton>
+                          </Tooltip>
+                        )}
                         <IconButton aria-label="delete" color="error" sx={{ padding: "5px" }} onClick={() => handleDelete(row._id)}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete</i>
                         </IconButton>
@@ -256,6 +321,86 @@ const UsersList: React.FC = () => {
           </Table>
         </TableContainer>
       </Card>
+
+      {/* Change Password Modal */}
+      <BootstrapDialog onClose={() => setPwOpen(false)} open={pwOpen} className="rmu-modal">
+        <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
+            <Typography variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
+              Change Password — {pwUserName}
+            </Typography>
+            <IconButton aria-label="remove" size="small" onClick={() => setPwOpen(false)}><ClearIcon /></IconButton>
+          </Box>
+          <Box className="rmu-modal-content">
+            <Box component="form" noValidate onSubmit={handleChangePassword}>
+              <Box sx={{ padding: "25px", borderRadius: "8px" }} className="bg-white">
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">New Password *</Typography>
+                    <TextField
+                      required fullWidth label="New password"
+                      type={pwShow ? "text" : "password"}
+                      value={pwValue}
+                      onChange={(e) => setPwValue(e.target.value)}
+                      InputProps={{
+                        style: { borderRadius: 8 },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={() => setPwShow((s) => !s)} edge="end" size="small">
+                              {pwShow ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Confirm Password *</Typography>
+                    <TextField
+                      required fullWidth label="Confirm new password"
+                      type={pwConfirmShow ? "text" : "password"}
+                      value={pwConfirm}
+                      onChange={(e) => setPwConfirm(e.target.value)}
+                      InputProps={{
+                        style: { borderRadius: 8 },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={() => setPwConfirmShow((s) => !s)} edge="end" size="small">
+                              {pwConfirmShow ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                  {pwError && (
+                    <Grid item xs={12}>
+                      <Typography color="error" sx={{ fontSize: "13px" }}>{pwError}</Typography>
+                    </Grid>
+                  )}
+                  {pwSuccess && (
+                    <Grid item xs={12}>
+                      <Typography color="success.main" sx={{ fontSize: "13px" }}>{pwSuccess}</Typography>
+                    </Grid>
+                  )}
+                  <Grid item xs={12} mt={1}>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", gap: "10px" }}>
+                      <Button onClick={() => setPwOpen(false)} variant="outlined" color="error" disabled={pwSubmitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px" }}>
+                        Cancel
+                      </Button>
+                      <Button type="submit" variant="contained" disabled={pwSubmitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px", color: "#fff !important" }}>
+                        {pwSubmitting ? <CircularProgress size={18} color="inherit" /> : "Update Password"}
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </BootstrapDialog>
 
       {/* Edit Modal */}
       <BootstrapDialog onClose={() => setEditOpen(false)} open={editOpen} className="rmu-modal">
