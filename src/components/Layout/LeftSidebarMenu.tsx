@@ -339,7 +339,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                MODULES
+                PAGES
               </Typography>
 
               <Link
@@ -564,7 +564,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                PAGES
+                MODULES
               </Typography>
 
               <Accordion
