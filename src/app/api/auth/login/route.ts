@@ -6,7 +6,6 @@ import { SESSION_COOKIE, signSession, sessionCookieOptions } from "@/lib/session
 export const runtime = "nodejs";
 
 interface UserDoc {
-  _id: { toString(): string };
   name: string;
   email: string;
   password: string;
@@ -55,7 +54,7 @@ export async function POST(req: Request) {
   }
 
   const sessionUser = {
-    id: user._id.toString(),
+    id: String(user._id),
     name: user.name,
     email: user.email,
     role: user.role,

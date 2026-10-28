@@ -1,15 +1,19 @@
 "use client";
 
-import { authApi } from "@/lib/api/auth";
+import { authApi, AuthUser } from "@/lib/api/auth";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 
 const LogoutContent: React.FC = () => {
-  // Destroy the session as soon as the logout screen is shown.
+  const [user, setUser] = React.useState<AuthUser | null>(null);
+
   React.useEffect(() => {
-    authApi.logout();
+    authApi.me().then((u) => {
+      setUser(u);
+      authApi.logout();
+    });
   }, []);
 
   return (
@@ -109,23 +113,49 @@ const LogoutContent: React.FC = () => {
                     mb: "20px",
                   }}
                 >
-                  <Image
-                    src="/images/admin.png"
-                    className="rounded-circle"
-                    alt="admin-image"
-                    width={50}
-                    height={50}
-                  />
-                  <Typography
-                    component="span"
-                    className="text-black"
-                    sx={{
-                      fontWeight: "600",
-                      display: "block",
-                    }}
-                  >
-                    Olivia John
-                  </Typography>
+                  {user?.image ? (
+                    <Image
+                      src={user.image}
+                      className="rounded-circle"
+                      alt={user.name}
+                      width={50}
+                      height={50}
+                      style={{ objectFit: "cover" }}
+                      unoptimized
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: "50%",
+                        bgcolor: "primary.main",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        color: "#fff",
+                      }}
+                    >
+                      {user?.name ? user.name.charAt(0).toUpperCase() : "?"}
+                    </Box>
+                  )}
+                  <Box>
+                    <Typography
+                      component="span"
+                      className="text-black"
+                      sx={{ fontWeight: "600", display: "block" }}
+                    >
+                      {user?.name || "—"}
+                    </Typography>
+                    {user?.email && (
+                      <Typography sx={{ fontSize: "13px", color: "#888" }}>
+                        {user.email}
+                      </Typography>
+                    )}
+                  </Box>
                 </Box>
 
                 <Link href="/authentication/sign-in">

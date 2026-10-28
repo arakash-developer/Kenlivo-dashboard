@@ -5,6 +5,7 @@ export interface AuthUser {
   name: string;
   email: string;
   role: UserRole;
+  image?: string | null;
 }
 
 export interface LoginPayload {
