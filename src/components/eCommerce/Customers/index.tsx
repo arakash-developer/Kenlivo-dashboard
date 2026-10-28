@@ -1,31 +1,31 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import styles from "@/components/eCommerce/Search.module.css";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  FormControl,
+  IconButton,
+  InputLabel,
+  Link,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Link,
+  Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/eCommerce/Search.module.css";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useTheme } from "@mui/material/styles";
+import Image from "next/image";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -33,7 +33,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -42,13 +42,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -109,7 +109,7 @@ function createData(
   totalSpend: string,
   totalOrders: number,
   status: string,
-  viewDetails: string
+  viewDetails: string,
 ) {
   return {
     id,
@@ -130,241 +130,241 @@ const rows = [
     "#JAN-854",
     "/images/users/user6.jpg",
     "Oliver Khan",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "+1 555-123-4567",
     "10 Oct 2024",
     "$6,855.00",
     125,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-853",
     "/images/users/user7.jpg",
     "Carolyn Barnes",
-    "carolyn@trezo.com",
+    "carolyn@kenlivo.com",
     "+1 555-987-6543",
     "11 Sep 2024",
     "$2,800.00",
     99,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-852",
     "/images/users/user8.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "+1 555-456-7890",
     "12 Aug 2024",
     "$258.00",
     145,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-851",
     "/images/users/user9.jpg",
     "Barbara Cross",
-    "barbara@trezo.com",
+    "barbara@kenlivo.com",
     "+1 555-369-7878",
     "13 Jul 2024",
     "$3,890.00",
     279,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-850",
     "/images/users/user10.jpg",
     "Rebecca Block",
-    "rebecca@trezo.com",
+    "rebecca@kenlivo.com",
     "+1 555-658-4488",
     "14 Jun 2024",
     "$2,500.00",
     169,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-849",
     "/images/users/user11.jpg",
     "Ramiro McCarty",
-    "ramiro@trezo.com",
+    "ramiro@kenlivo.com",
     "+1 555-558-9966",
     "15 May 2024",
     "$8,200.00",
     46,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-848",
     "/images/users/user12.jpg",
     "Robert Fairweather",
-    "robert@trezo.com",
+    "robert@kenlivo.com",
     "+1 555-357-5888",
     "16 Apr 2024",
     "$640.00",
     184,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-847",
     "/images/users/user13.jpg",
     "Marcelino Haddock",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "+1 555-456-8877",
     "17 Mar 2024",
     "$9,100.00",
     166,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-846",
     "/images/users/user14.jpg",
     "Thomas Wilson",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "+1 555-622-4488",
     "18 Feb 2024",
     "$7,300.00",
     75,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-845",
     "/images/users/user15.jpg",
     "Nathaniel Hulsey",
-    "nathaniel@trezo.com",
+    "nathaniel@kenlivo.com",
     "+1 555-357-5888",
     "16 Apr 2024",
     "$640.00",
     184,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-844",
     "/images/users/user16.jpg",
     "Oliver Khan",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "+1 555-123-4567",
     "10 Oct 2024",
     "$6,855.00",
     125,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-843",
     "/images/users/user17.jpg",
     "Carolyn Barnes",
-    "carolyn@trezo.com",
+    "carolyn@kenlivo.com",
     "+1 555-987-6543",
     "11 Sep 2024",
     "$2,800.00",
     99,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-842",
     "/images/users/user18.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "+1 555-456-7890",
     "12 Aug 2024",
     "$258.00",
     145,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-841",
     "/images/users/user19.jpg",
     "Megan Cross",
-    "megan@trezo.com",
+    "megan@kenlivo.com",
     "+1 555-369-7878",
     "13 Jul 2024",
     "$3,890.00",
     279,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-840",
     "/images/users/user20.jpg",
     "Lauren Block",
-    "lauren@trezo.com",
+    "lauren@kenlivo.com",
     "+1 555-658-4488",
     "14 Jun 2024",
     "$2,500.00",
     169,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-839",
     "/images/users/user21.jpg",
     "Michelle McCarty",
-    "michelle@trezo.com",
+    "michelle@kenlivo.com",
     "+1 555-558-9966",
     "15 May 2024",
     "$8,200.00",
     46,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-838",
     "/images/users/user22.jpg",
     "Sophie Fairweather",
-    "sophie@trezo.com",
+    "sophie@kenlivo.com",
     "+1 555-357-5888",
     "16 Apr 2024",
     "$640.00",
     184,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-837",
     "/images/users/user23.jpg",
     "Tracy Haddock",
-    "tracy@trezo.com",
+    "tracy@kenlivo.com",
     "+1 555-456-8877",
     "17 Mar 2024",
     "$9,100.00",
     166,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-836",
     "/images/users/user24.jpg",
     "Charlotte Wilson",
-    "charlotte@trezo.com",
+    "charlotte@kenlivo.com",
     "+1 555-622-4488",
     "18 Feb 2024",
     "$7,300.00",
     75,
     "Active",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
   createData(
     "#JAN-835",
     "/images/users/user25.jpg",
     "Sarah Hulsey",
-    "sarah@trezo.com",
+    "sarah@kenlivo.com",
     "+1 555-357-5888",
     "16 Apr 2024",
     "$640.00",
     184,
     "Deactive",
-    "/ecommerce/customers/details"
+    "/ecommerce/customers/details",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -379,13 +379,13 @@ const Customers: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -571,7 +571,7 @@ const Customers: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -681,7 +681,7 @@ const Customers: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

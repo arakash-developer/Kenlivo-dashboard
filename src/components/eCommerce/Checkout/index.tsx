@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
-  TextField,
   Select,
   SelectChangeEvent,
-  Button,
+  TextField,
+  Typography,
 } from "@mui/material";
-import ShoppingCart from "./ShoppingCart";
-import PaymentMethod from "./PaymentMethod";
+import React, { useState } from "react";
 import CustomEditor from "./CustomEditor";
+import PaymentMethod from "./PaymentMethod";
+import ShoppingCart from "./ShoppingCart";
 
 const Checkout: React.FC = () => {
   const [state, setState] = useState<string>("");
@@ -169,7 +169,7 @@ const Checkout: React.FC = () => {
 
                       <TextField
                         label="Enter email address"
-                        placeholder="E.g. ava@trezo.com"
+                        placeholder="E.g. ava@kenlivo.com"
                         variant="filled"
                         id="emailAddress"
                         name="emailAddress"
@@ -410,7 +410,7 @@ const Checkout: React.FC = () => {
                     >
                       Order Note (optional)
                     </Typography>
- 
+
                     <CustomEditor />
                   </Box>
                 </Grid>

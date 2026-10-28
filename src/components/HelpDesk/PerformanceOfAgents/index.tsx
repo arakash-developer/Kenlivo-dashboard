@@ -1,29 +1,29 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
+  Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import Image from "next/image";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -31,7 +31,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -40,13 +40,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -107,7 +107,7 @@ function createData(
   resolvedTickets: number,
   avgResolutionTime: string,
   satisfactionRate: number,
-  availability: string
+  availability: string,
 ) {
   return {
     id,
@@ -132,7 +132,7 @@ const rows = [
     75,
     "2.5 hours",
     80,
-    "available"
+    "available",
   ),
   createData(
     "#853",
@@ -143,7 +143,7 @@ const rows = [
     35,
     "1.4 hours",
     75,
-    "available"
+    "available",
   ),
   createData(
     "#852",
@@ -154,7 +154,7 @@ const rows = [
     45,
     "3.2 hours",
     80,
-    "available"
+    "available",
   ),
   createData(
     "#851",
@@ -165,7 +165,7 @@ const rows = [
     25,
     "4.5 hours",
     100,
-    "available"
+    "available",
   ),
   createData(
     "#850",
@@ -176,7 +176,7 @@ const rows = [
     10,
     "3.8 hours",
     80,
-    "Not Available"
+    "Not Available",
   ),
   createData(
     "#849",
@@ -187,7 +187,7 @@ const rows = [
     20,
     "5.3 hours",
     60,
-    "available"
+    "available",
   ),
   createData(
     "#848",
@@ -198,7 +198,7 @@ const rows = [
     75,
     "2.5 hours",
     80,
-    "available"
+    "available",
   ),
   createData(
     "#847",
@@ -209,7 +209,7 @@ const rows = [
     35,
     "1.4 hours",
     75,
-    "available"
+    "available",
   ),
   createData(
     "#846",
@@ -220,7 +220,7 @@ const rows = [
     45,
     "3.2 hours",
     45,
-    "available"
+    "available",
   ),
   createData(
     "#845",
@@ -231,7 +231,7 @@ const rows = [
     30,
     "4.5 hours",
     67,
-    "Not Available"
+    "Not Available",
   ),
   createData(
     "#844",
@@ -242,7 +242,7 @@ const rows = [
     10,
     "2.8 hours",
     50,
-    "available"
+    "available",
   ),
   createData(
     "#843",
@@ -253,7 +253,7 @@ const rows = [
     20,
     "1.3 hours",
     60,
-    "available"
+    "available",
   ),
   createData(
     "#842",
@@ -264,7 +264,7 @@ const rows = [
     41,
     "3.1 hours",
     70,
-    "available"
+    "available",
   ),
   createData(
     "#841",
@@ -275,7 +275,7 @@ const rows = [
     21,
     "4.1 hours",
     100,
-    "available"
+    "available",
   ),
   createData(
     "#840",
@@ -286,7 +286,7 @@ const rows = [
     11,
     "3.1 hours",
     81,
-    "Not Available"
+    "Not Available",
   ),
   createData(
     "#839",
@@ -297,7 +297,7 @@ const rows = [
     21,
     "5.1 hours",
     61,
-    "available"
+    "available",
   ),
   createData(
     "#838",
@@ -308,7 +308,7 @@ const rows = [
     71,
     "2.1 hours",
     80,
-    "available"
+    "available",
   ),
   createData(
     "#837",
@@ -319,7 +319,7 @@ const rows = [
     31,
     "1.1 hours",
     75,
-    "available"
+    "available",
   ),
   createData(
     "#836",
@@ -330,7 +330,7 @@ const rows = [
     41,
     "3.1 hours",
     45,
-    "available"
+    "available",
   ),
   createData(
     "#835",
@@ -341,7 +341,7 @@ const rows = [
     31,
     "4.1 hours",
     67,
-    "Not Available"
+    "Not Available",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -362,13 +362,13 @@ const PerformanceOfAgents: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -556,7 +556,7 @@ const PerformanceOfAgents: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -696,7 +696,7 @@ const PerformanceOfAgents: React.FC = () => {
                       className="border-bottom"
                     >
                       <Box
-                        className={`trezo-badge ${row.availability}`}
+                        className={`kenlivo-badge ${row.availability}`}
                         sx={{ textTransform: "capitalize" }}
                       >
                         {row.availability}

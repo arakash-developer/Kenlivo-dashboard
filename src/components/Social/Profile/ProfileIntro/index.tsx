@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { Card, Box, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import Image from "next/image";
+import * as React from "react";
 
 const ProfileIntro: React.FC = () => {
   return (
@@ -57,7 +57,7 @@ const ProfileIntro: React.FC = () => {
                 Alice Johnson
               </Typography>
 
-              <Typography>johnson&#64;trezo.com</Typography>
+              <Typography>johnson&#64;kenlivo.com</Typography>
             </Box>
           </Box>
 

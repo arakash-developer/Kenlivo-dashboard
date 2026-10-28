@@ -1,28 +1,28 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  IconButton,
   Menu,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
+  Typography,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import Image from "next/image";
+import React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -30,7 +30,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -39,13 +39,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -103,7 +103,7 @@ function createData(
   designation: string,
   tasks: number,
   statusProgress: number,
-  statusProgressBg: string
+  statusProgressBg: string,
 ) {
   return {
     id,
@@ -124,43 +124,43 @@ const rows = [
     "Head of HR",
     55,
     50,
-    "primary"
+    "primary",
   ),
   createData(
     2,
     "/images/users/user7.jpg",
     "Laura Martinez",
-    "laura@trezo.com",
+    "laura@kenlivo.com",
     125,
     70,
-    "success"
+    "success",
   ),
   createData(
     3,
     "/images/users/user8.jpg",
     "Mark Thompson",
-    "mark@trezo.com",
+    "mark@kenlivo.com",
     78,
     30,
-    "secondary"
+    "secondary",
   ),
   createData(
     4,
     "/images/users/user9.jpg",
     "Rachel White",
-    "rachel@trezo.com",
+    "rachel@kenlivo.com",
     95,
     90,
-    "success"
+    "success",
   ),
   createData(
     5,
     "/images/users/user10.jpg",
     "Kevin Lee",
-    "kevin@trezo.com",
+    "kevin@kenlivo.com",
     134,
     50,
-    "warning"
+    "warning",
   ),
   createData(
     6,
@@ -169,25 +169,25 @@ const rows = [
     "Head of HR",
     55,
     50,
-    "primary"
+    "primary",
   ),
   createData(
     7,
     "/images/users/user17.jpg",
     "Laura Martinez",
-    "laura@trezo.com",
+    "laura@kenlivo.com",
     125,
     70,
-    "success"
+    "success",
   ),
   createData(
     8,
     "/images/users/user18.jpg",
     "Mark Thompson",
-    "mark@trezo.com",
+    "mark@kenlivo.com",
     78,
     30,
-    "secondary"
+    "secondary",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -212,13 +212,13 @@ const TeamMembers: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -357,7 +357,7 @@ const TeamMembers: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (

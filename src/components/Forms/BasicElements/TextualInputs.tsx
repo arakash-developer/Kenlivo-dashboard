@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
+  Card,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
-  TextField,
   Select,
   SelectChangeEvent,
+  TextField,
+  Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 import CustomEditor from "./CustomEditor";
 
 const TextualInputs: React.FC = () => {
@@ -115,7 +115,7 @@ const TextualInputs: React.FC = () => {
               <FormControl fullWidth>
                 <TextField
                   label="Email address"
-                  placeholder="E.g. hello@trezo.com"
+                  placeholder="E.g. hello@kenlivo.com"
                   variant="filled"
                   id="email"
                   name="email"

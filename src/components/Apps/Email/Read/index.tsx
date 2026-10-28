@@ -1,21 +1,21 @@
 "use client";
 
-import React from "react";
 import {
-  Card,
   Box,
+  Button,
+  Card,
+  IconButton,
   Menu,
   MenuItem,
-  IconButton,
   Typography,
-  Button,
 } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
+import React from "react";
 
-import Checkbox from "@mui/material/Checkbox";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import Checkbox from "@mui/material/Checkbox";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -299,7 +299,7 @@ const Read: React.FC = () => {
                 >
                   Sarah Smith
                 </Typography>
-                <Typography fontSize="12px">sarah&#64;trezo.com</Typography>
+                <Typography fontSize="12px">sarah&#64;kenlivo.com</Typography>
               </Box>
             </Box>
 

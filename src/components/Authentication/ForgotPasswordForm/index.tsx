@@ -1,16 +1,16 @@
 "use client";
 
-import * as React from "react";
 import {
-  Grid,
-  Button,
   Box,
-  Typography,
+  Button,
   FormControl,
+  Grid,
   TextField,
+  Typography,
 } from "@mui/material";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 
 const ForgotPasswordForm: React.FC = () => {
   return (
@@ -120,7 +120,7 @@ const ForgotPasswordForm: React.FC = () => {
                       </Typography>
 
                       <TextField
-                        label="example&#64;trezo.com"
+                        label="example&#64;kenlivo.com"
                         variant="filled"
                         id="email"
                         name="email"

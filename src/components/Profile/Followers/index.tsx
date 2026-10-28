@@ -1,14 +1,15 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
@@ -16,14 +17,13 @@ import {
   TableFooter,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
+  Typography,
 } from "@mui/material";
-import Link from "next/link";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -31,7 +31,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -40,13 +40,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -102,7 +102,7 @@ function createData(
   image: string,
   name: string,
   email: string,
-  viewLink: string
+  viewLink: string,
 ) {
   return {
     id,
@@ -114,63 +114,75 @@ function createData(
 }
 
 const rows = [
-  createData(1, "/images/users/user6.jpg", "Alex Davis", "alex@trezo.com", "#"),
+  createData(
+    1,
+    "/images/users/user6.jpg",
+    "Alex Davis",
+    "alex@kenlivo.com",
+    "#",
+  ),
   createData(
     2,
     "/images/users/user7.jpg",
     "Laura Martinez",
-    "laura@trezo.com",
-    "#"
+    "laura@kenlivo.com",
+    "#",
   ),
   createData(
     3,
     "/images/users/user8.jpg",
     "Mark Thompson",
-    "mark@trezo.com",
-    "#"
+    "mark@kenlivo.com",
+    "#",
   ),
   createData(
     4,
     "/images/users/user9.jpg",
     "Rachel White",
-    "rachel@trezo.com",
-    "#"
+    "rachel@kenlivo.com",
+    "#",
   ),
   createData(
     5,
     "/images/users/user10.jpg",
     "Kevin Lee",
-    "kevin@trezo.com",
-    "#"
+    "kevin@kenlivo.com",
+    "#",
   ),
   createData(
     6,
     "/images/users/user11.jpg",
     "Oliver Johnson",
-    "oliver@trezo.com",
-    "#"
+    "oliver@kenlivo.com",
+    "#",
   ),
-  createData(7, "/images/users/user12.jpg", "Jake Noah", "jake@trezo.com", "#"),
+  createData(
+    7,
+    "/images/users/user12.jpg",
+    "Jake Noah",
+    "jake@kenlivo.com",
+    "#",
+  ),
   createData(
     8,
     "/images/users/user13.jpg",
     "Callum Mason",
-    "callum@trezo.com",
-    "#"
+    "callum@kenlivo.com",
+    "#",
   ),
   createData(
     9,
     "/images/users/user14.jpg",
     "Robert Kyle",
-    "robert@trezo.com",
-    "#"
+    "robert@kenlivo.com",
+    "#",
   ),
   createData(
     10,
     "/images/users/user15.jpg",
     "Thomas Joe",
-    "thomas@trezo.com",
-    "#"
+    "thomas@kenlivo.com",
+    "#",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -191,13 +203,13 @@ const Followers: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -276,7 +288,7 @@ const Followers: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (

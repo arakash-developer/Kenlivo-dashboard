@@ -1,30 +1,30 @@
 "use client";
 
-import * as React from "react";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
+  Avatar,
+  AvatarGroup,
   Box,
-  Typography,
+  Card,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Avatar,
-  AvatarGroup,
+  Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -32,7 +32,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -41,13 +41,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -121,7 +121,7 @@ function createData(
   budget: string,
   startDate: string,
   endDate: string,
-  status: string
+  status: string,
 ): Project {
   return {
     id,
@@ -166,7 +166,7 @@ const rows = [
     "$4,500",
     "25 Mar 2024",
     "25 Apr 2024",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#853",
@@ -198,7 +198,7 @@ const rows = [
     "$6,800",
     "20 Mar 2024",
     "20 Apr 2024",
-    "In Progress"
+    "In Progress",
   ),
   createData(
     "#852",
@@ -224,7 +224,7 @@ const rows = [
     "$2,500",
     "15 Mar 2024",
     "15 Apr 2024",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#851",
@@ -250,7 +250,7 @@ const rows = [
     "$7,500",
     "10 Mar 2024",
     "10 Apr 2024",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#849",
@@ -276,7 +276,7 @@ const rows = [
     "$3,400",
     "05 Mar 2024",
     "05 Apr 2024",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#848",
@@ -296,7 +296,7 @@ const rows = [
     "$4,680",
     "25 Mar 2024",
     "25 Apr 2025",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#847",
@@ -322,7 +322,7 @@ const rows = [
     "$4,780",
     "20 Mar 2024",
     "20 Apr 2024",
-    "In Progress"
+    "In Progress",
   ),
   createData(
     "#846",
@@ -348,7 +348,7 @@ const rows = [
     "$4,980",
     "03 Mar 2024",
     "15 Apr 2024",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#845",
@@ -374,7 +374,7 @@ const rows = [
     "$4,550",
     "10 Mar 2024",
     "10 Apr 2024",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#844",
@@ -394,7 +394,7 @@ const rows = [
     "$3,450",
     "05 Mar 2024",
     "05 Apr 2024",
-    "Finished"
+    "Finished",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -415,13 +415,13 @@ const MyProjects: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -606,7 +606,7 @@ const MyProjects: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -716,7 +716,7 @@ const MyProjects: React.FC = () => {
                       }}
                       className="text-black border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

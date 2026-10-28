@@ -1,21 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  Grid,
   InputLabel,
   MenuItem,
-  TextField,
-  Button,
-  Checkbox,
-  FormControlLabel,
   Select,
   SelectChangeEvent,
+  TextField,
+  Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 import CustomEditor from "./CustomEditor";
 
 const AddUser: React.FC = () => {
@@ -147,7 +147,7 @@ const AddUser: React.FC = () => {
 
                       <TextField
                         label="Enter email address"
-                        placeholder="E.g. olivia@trezo.com"
+                        placeholder="E.g. olivia@kenlivo.com"
                         variant="filled"
                         id="emailAddress"
                         name="emailAddress"

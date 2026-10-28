@@ -1,30 +1,30 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  Checkbox,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
+  Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import Image from "next/image";
+import * as React from "react";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 interface TablePaginationActionsProps {
@@ -33,7 +33,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -42,13 +42,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -105,7 +105,7 @@ function createData(
   customerName: string,
   email: string,
   source: string,
-  status: string
+  status: string,
 ) {
   return {
     id,
@@ -122,81 +122,81 @@ const rows = [
     1,
     "/images/users/user11.jpg",
     "David Brown",
-    "david@trezo.com",
+    "david@kenlivo.com",
     "Organic",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     2,
     "/images/users/user12.jpg",
     "Sarah Miller",
-    "sara@trezo.com",
+    "sara@kenlivo.com",
     "Social",
-    "Pending"
+    "Pending",
   ),
   createData(
     3,
     "/images/users/user13.jpg",
     "Michael Wilson",
-    "micheal@trezo.com",
+    "micheal@kenlivo.com",
     "Website",
-    "in Progress"
+    "in Progress",
   ),
   createData(
     4,
     "/images/users/user8.jpg",
     "Amanda Clark",
-    "amanda@trezo.com",
+    "amanda@kenlivo.com",
     "Paid",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     5,
     "/images/users/user14.jpg",
     "Jennifer Taylor",
-    "taylor@trezo.com",
+    "taylor@kenlivo.com",
     "Others",
-    "rejected"
+    "rejected",
   ),
   createData(
     6,
     "/images/users/user15.jpg",
     "Jhon Me",
-    "joon@trezo.com",
+    "joon@kenlivo.com",
     "Organic",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     7,
     "/images/users/user16.jpg",
     "Miller Kay",
-    "miller@trezo.com",
+    "miller@kenlivo.com",
     "Social",
-    "Pending"
+    "Pending",
   ),
   createData(
     8,
     "/images/users/user17.jpg",
     "Clark Wilson",
-    "clark@trezo.com",
+    "clark@kenlivo.com",
     "Paid",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     9,
     "/images/users/user18.jpg",
     "Wilson Clark",
-    "wilson@trezo.com",
+    "wilson@kenlivo.com",
     "Website",
-    "in Progress"
+    "in Progress",
   ),
   createData(
     10,
     "/images/users/user19.jpg",
     "David Le",
-    "davidle@trezo.com",
+    "davidle@kenlivo.com",
     "Organic",
-    "Confirmed"
+    "Confirmed",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -217,13 +217,13 @@ const RecentLeads: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -375,7 +375,7 @@ const RecentLeads: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -455,7 +455,7 @@ const RecentLeads: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

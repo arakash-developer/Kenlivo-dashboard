@@ -1,18 +1,18 @@
 "use client";
 
-import React from "react";
 import {
-  Card,
   Box,
+  Card,
+  IconButton,
+  Link,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
-  Paper,
-  IconButton,
-  Link,
 } from "@mui/material";
+import React from "react";
 
 function createData(
   id: string,
@@ -23,7 +23,7 @@ function createData(
   dueDate: string,
   priority: string,
   status: string,
-  viewDetails: string
+  viewDetails: string,
 ) {
   return {
     id,
@@ -48,7 +48,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -86,7 +86,7 @@ const Ticket: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (
@@ -168,7 +168,7 @@ const Ticket: React.FC = () => {
                     className="border-bottom"
                   >
                     <div
-                      className={`trezo-badge ${row.status}`}
+                      className={`kenlivo-badge ${row.status}`}
                       style={{ textTransform: "capitalize" }}
                     >
                       {row.status}

@@ -1,27 +1,26 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import styles from "@/components/Members/MembersTable/Search.module.css";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/Members/MembersTable/Search.module.css";
+import Image from "next/image";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -29,7 +28,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -38,13 +37,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -103,7 +102,7 @@ function createData(
   phone: string,
   location: string,
   joiningDate: string,
-  lastActive: string
+  lastActive: string,
 ) {
   return {
     id,
@@ -122,201 +121,201 @@ const rows = [
     "#JAN-820",
     "/images/users/user6.jpg",
     "Oliver Khan",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "+1 555-123-4567",
     "Washington D.C",
     "10 Oct 2024",
-    "01 Dec 2024 08:23 AM"
+    "01 Dec 2024 08:23 AM",
   ),
   createData(
     "#JAN-819",
     "/images/users/user7.jpg",
     "Carolyn Barnes",
-    "carolyn@trezo.com",
+    "carolyn@kenlivo.com",
     "+1 555-987-6543",
     "Chicago",
     "11 Sep 2024",
-    "02 Dec 2024 05:09 PM"
+    "02 Dec 2024 05:09 PM",
   ),
   createData(
     "#JAN-818",
     "/images/users/user8.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "+1 555-456-7890",
     "Oklahoma City",
     "12 Aug 2024",
-    "03 Dec 2024 09:30 AM"
+    "03 Dec 2024 09:30 AM",
   ),
   createData(
     "#JAN-817",
     "/images/users/user9.jpg",
     "Barbara Cross",
-    "barbara@trezo.com",
+    "barbara@kenlivo.com",
     "+1 555-369-7878",
     "San Diego",
     "13 Jul 2024",
-    "04 Dec 2024 10:22 AM"
+    "04 Dec 2024 10:22 AM",
   ),
   createData(
     "#JAN-816",
     "/images/users/user10.jpg",
     "Rebecca Block",
-    "rebecca@trezo.com",
+    "rebecca@kenlivo.com",
     "+1 555-658-4488",
     "Los Angeles",
     "14 Jun 2024",
-    "05 Dec 2024 08:49 AM"
+    "05 Dec 2024 08:49 AM",
   ),
   createData(
     "#JAN-815",
     "/images/users/user11.jpg",
     "Ramiro McCarty",
-    "ramiro@trezo.com",
+    "ramiro@kenlivo.com",
     "+1 555-558-9966",
     "Las Vegas",
     "15 May 2024",
-    "06 Dec 2024 04:35 PM"
+    "06 Dec 2024 04:35 PM",
   ),
   createData(
     "#JAN-814",
     "/images/users/user12.jpg",
     "Robert Fairweather",
-    "robert@trezo.com",
+    "robert@kenlivo.com",
     "+1 555-357-5888",
     "San Francisco",
     "16 Apr 2024",
-    "07 Dec 2024 06:13 PM"
+    "07 Dec 2024 06:13 PM",
   ),
   createData(
     "#JAN-813",
     "/images/users/user13.jpg",
     "Marcelino Haddock",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "+1 555-456-8877",
     "Washington D.C",
     "17 Mar 2024",
-    "08 Dec 2024 02:20 AM"
+    "08 Dec 2024 02:20 AM",
   ),
   createData(
     "#JAN-812",
     "/images/users/user14.jpg",
     "Thomas Wilson",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "+1 555-622-4488",
     "San Diego",
     "18 Feb 2024",
-    "09 Dec 2024 12:09 AM"
+    "09 Dec 2024 12:09 AM",
   ),
   createData(
     "#JAN-811",
     "/images/users/user15.jpg",
     "Nathaniel Hulsey",
-    "nathaniel@trezo.com",
+    "nathaniel@kenlivo.com",
     "+1 555-225-4488",
     "Chicago",
     "19 Jan 2024",
-    "10 Dec 2024 06:03 PM"
+    "10 Dec 2024 06:03 PM",
   ),
   createData(
     "#JAN-810",
     "/images/users/user15.jpg",
     "Nathaniel Hulsey",
-    "nathaniel@trezo.com",
+    "nathaniel@kenlivo.com",
     "+1 555-225-4488",
     "Chicago",
     "19 Jan 2024",
-    "10 Dec 2024 06:03 PM"
+    "10 Dec 2024 06:03 PM",
   ),
   createData(
     "#JAN-809",
     "/images/users/user14.jpg",
     "Thomas Wilson",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "+1 555-622-4488",
     "San Diego",
     "18 Feb 2024",
-    "09 Dec 2024 12:09 AM"
+    "09 Dec 2024 12:09 AM",
   ),
   createData(
     "#JAN-808",
     "/images/users/user13.jpg",
     "Marcelino Haddock",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "+1 555-456-8877",
     "Washington D.C",
     "17 Mar 2024",
-    "08 Dec 2024 02:20 AM"
+    "08 Dec 2024 02:20 AM",
   ),
   createData(
     "#JAN-807",
     "/images/users/user12.jpg",
     "Robert Fairweather",
-    "robert@trezo.com",
+    "robert@kenlivo.com",
     "+1 555-357-5888",
     "San Francisco",
     "16 Apr 2024",
-    "07 Dec 2024 06:13 PM"
+    "07 Dec 2024 06:13 PM",
   ),
   createData(
     "#JAN-806",
     "/images/users/user11.jpg",
     "Ramiro McCarty",
-    "ramiro@trezo.com",
+    "ramiro@kenlivo.com",
     "+1 555-558-9966",
     "Las Vegas",
     "15 May 2024",
-    "06 Dec 2024 04:35 PM"
+    "06 Dec 2024 04:35 PM",
   ),
   createData(
     "#JAN-805",
     "/images/users/user10.jpg",
     "Rebecca Block",
-    "rebecca@trezo.com",
+    "rebecca@kenlivo.com",
     "+1 555-658-4488",
     "Los Angeles",
     "14 Jun 2024",
-    "05 Dec 2024 08:49 AM"
+    "05 Dec 2024 08:49 AM",
   ),
   createData(
     "#JAN-804",
     "/images/users/user9.jpg",
     "Barbara Cross",
-    "barbara@trezo.com",
+    "barbara@kenlivo.com",
     "+1 555-369-7878",
     "San Diego",
     "13 Jul 2024",
-    "04 Dec 2024 10:22 AM"
+    "04 Dec 2024 10:22 AM",
   ),
   createData(
     "#JAN-803",
     "/images/users/user8.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "+1 555-456-7890",
     "Oklahoma City",
     "12 Aug 2024",
-    "03 Dec 2024 09:30 AM"
+    "03 Dec 2024 09:30 AM",
   ),
   createData(
     "#JAN-802",
     "/images/users/user7.jpg",
     "Carolyn Barnes",
-    "carolyn@trezo.com",
+    "carolyn@kenlivo.com",
     "+1 555-987-6543",
     "Chicago",
     "11 Sep 2024",
-    "02 Dec 2024 05:09 PM"
+    "02 Dec 2024 05:09 PM",
   ),
   createData(
     "#JAN-801",
     "/images/users/user6.jpg",
     "Oliver Khan",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "+1 555-123-4567",
     "Washington D.C",
     "10 Oct 2024",
-    "01 Dec 2024 08:23 AM"
+    "01 Dec 2024 08:23 AM",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -331,13 +330,13 @@ const MembersTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -423,7 +422,7 @@ const MembersTable: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (

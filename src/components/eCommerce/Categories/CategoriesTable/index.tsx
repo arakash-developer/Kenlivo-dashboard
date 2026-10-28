@@ -1,42 +1,53 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import styles from "@/components/eCommerce/Categories/CategoriesTable/CategoriesTable.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Dialog,
-  DialogTitle,
-  Grid,
-  Button,
   TextField,
+  Typography,
 } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { styled, useTheme } from "@mui/material/styles";
 import Image from "next/image";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-import styles from "@/components/eCommerce/Categories/CategoriesTable/CategoriesTable.module.css";
-import { styled } from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
-import Select, { SelectChangeEvent } from "@mui/material/Select"; 
+import React, { FormEvent, useEffect, useState } from "react";
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  image: string | null;
+  isActive: boolean;
+  totalProducts: number;
+}
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -45,17 +56,12 @@ interface BootstrapDialogTitleProps {
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
+  "& .MuiDialogContent-root": { padding: theme.spacing(2) },
+  "& .MuiDialogActions-root": { padding: theme.spacing(1) },
 }));
 
 function BootstrapDialogTitle(props: BootstrapDialogTitleProps) {
   const { children, onClose, ...other } = props;
-
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -63,12 +69,7 @@ function BootstrapDialogTitle(props: BootstrapDialogTitleProps) {
         <IconButton
           aria-label="close"
           onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
+          sx={{ position: "absolute", right: 8, top: 8, color: (theme) => theme.palette.grey[500] }}
         >
           <CloseIcon />
         </IconButton>
@@ -76,216 +77,151 @@ function BootstrapDialogTitle(props: BootstrapDialogTitleProps) {
     </DialogTitle>
   );
 }
-
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-// End Modal
 
 interface TablePaginationActionsProps {
   count: number;
   page: number;
   rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
-  ) => void;
+  onPageChange: (event: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
 }
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    onPageChange(event, page + 1);
-  };
-
   return (
-    <Box
-      sx={{
-        flexShrink: 0,
-        display: "flex",
-        gap: "10px",
-        padding: "0 20px",
-      }}
-    >
+    <Box sx={{ flexShrink: 0, display: "flex", gap: "10px", padding: "0 20px" }}>
       <IconButton
-        onClick={handleBackButtonClick}
+        onClick={(e) => onPageChange(e, page - 1)}
         disabled={page === 0}
         aria-label="previous page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
+        sx={{ borderRadius: "4px", padding: "6px" }}
         className="border"
       >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
+        {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
       </IconButton>
-
       <IconButton
-        onClick={handleNextButtonClick}
+        onClick={(e) => onPageChange(e, page + 1)}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
+        sx={{ borderRadius: "4px", padding: "6px" }}
         className="border"
       >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
+        {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
       </IconButton>
     </Box>
   );
 }
 
-function createData(
-  id: string,
-  image: string,
-  name: string,
-  totalProducts: number,
-  slug: string,
-  description: string,
-  status: string
-) {
-  return {
-    id,
-    image,
-    name,
-    totalProducts,
-    slug,
-    description,
-    status,
-  };
-}
-
-const rows = [
-  createData(
-    "1",
-    "/images/products/product1.jpg",
-    "Watch",
-    54,
-    "watch",
-    "What is lorem ipsum?",
-    "active"
-  ),
-  createData(
-    "2",
-    "/images/products/product2.jpg",
-    "Headphone",
-    13,
-    "headphone",
-    "Why do we use it?",
-    "active"
-  ),
-  createData(
-    "3",
-    "/images/products/product3.jpg",
-    "Mobile",
-    42,
-    "mobile",
-    "Where does it come from?",
-    "Deactive"
-  ),
-  createData(
-    "4",
-    "/images/products/product4.jpg",
-    "Speaker",
-    42,
-    "speaker",
-    "Where does it come from?",
-    "active"
-  ),
-  createData(
-    "5",
-    "/images/products/product5.jpg",
-    "Electronics",
-    42,
-    "slectronics",
-    "Where does it come from?",
-    "active"
-  ),
-].sort((b, a) => (a.id < b.id ? -1 : 1));
-
 const CategoriesTable: React.FC = () => {
-  // Table
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  const [open, setOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  const [status, setStatus] = useState<string>("active");
+  const [formName, setFormName] = useState("");
+  const [formDescription, setFormDescription] = useState("");
+  const [formImage, setFormImage] = useState("");
+
+  const fetchCategories = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/categories");
+      const json = await res.json();
+      setCategories(json.data ?? []);
+    } catch {
+      setCategories([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchCategories(); }, []);
+
+  const filtered = categories.filter((c) =>
+    c.name.toLowerCase().includes(search.toLowerCase()) ||
+    c.slug.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filtered.length) : 0;
+
+  const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+  const handleChangeRowsPerPage = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
 
-  // Modal
-  const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
+    setFormName("");
+    setFormDescription("");
+    setFormImage("");
+    setStatus("active");
+    setFormError("");
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+
+  const handleClose = () => setOpen(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log();
+    if (!formName.trim()) { setFormError("Name is required"); return; }
+    setSubmitting(true);
+    setFormError("");
+    try {
+      const res = await fetch("/api/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formName.trim(),
+          description: formDescription.trim(),
+          image: formImage.trim() || null,
+          isActive: status === "active",
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok) { setFormError(json.message ?? "Failed to create"); return; }
+      await fetchCategories();
+      handleClose();
+    } catch {
+      setFormError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  // Select
-  const [status, setStatus] = useState("");
-  const handleChangeStatus = (event: SelectChangeEvent) => {
-    setStatus(event.target.value as string);
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this category?")) return;
+    await fetch("/api/categories", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    fetchCategories();
   };
 
   return (
     <>
       <Card
-        sx={{
-          boxShadow: "none",
-          borderRadius: "7px",
-          mb: "25px",
-          padding: { xs: "18px", sm: "20px", lg: "25px" },
-        }}
+        sx={{ boxShadow: "none", borderRadius: "7px", mb: "25px", padding: { xs: "18px", sm: "20px", lg: "25px" } }}
         className="rmui-card"
       >
         <Box
-          sx={{
-            display: { xs: "block", sm: "flex" },
-            alignItems: "center",
-            justifyContent: "space-between",
-            mb: "25px",
-          }}
+          sx={{ display: { xs: "block", sm: "flex" }, alignItems: "center", justifyContent: "space-between", mb: "25px" }}
         >
-          <form className={styles.searchBox}>
+          <form className={styles.searchBox} onSubmit={(e) => e.preventDefault()}>
             <label>
               <i className="material-symbols-outlined">search</i>
             </label>
@@ -293,273 +229,104 @@ const CategoriesTable: React.FC = () => {
               type="text"
               className={styles.inputSearch}
               placeholder="Search category here....."
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(0); }}
             />
           </form>
 
           <Button
             onClick={handleClickOpen}
             variant="outlined"
-            sx={{
-              textTransform: "capitalize",
-              borderRadius: "7px",
-              fontWeight: "500",
-              fontSize: "13px",
-              padding: "6px 13px",
-            }}
+            sx={{ textTransform: "capitalize", borderRadius: "7px", fontWeight: "500", fontSize: "13px", padding: "6px 13px" }}
             color="primary"
           >
-            <AddIcon sx={{ position: "relative", top: "-1px" }} /> Add New
-            Category
+            <AddIcon sx={{ position: "relative", top: "-1px" }} /> Add New Category
           </Button>
         </Box>
 
-        {/* Table */}
-
-        <TableContainer
-          component={Paper}
-          sx={{
-            boxShadow: "none",
-            borderRadius: "7px",
-          }}
-          className="rmui-table border"
-        >
-          <Table sx={{ minWidth: 950 }} aria-label="Table">
+        <TableContainer component={Paper} sx={{ boxShadow: "none", borderRadius: "7px" }} className="rmui-table border">
+          <Table sx={{ minWidth: 950 }} aria-label="Categories Table">
             <TableHead className="bg-f6f7f9">
               <TableRow>
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  #
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Image
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Name
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Total Products
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Slug
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Description
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Status
-                </TableCell>
-
-                <TableCell
-                  sx={{
-                    fontWeight: "500",
-                    padding: "10px 20px",
-                    fontSize: "14px",
-                  }}
-                  className="text-black border-bottom"
-                >
-                  Action
-                </TableCell>
+                {["#", "Image", "Name", "Total Products", "Slug", "Description", "Status", "Action"].map((h) => (
+                  <TableCell key={h} sx={{ fontWeight: "500", padding: "10px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                    {h}
+                  </TableCell>
+                ))}
               </TableRow>
             </TableHead>
 
             <TableBody>
-              {(rowsPerPage > 0
-                ? rows.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : rows
-              ).map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell
-                    sx={{
-                      padding: "5px 13px",
-                      fontSize: "14px",
-                      width: "65px",
-                    }}
-                    className="border-bottom"
-                  >
-                    <Checkbox {...label} sx={{ padding: "8px" }} />
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="border-bottom"
-                  >
-                    <Image
-                      src={row.image}
-                      alt="img"
-                      width={50}
-                      height={50}
-                      style={{ borderRadius: "100px" }}
-                    />
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    {row.name}
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="border-bottom"
-                  >
-                    {row.totalProducts}
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="border-bottom"
-                  >
-                    {row.slug}
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="border-bottom"
-                  >
-                    {row.description}
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                    }}
-                    className="border-bottom"
-                  >
-                    <div
-                      className={`trezo-badge ${row.status}`}
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      {row.status}
-                    </div>
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      padding: "15px 20px",
-                    }}
-                    className="border-bottom"
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <IconButton
-                        aria-label="view"
-                        color="primary"
-                        sx={{ padding: "5px" }}
-                      >
-                        <i
-                          className="material-symbols-outlined"
-                          style={{ fontSize: "16px" }}
-                        >
-                          visibility
-                        </i>
-                      </IconButton>
-
-                      <IconButton
-                        aria-label="edit"
-                        color="secondary"
-                        sx={{ padding: "5px" }}
-                      >
-                        <i
-                          className="material-symbols-outlined"
-                          style={{ fontSize: "16px" }}
-                        >
-                          edit
-                        </i>
-                      </IconButton>
-
-                      <IconButton
-                        aria-label="delete"
-                        color="error"
-                        sx={{ padding: "5px" }}
-                      >
-                        <i
-                          className="material-symbols-outlined"
-                          style={{ fontSize: "16px" }}
-                        >
-                          delete
-                        </i>
-                      </IconButton>
-                    </Box>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={8} align="center" sx={{ py: 4 }}>
+                    <CircularProgress size={28} />
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : filtered.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={8} align="center" sx={{ py: 4, color: "#888" }}>
+                    No categories found.
+                  </TableCell>
+                </TableRow>
+              ) : (
+                (rowsPerPage > 0
+                  ? filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : filtered
+                ).map((row, idx) => (
+                  <TableRow key={row._id}>
+                    <TableCell sx={{ padding: "5px 13px", fontSize: "14px", width: "65px" }} className="border-bottom">
+                      <Checkbox {...label} sx={{ padding: "8px" }} />
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.image ? (
+                        <Image src={row.image} alt={row.name} width={50} height={50} style={{ borderRadius: "100px", objectFit: "cover" }} />
+                      ) : (
+                        <Box sx={{ width: 50, height: 50, borderRadius: "50%", bgcolor: "#f0dde0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
+                          {row.name.charAt(0).toUpperCase()}
+                        </Box>
+                      )}
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                      {row.name}
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.totalProducts}
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.slug}
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">
+                      {row.description || "—"}
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px" }} className="border-bottom">
+                      <div className={`kenlivo-badge ${row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                        {row.isActive ? "Active" : "Inactive"}
+                      </div>
+                    </TableCell>
+
+                    <TableCell sx={{ padding: "15px 20px" }} className="border-bottom">
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <IconButton aria-label="view" color="primary" sx={{ padding: "5px" }}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>visibility</i>
+                        </IconButton>
+                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
+                        </IconButton>
+                        <IconButton aria-label="delete" color="error" sx={{ padding: "5px" }} onClick={() => handleDelete(row._id)}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete</i>
+                        </IconButton>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={8} />
@@ -572,23 +339,14 @@ const CategoriesTable: React.FC = () => {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={8}
-                  count={rows.length}
+                  count={filtered.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
-                  slotProps={{
-                    select: {
-                      inputProps: {
-                        "aria-label": "rows per page",
-                      },
-                      native: true,
-                    },
-                  }}
+                  slotProps={{ select: { inputProps: { "aria-label": "rows per page" }, native: true } }}
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                   ActionsComponent={TablePaginationActions}
-                  sx={{
-                    border: "none",
-                  }}
+                  sx={{ border: "none" }}
                 />
               </TableRow>
             </TableFooter>
@@ -596,7 +354,7 @@ const CategoriesTable: React.FC = () => {
         </TableContainer>
       </Card>
 
-      {/* Modal */}
+      {/* Add Category Modal */}
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -605,27 +363,12 @@ const CategoriesTable: React.FC = () => {
       >
         <Box>
           <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              background: "#f6f7f9",
-              padding: { xs: "15px 20px", md: "25px" },
-            }}
+            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }}
             className="rmu-modal-header"
           >
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              sx={{
-                fontWeight: "600",
-                fontSize: { xs: "16px", md: "18px" },
-              }}
-              className="text-black"
-            >
+            <Typography id="modal-modal-title" variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
               Add New Category
             </Typography>
-
             <IconButton aria-label="remove" size="small" onClick={handleClose}>
               <ClearIcon />
             </IconButton>
@@ -633,172 +376,100 @@ const CategoriesTable: React.FC = () => {
 
           <Box className="rmu-modal-content">
             <Box component="form" noValidate onSubmit={handleSubmit}>
-              <Box
-                sx={{
-                  padding: "25px",
-                  borderRadius: "8px",
-                }}
-                className="bg-white"
-              >
+              <Box sx={{ padding: "25px", borderRadius: "8px" }} className="bg-white">
                 <Grid container alignItems="center" spacing={2}>
-                  <Grid item xs={12} md={12} lg={6}>
-                    <Typography
-                      component="h5"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "12px",
-                      }}
-                      className="text-black"
-                    >
-                      Name
-                    </Typography>
 
+                  <Grid item xs={12} md={12} lg={6}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
+                      Name *
+                    </Typography>
                     <TextField
-                      autoComplete="name"
                       name="name"
                       required
                       fullWidth
-                      id="name"
                       label="Enter name"
                       autoFocus
-                      InputProps={{
-                        style: { borderRadius: 8 },
-                      }}
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                      InputProps={{ style: { borderRadius: 8 } }}
                     />
                   </Grid>
 
                   <Grid item xs={12} md={12} lg={6}>
-                    <Typography
-                      component="h5"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "12px",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
                       Status
                     </Typography>
-
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Select
-                      </InputLabel>
+                      <InputLabel id="status-label">Select</InputLabel>
                       <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        labelId="status-label"
                         value={status}
                         label="Select"
-                        onChange={handleChangeStatus}
+                        onChange={(e: SelectChangeEvent) => setStatus(e.target.value)}
+                        sx={{ borderRadius: 2 }}
                       >
-                        <MenuItem value={0}>Active</MenuItem>
-                        <MenuItem value={1}>Deactive</MenuItem>
+                        <MenuItem value="active">Active</MenuItem>
+                        <MenuItem value="inactive">Inactive</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
 
-                  <Grid item xs={12} md={12} lg={12}>
-                    <Typography
-                      component="h5"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "12px",
-                      }}
-                      className="text-black"
-                    >
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
                       Description
                     </Typography>
-
-                    <textarea 
-                      id="description" 
-                      name="description" 
+                    <textarea
+                      name="description"
                       placeholder="Description"
-                      rows={5}
-                      style={{
-                        width: '100%',
-                        borderRadius: '6px',
-                        padding: '10px 15px',
-                        border: '1px solid #D5D9E2'
-                      }} 
-                    ></textarea>
-                  </Grid>
-
-                  <Grid item xs={12} md={12} lg={12}>
-                    <Typography
-                      component="h5"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "12px",
-                      }}
-                      className="text-black"
-                    >
-                      Image
-                    </Typography>
-
-                    <TextField
-                      autoComplete="image"
-                      name="image"
-                      required
-                      fullWidth
-                      id="image"
-                      type="file"
-                      autoFocus
-                      InputProps={{
-                        style: { borderRadius: 8 },
-                      }}
+                      rows={4}
+                      value={formDescription}
+                      onChange={(e) => setFormDescription(e.target.value)}
+                      style={{ width: "100%", borderRadius: "6px", padding: "10px 15px", border: "1px solid #D5D9E2", outline: "none", fontFamily: "inherit", fontSize: 14 }}
                     />
                   </Grid>
 
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
+                      Image URL
+                    </Typography>
+                    <TextField
+                      name="image"
+                      fullWidth
+                      label="https://..."
+                      value={formImage}
+                      onChange={(e) => setFormImage(e.target.value)}
+                      InputProps={{ style: { borderRadius: 8 } }}
+                    />
+                  </Grid>
+
+                  {formError && (
+                    <Grid item xs={12}>
+                      <Typography color="error" sx={{ fontSize: "13px" }}>{formError}</Typography>
+                    </Grid>
+                  )}
+
                   <Grid item xs={12} mt={1}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "end",
-                        gap: "10px",
-                      }}
-                    >
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", gap: "10px" }}>
                       <Button
                         onClick={handleClose}
                         variant="outlined"
                         color="error"
-                        sx={{
-                          textTransform: "capitalize",
-                          borderRadius: "8px",
-                          fontWeight: "500",
-                          fontSize: "13px",
-                          padding: "11px 30px",
-                        }}
+                        disabled={submitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px" }}
                       >
                         Cancel
                       </Button>
-
                       <Button
                         type="submit"
                         variant="contained"
-                        sx={{
-                          textTransform: "capitalize",
-                          borderRadius: "8px",
-                          fontWeight: "500",
-                          fontSize: "13px",
-                          padding: "11px 30px",
-                          color: "#fff !important",
-                        }}
+                        disabled={submitting}
+                        sx={{ textTransform: "capitalize", borderRadius: "8px", fontWeight: "500", fontSize: "13px", padding: "11px 30px", color: "#fff !important" }}
                       >
-                        <AddIcon
-                          sx={{
-                            position: "relative",
-                            top: "-2px",
-                          }}
-                          className="mr-5px"
-                        />{" "}
-                        Create
+                        {submitting ? <CircularProgress size={18} color="inherit" /> : <><AddIcon sx={{ position: "relative", top: "-2px" }} className="mr-5px" /> Create</>}
                       </Button>
                     </Box>
                   </Grid>
+
                 </Grid>
               </Box>
             </Box>

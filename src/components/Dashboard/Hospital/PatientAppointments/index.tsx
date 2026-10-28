@@ -1,28 +1,25 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
-  Menu,
-  MenuItem,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Image from "next/image";
+import * as React from "react";
 import styles from "../PatientAppointments/PatientAppointments.module.css";
 import DateTimePickerDemo from "./DateTimePickerDemo";
 
@@ -32,7 +29,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -41,13 +38,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -106,7 +103,7 @@ function createData(
   doctorImg: string,
   doctorName: string,
   department: string,
-  status: string
+  status: string,
 ) {
   return {
     id,
@@ -129,7 +126,7 @@ const rows = [
     "/images/users/user11.jpg",
     "Dr. Sarah",
     "Cardiology",
-    "confirmed"
+    "confirmed",
   ),
   createData(
     "2",
@@ -139,7 +136,7 @@ const rows = [
     "/images/users/user32.jpg",
     "Dr. Mark",
     "Pediatrics",
-    "rescheduled"
+    "rescheduled",
   ),
   createData(
     "3",
@@ -149,7 +146,7 @@ const rows = [
     "/images/users/user33.jpg",
     "Dr. Emily",
     "Orthopedics",
-    "cancelled"
+    "cancelled",
   ),
   createData(
     "4",
@@ -159,7 +156,7 @@ const rows = [
     "/images/users/user34.jpg",
     "Dr. Adam",
     "Dermatology",
-    "confirmed"
+    "confirmed",
   ),
   createData(
     "5",
@@ -169,7 +166,7 @@ const rows = [
     "/images/users/user35.jpg",
     "Dr. Rebecca",
     "Surgery",
-    "pending"
+    "pending",
   ),
   createData(
     "6",
@@ -179,7 +176,7 @@ const rows = [
     "/images/users/user35.jpg",
     "Dr. Rebecca",
     "Surgery",
-    "pending"
+    "pending",
   ),
   createData(
     "7",
@@ -189,7 +186,7 @@ const rows = [
     "/images/users/user34.jpg",
     "Dr. Adam",
     "Dermatology",
-    "confirmed"
+    "confirmed",
   ),
   createData(
     "8",
@@ -199,7 +196,7 @@ const rows = [
     "/images/users/user33.jpg",
     "Dr. Emily",
     "Orthopedics",
-    "cancelled"
+    "cancelled",
   ),
   createData(
     "9",
@@ -209,7 +206,7 @@ const rows = [
     "/images/users/user32.jpg",
     "Dr. Mark",
     "Pediatrics",
-    "rescheduled"
+    "rescheduled",
   ),
   createData(
     "10",
@@ -219,7 +216,7 @@ const rows = [
     "/images/users/user11.jpg",
     "Dr. Sarah",
     "Cardiology",
-    "confirmed"
+    "confirmed",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -244,13 +241,13 @@ const PatientAppointments: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -269,7 +266,7 @@ const PatientAppointments: React.FC = () => {
       >
         <Box
           sx={{
-            display: {sm: 'flex'},
+            display: { sm: "flex" },
             alignItems: "center",
             justifyContent: "space-between",
             mb: "25px",
@@ -286,7 +283,7 @@ const PatientAppointments: React.FC = () => {
             Patient Appointments
           </Typography>
 
-          <Box sx={{ mt: {xs: '10px', sm: '0'} }}>
+          <Box sx={{ mt: { xs: "10px", sm: "0" } }}>
             <DateTimePickerDemo />
           </Box>
         </Box>
@@ -373,7 +370,7 @@ const PatientAppointments: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (
@@ -466,7 +463,12 @@ const PatientAppointments: React.FC = () => {
                     }}
                     className="text-black border-bottom"
                   >
-                    <Box className={`trezo-badge ${row.status}`} sx={{ textTransform: 'capitalize' }}>{row.status}</Box>
+                    <Box
+                      className={`kenlivo-badge ${row.status}`}
+                      sx={{ textTransform: "capitalize" }}
+                    >
+                      {row.status}
+                    </Box>
                   </TableCell>
                 </TableRow>
               ))}

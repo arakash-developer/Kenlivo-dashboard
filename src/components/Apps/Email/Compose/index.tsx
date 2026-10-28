@@ -1,32 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import AddToDriveIcon from "@mui/icons-material/AddToDrive";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
+import LinkIcon from "@mui/icons-material/Link";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import TagFacesIcon from "@mui/icons-material/TagFaces";
 import {
-  Card,
   Box,
-  Grid,
-  Typography,
-  TextField,
   Button,
-  OutlinedInput,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  ListItemText,
+  Card,
   Checkbox,
+  FormControl,
+  Grid,
   IconButton,
+  InputLabel,
+  ListItemText,
   Menu,
+  MenuItem,
+  OutlinedInput,
+  TextField,
+  Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import LinkIcon from "@mui/icons-material/Link";
-import TagFacesIcon from "@mui/icons-material/TagFaces";
-import AddToDriveIcon from "@mui/icons-material/AddToDrive";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import EditIcon from "@mui/icons-material/Edit";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, { useState } from "react";
 import CustomEditor from "./CustomEditor";
 
 const ITEM_HEIGHT = 48;
@@ -41,12 +41,12 @@ const MenuProps = {
 };
 
 const names = [
-  "james@trezo.com",
-  "andy@trezo.com",
-  "mateo@trezo.com",
-  "luca@trezo.com",
-  "smith@trezo.com",
-  "tomato@trezo.com",
+  "james@kenlivo.com",
+  "andy@kenlivo.com",
+  "mateo@kenlivo.com",
+  "luca@kenlivo.com",
+  "smith@kenlivo.com",
+  "tomato@kenlivo.com",
 ];
 
 const Compose: React.FC = () => {
@@ -56,14 +56,14 @@ const Compose: React.FC = () => {
 
   const handleChange = (
     event: SelectChangeEvent<typeof toNames>,
-    setNames: React.Dispatch<React.SetStateAction<string[]>>
+    setNames: React.Dispatch<React.SetStateAction<string[]>>,
   ) => {
     const {
       target: { value },
     } = event;
     setNames(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof value === "string" ? value.split(",") : value,
     );
   };
 

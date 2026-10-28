@@ -1,15 +1,15 @@
 "use client";
 
-import * as React from "react";
 import {
-  Grid,
-  Button,
   Box,
-  Typography,
+  Button,
   FormControl,
+  Grid,
   TextField,
+  Typography,
 } from "@mui/material";
 import Image from "next/image";
+import * as React from "react";
 import Countdown from "./Countdown";
 
 const ComingSoonContent: React.FC = () => {
@@ -105,7 +105,7 @@ const ComingSoonContent: React.FC = () => {
                       </Typography>
 
                       <TextField
-                        label="example&#64;trezo.com"
+                        label="example&#64;kenlivo.com"
                         variant="filled"
                         id="email"
                         name="email"

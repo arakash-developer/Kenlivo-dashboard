@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { Card, Box, Typography, Button } from "@mui/material";
+import { Box, Button, Card, Typography } from "@mui/material";
 import Image from "next/image";
+import * as React from "react";
 import CustomEditor from "./CustomEditor";
 
 const Comments: React.FC = () => {
@@ -55,7 +55,7 @@ const Comments: React.FC = () => {
               <Typography>a day ago</Typography>
 
               <Typography
-                className="trezo-badge bg-primary text-white"
+                className="kenlivo-badge bg-primary text-white"
                 sx={{ mt: { xs: "5px !important", sm: "0 !important" } }}
               >
                 #BD0JL0G6
@@ -131,7 +131,7 @@ const Comments: React.FC = () => {
               <Typography className="d-block">18 hours ago</Typography>
 
               <Typography
-                className="trezo-badge bg-secondary text-white"
+                className="kenlivo-badge bg-secondary text-white"
                 sx={{ mt: { xs: "5px !important", sm: "0 !important" } }}
               >
                 Support Staff
@@ -263,7 +263,7 @@ const Comments: React.FC = () => {
 
               <Typography className="d-block">05 hours ago</Typography>
               <Typography
-                className="trezo-badge bg-secondary text-white"
+                className="kenlivo-badge bg-secondary text-white"
                 sx={{ mt: { xs: "5px !important", sm: "0 !important" } }}
               >
                 Support Staff

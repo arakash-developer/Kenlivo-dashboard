@@ -1,29 +1,29 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import styles from "@/components/Events/EventsList/Search.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Button,
+  Typography,
 } from "@mui/material";
-import NextLink from "next/link";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/Events/EventsList/Search.module.css";
-import AddIcon from "@mui/icons-material/Add";
+import Image from "next/image";
+import NextLink from "next/link";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -31,7 +31,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -40,13 +40,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -105,7 +105,7 @@ function createData(
   location: string,
   organizer: string,
   status: string,
-  detailsLink: string
+  detailsLink: string,
 ) {
   return {
     eventID,
@@ -128,7 +128,7 @@ const rows = [
     "Convention Center",
     "ABC Corporation",
     "happening",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-257",
@@ -138,7 +138,7 @@ const rows = [
     "Online",
     "Marketing Pros",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-256",
@@ -148,7 +148,7 @@ const rows = [
     "City Sky Lounge",
     "Tech Solutions Inc.",
     "past",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-255",
@@ -158,7 +158,7 @@ const rows = [
     "Training Center",
     "Startup Hub",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-254",
@@ -168,7 +168,7 @@ const rows = [
     "Tech Park Auditorium",
     "Community Foundation",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-253",
@@ -178,7 +178,7 @@ const rows = [
     "Grand Hotel Ballroom",
     "FutureTech Solution",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-252",
@@ -188,7 +188,7 @@ const rows = [
     "Innovation Hub",
     "Leadership Institute",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-251",
@@ -198,7 +198,7 @@ const rows = [
     "Medical Center",
     "XYZ Innovations",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-250",
@@ -208,7 +208,7 @@ const rows = [
     "Corporate HQ",
     "DTech Institute",
     "past",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-249",
@@ -218,7 +218,7 @@ const rows = [
     "Online",
     "ABC Corporation",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-248",
@@ -228,7 +228,7 @@ const rows = [
     "Convention Center",
     "ABC Corporation",
     "happening",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-247",
@@ -238,7 +238,7 @@ const rows = [
     "Training Center",
     "Startup Hub",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-246",
@@ -248,7 +248,7 @@ const rows = [
     "Tech Park Auditorium",
     "Community Foundation",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-245",
@@ -258,7 +258,7 @@ const rows = [
     "Online",
     "Marketing Pros",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-244",
@@ -268,7 +268,7 @@ const rows = [
     "City Sky Lounge",
     "Tech Solutions Inc.",
     "past",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-243",
@@ -278,7 +278,7 @@ const rows = [
     "Grand Hotel Ballroom",
     "FutureTech Solution",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-242",
@@ -288,7 +288,7 @@ const rows = [
     "Medical Center",
     "XYZ Innovations",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-241",
@@ -298,7 +298,7 @@ const rows = [
     "Innovation Hub",
     "Leadership Institute",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-240",
@@ -308,7 +308,7 @@ const rows = [
     "Corporate HQ",
     "DTech Institute",
     "past",
-    "/events/details/"
+    "/events/details/",
   ),
   createData(
     "JAN-239",
@@ -318,7 +318,7 @@ const rows = [
     "Online",
     "ABC Corporation",
     "upcoming",
-    "/events/details/"
+    "/events/details/",
   ),
 ].sort((b, a) => (a.eventID < b.eventID ? -1 : 1));
 
@@ -333,13 +333,13 @@ const EventsList: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -495,7 +495,7 @@ const EventsList: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -587,7 +587,7 @@ const EventsList: React.FC = () => {
                       className="border-bottom"
                     >
                       <div
-                        className={`trezo-badge ${row.status}`}
+                        className={`kenlivo-badge ${row.status}`}
                         style={{ textTransform: "capitalize" }}
                       >
                         {row.status}

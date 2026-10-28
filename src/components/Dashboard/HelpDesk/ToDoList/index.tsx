@@ -1,45 +1,44 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import styles from "@/components/Dashboard/HelpDesk/ToDoList/ToDoList.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Dialog,
-  DialogTitle,
-  Grid,
-  Button,
   TextField,
+  Typography,
 } from "@mui/material";
-import Link from "next/link";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-import styles from "@/components/Dashboard/HelpDesk/ToDoList/ToDoList.module.css";
-import { styled } from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { styled, useTheme } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import Link from "next/link";
+import PropTypes from "prop-types";
+import React, { FormEvent, useState } from "react";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -92,7 +91,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -101,13 +100,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -165,7 +164,7 @@ function createData(
   dueDate: string,
   priority: string,
   status: string,
-  viewLink: string
+  viewLink: string,
 ) {
   return {
     id,
@@ -186,7 +185,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "Finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#851",
@@ -195,7 +194,7 @@ const rows = [
     "25 Apr 2024",
     "Low",
     "Pending",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#852",
@@ -204,7 +203,7 @@ const rows = [
     "20 Apr 2024",
     "Medium",
     "In Progress",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#853",
@@ -213,7 +212,7 @@ const rows = [
     "15 Apr 2024",
     "High",
     "Finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#854",
@@ -222,7 +221,7 @@ const rows = [
     "10 Apr 2024",
     "Low",
     "Cancelled",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#855",
@@ -231,7 +230,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "Finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#856",
@@ -240,7 +239,7 @@ const rows = [
     "25 Apr 2024",
     "Low",
     "Pending",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#857",
@@ -249,7 +248,7 @@ const rows = [
     "20 Apr 2024",
     "Medium",
     "In Progress",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#858",
@@ -258,7 +257,7 @@ const rows = [
     "15 Apr 2024",
     "High",
     "Finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#869",
@@ -267,7 +266,7 @@ const rows = [
     "10 Apr 2024",
     "Low",
     "Cancelled",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -282,13 +281,13 @@ const ToDoList: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -502,7 +501,7 @@ const ToDoList: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -575,7 +574,7 @@ const ToDoList: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

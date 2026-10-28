@@ -1,7 +1,7 @@
 "use client";
 
+import { Box, Card, Typography } from "@mui/material";
 import React from "react";
-import { Card, Box, Typography } from "@mui/material";
 
 const BillingDetails: React.FC = () => {
   return (
@@ -33,7 +33,7 @@ const BillingDetails: React.FC = () => {
           </Box>
 
           <Box mt="8px">
-            <span className="text-black">Email:</span> example&#64;trezo.com
+            <span className="text-black">Email:</span> example&#64;kenlivo.com
           </Box>
 
           <Box mt="8px">

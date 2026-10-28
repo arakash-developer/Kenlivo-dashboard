@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  IconButton,
   Menu,
   MenuItem,
-  IconButton,
+  Typography,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Image from "next/image";
+import React from "react";
 
 const CustomerId: React.FC = () => {
   // Dropdown
@@ -128,7 +128,7 @@ const CustomerId: React.FC = () => {
               Billing Email:
             </Typography>
             <Typography fontSize="14px" fontWeight={500} className="text-black">
-              ava&#64;trezo.com
+              ava&#64;kenlivo.com
             </Typography>
           </Box>
 

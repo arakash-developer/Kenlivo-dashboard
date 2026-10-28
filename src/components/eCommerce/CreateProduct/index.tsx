@@ -1,10 +1,12 @@
 "use client";
 
 import {
+  Alert,
   Box,
   Button,
   Card,
   Checkbox,
+  CircularProgress,
   FormControl,
   Grid,
   InputLabel,
@@ -19,47 +21,113 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import CustomEditor from "./CustomEditor";
 
+interface Category {
+  _id: string;
+  name: string;
+  isActive: boolean;
+}
+
+const TAG_OPTIONS = ["Watch", "Electronics", "Sports", "Fashion", "Jewellery"];
+
 const CreateProduct: React.FC = () => {
-  const [productType, setProductType] = useState<string>("");
-  const [brandName, setBrandName] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [vendor, setVendor] = useState<string>("");
-  const [collection, setCollection] = useState<string>("");
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const router = useRouter();
 
-  const handleProductTypeChange = (event: SelectChangeEvent) => {
-    setProductType(event.target.value as string);
-  };
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const handleBrandNameChange = (event: SelectChangeEvent) => {
-    setBrandName(event.target.value as string);
-  };
+  const [productTitle, setProductTitle] = useState("");
+  const [productType, setProductType] = useState("");
+  const [sku, setSku] = useState("");
+  const [brandName, setBrandName] = useState("");
+  const [description, setDescription] = useState("");
+  const [regularPrice, setRegularPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [productID, setProductID] = useState("");
+  const [discountOffer, setDiscountOffer] = useState("");
+  const [category, setCategory] = useState("");
+  const [vendor, setVendor] = useState("");
+  const [collection, setCollection] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [primaryImage, setPrimaryImage] = useState("");
+  const [secondaryImages, setSecondaryImages] = useState(["", "", "", ""]);
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
 
-  const handleCategoryChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value as string);
-  };
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleVendorChange = (event: SelectChangeEvent) => {
-    setVendor(event.target.value as string);
-  };
-
-  const handleCollectionChange = (event: SelectChangeEvent) => {
-    setCollection(event.target.value as string);
-  };
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((r) => r.json())
+      .then((json) => setCategories((json.data ?? []).filter((c: Category) => c.isActive)))
+      .catch(() => {});
+  }, []);
 
   const handleMultipleSelectChange = (event: SelectChangeEvent<string[]>) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedOptions(typeof value === "string" ? value.split(",") : value);
+    const { target: { value } } = event;
+    setSelectedTags(typeof value === "string" ? value.split(",") : value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (!productTitle.trim()) { setError("Product title is required."); return; }
+    if (!regularPrice || isNaN(Number(regularPrice)) || Number(regularPrice) <= 0) { setError("Enter a valid regular price."); return; }
+    if (!category) { setError("Please select a category."); return; }
+
+    setSubmitting(true);
+    try {
+      const price = Number(regularPrice);
+      const finalPrice = salePrice && !isNaN(Number(salePrice)) ? Number(salePrice) : price;
+      const discountPercentage = price > 0 ? Math.round((1 - finalPrice / price) * 100) : 0;
+
+      const res = await fetch("/api/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: productTitle.trim(),
+          description: description.trim() || metaDescription.trim(),
+          tagline: "",
+          price,
+          discountPercentage,
+          category,
+          images: [primaryImage, ...secondaryImages].map((u) => u.trim()).filter(Boolean),
+          stock: stock ? Number(stock) : 0,
+          isActive: true,
+          sku: sku.trim(),
+          brandName: brandName.trim(),
+          productType,
+          vendor,
+          collection,
+          tags: selectedTags,
+          productID: productID.trim(),
+          metaTitle: metaTitle.trim(),
+          metaDescription: metaDescription.trim(),
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) { setError(json.message ?? "Failed to create product."); return; }
+
+      setSuccess("Product created successfully!");
+      setTimeout(() => router.push("/ecommerce/products-list/"), 1200);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <>
-      <Box component="form">
+      <Box component="form" onSubmit={handleSubmit} noValidate>
         <Grid container columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}>
           <Grid item xs={12} sm={12} md={6} lg={12} xl={8}>
             <Card
@@ -71,62 +139,36 @@ const CreateProduct: React.FC = () => {
               }}
               className="rmui-card"
             >
-              <Box
-                sx={{
-                  mb: "25px",
-                }}
-              >
+              <Box sx={{ mb: "25px" }}>
                 <Typography
                   variant="h3"
-                  sx={{
-                    fontSize: { xs: "16px", md: "18px" },
-                    fontWeight: 700,
-                  }}
+                  sx={{ fontSize: { xs: "16px", md: "18px" }, fontWeight: 700 }}
                   className="text-black"
                 >
                   Add A Product
                 </Typography>
               </Box>
 
-              <Grid
-                container
-                spacing={3}
-                columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}
-              >
+              <Grid container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}>
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Product Title
                       </Typography>
-
                       <TextField
                         label="Enter Product Title"
                         placeholder="E.g. Google Pixel 7 Pro"
                         variant="filled"
                         id="productTitle"
                         name="productTitle"
+                        value={productTitle}
+                        onChange={(e) => setProductTitle(e.target.value)}
+                        required
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -135,19 +177,9 @@ const CreateProduct: React.FC = () => {
 
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Product Type
                     </Typography>
-
                     <FormControl fullWidth>
                       <InputLabel id="product-type-label">Select</InputLabel>
                       <Select
@@ -155,16 +187,11 @@ const CreateProduct: React.FC = () => {
                         id="product-type"
                         value={productType}
                         label="Select"
-                        onChange={handleProductTypeChange}
-                        sx={{
-                          "& fieldset": {
-                            border: "1px solid #D5D9E2",
-                            borderRadius: "7px",
-                          },
-                        }}
+                        onChange={(e: SelectChangeEvent) => setProductType(e.target.value)}
+                        sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value={0}>Digital Product</MenuItem>
-                        <MenuItem value={1}>Physical Product</MenuItem>
+                        <MenuItem value="digital">Digital Product</MenuItem>
+                        <MenuItem value="physical">Physical Product</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
@@ -173,37 +200,21 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         SKU
                       </Typography>
-
                       <TextField
                         label="Enter sku"
                         placeholder="E.g. ABC-12345"
                         variant="filled"
                         id="sku"
                         name="sku"
+                        value={sku}
+                        onChange={(e) => setSku(e.target.value)}
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -212,19 +223,9 @@ const CreateProduct: React.FC = () => {
 
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Brand Name
                     </Typography>
-
                     <FormControl fullWidth>
                       <InputLabel id="brand-name-label">Select</InputLabel>
                       <Select
@@ -232,19 +233,14 @@ const CreateProduct: React.FC = () => {
                         id="brand-name"
                         value={brandName}
                         label="Select"
-                        onChange={handleBrandNameChange}
-                        sx={{
-                          "& fieldset": {
-                            border: "1px solid #D5D9E2",
-                            borderRadius: "7px",
-                          },
-                        }}
+                        onChange={(e: SelectChangeEvent) => setBrandName(e.target.value)}
+                        sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value={0}>Emburo</MenuItem>
-                        <MenuItem value={1}>Fediz</MenuItem>
-                        <MenuItem value={2}>Debilop</MenuItem>
-                        <MenuItem value={3}>Canin</MenuItem>
-                        <MenuItem value={4}>Kenlivo</MenuItem>
+                        <MenuItem value="Emburo">Emburo</MenuItem>
+                        <MenuItem value="Fediz">Fediz</MenuItem>
+                        <MenuItem value="Debilop">Debilop</MenuItem>
+                        <MenuItem value="Canin">Canin</MenuItem>
+                        <MenuItem value="Kenlivo">Kenlivo</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
@@ -252,19 +248,9 @@ const CreateProduct: React.FC = () => {
 
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Product Description
                     </Typography>
-
                     <CustomEditor />
                   </Box>
                 </Grid>
@@ -272,37 +258,24 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Regular Price
                       </Typography>
-
                       <TextField
                         label="Enter Regular Price"
                         placeholder="E.g. $99"
                         variant="filled"
                         id="regularPrice"
                         name="regularPrice"
+                        type="number"
+                        inputProps={{ min: 0, step: "0.01" }}
+                        value={regularPrice}
+                        onChange={(e) => setRegularPrice(e.target.value)}
+                        required
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -312,38 +285,23 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Sale Price
                       </Typography>
-
                       <TextField
                         label="Enter Sale Price"
                         placeholder="E.g. $29"
                         variant="filled"
                         id="salePrice"
                         name="salePrice"
-                        required
+                        type="number"
+                        inputProps={{ min: 0, step: "0.01" }}
+                        value={salePrice}
+                        onChange={(e) => setSalePrice(e.target.value)}
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -351,27 +309,14 @@ const CreateProduct: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12} md={12} lg={12} xl={6}>
-                  <Typography
-                    component="h5"
-                    sx={{
-                      fontWeight: "500",
-                      fontSize: "14px",
-                      mb: "12px",
-                    }}
-                    className="text-black"
-                  >
+                  <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
                     Publish Schedule
                   </Typography>
-
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       sx={{
                         width: "100%",
-
-                        "& fieldset": {
-                          border: "1px solid #D5D9E2",
-                          borderRadius: "7px",
-                        },
+                        "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" },
                       }}
                     />
                   </LocalizationProvider>
@@ -380,37 +325,23 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Product in Stock
                       </Typography>
-
                       <TextField
                         label="Enter Product in Stock"
                         placeholder="E.g. 17"
                         variant="filled"
                         id="stock"
                         name="stock"
+                        type="number"
+                        inputProps={{ min: 0, step: 1 }}
+                        value={stock}
+                        onChange={(e) => setStock(e.target.value)}
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -420,37 +351,21 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Product ID
                       </Typography>
-
                       <TextField
                         label="Enter Product ID"
                         placeholder="E.g. #JAN-2345"
                         variant="filled"
                         id="productID"
                         name="productID"
+                        value={productID}
+                        onChange={(e) => setProductID(e.target.value)}
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -460,37 +375,21 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={6}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Discount / Offer
                       </Typography>
-
                       <TextField
                         label="Enter Discount / Offer"
                         placeholder="E.g. $20"
                         variant="filled"
                         id="discountOffer"
                         name="discountOffer"
+                        value={discountOffer}
+                        onChange={(e) => setDiscountOffer(e.target.value)}
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -498,90 +397,81 @@ const CreateProduct: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12} md={12} lg={12} xl={6}>
-                  <Typography
-                    component="h5"
-                    sx={{
-                      fontWeight: "500",
-                      fontSize: "14px",
-                      mb: "12px",
-                    }}
-                    className="text-black"
-                  >
+                  <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
                     Available Date
                   </Typography>
-
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       sx={{
                         width: "100%",
-
-                        "& fieldset": {
-                          border: "1px solid #D5D9E2",
-                          borderRadius: "7px",
-                        },
+                        "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" },
                       }}
                     />
                   </LocalizationProvider>
                 </Grid>
 
                 <Grid item xs={12} md={12} lg={12} xl={6}>
-                  <Typography
-                    component="h5"
-                    sx={{
-                      fontWeight: "500",
-                      fontSize: "14px",
-                      mb: "12px",
-                    }}
-                    className="text-black"
-                  >
+                  <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
                     End Date
                   </Typography>
-
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       sx={{
                         width: "100%",
-
-                        "& fieldset": {
-                          border: "1px solid #D5D9E2",
-                          borderRadius: "7px",
-                        },
+                        "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" },
                       }}
                     />
                   </LocalizationProvider>
                 </Grid>
 
                 <Grid item xs={12} md={12} lg={12} xl={12}>
-                  <Typography
-                    component="h5"
-                    sx={{
-                      fontWeight: "500",
-                      fontSize: "14px",
-                      mb: "12px",
-                    }}
-                    className="text-black"
-                  >
+                  <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">
                     Upload Product Images
                   </Typography>
-
-                  <TextField
-                    autoComplete="uploadFile"
-                    name="uploadFile"
-                    required
-                    fullWidth
-                    id="uploadFile"
-                    type="file"
-                    autoFocus
-                    inputProps={{
-                      multiple: true,
-                    }}
-                    sx={{
-                      "& fieldset": {
-                        border: "1px solid #D5D9E2",
-                        borderRadius: "7px",
-                      },
-                    }}
-                  />
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <FormControl fullWidth>
+                        <Typography component="label" sx={{ fontWeight: "500", fontSize: "13px", mb: "8px", display: "block", color: "#555" }}>
+                          Primary Image URL
+                        </Typography>
+                        <TextField
+                          label="https://example.com/primary.jpg"
+                          variant="filled"
+                          value={primaryImage}
+                          onChange={(e) => setPrimaryImage(e.target.value)}
+                          sx={{
+                            "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                            "& .MuiInputBase-root::before": { border: "none" },
+                            "& .MuiInputBase-root:hover::before": { border: "none" },
+                          }}
+                        />
+                      </FormControl>
+                    </Grid>
+                    {secondaryImages.map((url, i) => (
+                      <Grid item xs={12} xl={6} key={i}>
+                        <FormControl fullWidth>
+                          <Typography component="label" sx={{ fontWeight: "500", fontSize: "13px", mb: "8px", display: "block", color: "#555" }}>
+                            Secondary Image {i + 1}
+                          </Typography>
+                          <TextField
+                            label={`https://example.com/image${i + 2}.jpg`}
+                            variant="filled"
+                            value={url}
+                            onChange={(e) => {
+                              const updated = [...secondaryImages];
+                              updated[i] = e.target.value;
+                              setSecondaryImages(updated);
+                            }}
+                            sx={{
+                              "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                              "& .MuiInputBase-root::before": { border: "none" },
+                              "& .MuiInputBase-root:hover::before": { border: "none" },
+                            }}
+                          />
+                        </FormControl>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
             </Card>
@@ -597,43 +487,22 @@ const CreateProduct: React.FC = () => {
               }}
               className="rmui-card"
             >
-              <Box
-                sx={{
-                  mb: "25px",
-                }}
-              >
+              <Box sx={{ mb: "25px" }}>
                 <Typography
                   variant="h3"
-                  sx={{
-                    fontSize: { xs: "16px", md: "18px" },
-                    fontWeight: 700,
-                  }}
+                  sx={{ fontSize: { xs: "16px", md: "18px" }, fontWeight: 700 }}
                   className="text-black"
                 >
                   Product Category & Tags
                 </Typography>
               </Box>
 
-              <Grid
-                container
-                spacing={3}
-                columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}
-              >
+              <Grid container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}>
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Category
                     </Typography>
-
                     <FormControl fullWidth>
                       <InputLabel id="category-label">Select</InputLabel>
                       <Select
@@ -641,19 +510,13 @@ const CreateProduct: React.FC = () => {
                         id="category"
                         value={category}
                         label="select"
-                        onChange={handleCategoryChange}
-                        sx={{
-                          "& fieldset": {
-                            border: "1px solid #D5D9E2",
-                            borderRadius: "7px",
-                          },
-                        }}
+                        onChange={(e: SelectChangeEvent) => setCategory(e.target.value)}
+                        sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value={0}>Watch</MenuItem>
-                        <MenuItem value={1}>Mobile</MenuItem>
-                        <MenuItem value={2}>Laptop</MenuItem>
-                        <MenuItem value={3}>Headphone</MenuItem>
-                        <MenuItem value={4}>Shoe</MenuItem>
+                        {categories.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {categories.map((c) => (
+                          <MenuItem key={c._id} value={c._id}>{c.name}</MenuItem>
+                        ))}
                       </Select>
                     </FormControl>
                   </Box>
@@ -661,19 +524,9 @@ const CreateProduct: React.FC = () => {
 
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Vendor
                     </Typography>
-
                     <FormControl fullWidth>
                       <InputLabel id="vendor-label">Select</InputLabel>
                       <Select
@@ -681,19 +534,14 @@ const CreateProduct: React.FC = () => {
                         id="vendor"
                         value={vendor}
                         label="Select"
-                        onChange={handleVendorChange}
-                        sx={{
-                          "& fieldset": {
-                            border: "1px solid #D5D9E2",
-                            borderRadius: "7px",
-                          },
-                        }}
+                        onChange={(e: SelectChangeEvent) => setVendor(e.target.value)}
+                        sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value={0}>Dennis Matthews</MenuItem>
-                        <MenuItem value={1}>Susan Rader</MenuItem>
-                        <MenuItem value={2}>Douglas Harvey</MenuItem>
-                        <MenuItem value={3}>John Valdez</MenuItem>
-                        <MenuItem value={4}>Kathryn Turner</MenuItem>
+                        <MenuItem value="Dennis Matthews">Dennis Matthews</MenuItem>
+                        <MenuItem value="Susan Rader">Susan Rader</MenuItem>
+                        <MenuItem value="Douglas Harvey">Douglas Harvey</MenuItem>
+                        <MenuItem value="John Valdez">John Valdez</MenuItem>
+                        <MenuItem value="Kathryn Turner">Kathryn Turner</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
@@ -701,19 +549,9 @@ const CreateProduct: React.FC = () => {
 
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Collection
                     </Typography>
-
                     <FormControl fullWidth>
                       <InputLabel id="collection-label">Select</InputLabel>
                       <Select
@@ -721,19 +559,14 @@ const CreateProduct: React.FC = () => {
                         id="collection"
                         value={collection}
                         label="Select"
-                        onChange={handleCollectionChange}
-                        sx={{
-                          "& fieldset": {
-                            border: "1px solid #D5D9E2",
-                            borderRadius: "7px",
-                          },
-                        }}
+                        onChange={(e: SelectChangeEvent) => setCollection(e.target.value)}
+                        sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        <MenuItem value={0}>Collection 1</MenuItem>
-                        <MenuItem value={1}>Collection 2</MenuItem>
-                        <MenuItem value={2}>Collection 3</MenuItem>
-                        <MenuItem value={3}>Collection 4</MenuItem>
-                        <MenuItem value={4}>Collection 5</MenuItem>
+                        <MenuItem value="collection-1">Collection 1</MenuItem>
+                        <MenuItem value="collection-2">Collection 2</MenuItem>
+                        <MenuItem value="collection-3">Collection 3</MenuItem>
+                        <MenuItem value="collection-4">Collection 4</MenuItem>
+                        <MenuItem value="collection-5">Collection 5</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
@@ -741,41 +574,23 @@ const CreateProduct: React.FC = () => {
 
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
-                    <Typography
-                      component="label"
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        mb: "10px",
-                        display: "block",
-                      }}
-                      className="text-black"
-                    >
+                    <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                       Tags
                     </Typography>
-
                     <FormControl fullWidth>
                       <InputLabel id="tags-label">Select</InputLabel>
                       <Select
                         labelId="tags-label"
                         id="tags-select"
                         multiple
-                        value={selectedOptions}
+                        value={selectedTags}
                         onChange={handleMultipleSelectChange}
                         input={<OutlinedInput label="Select" />}
                         renderValue={(selected) => selected.join(", ")}
                       >
-                        {[
-                          "Watch",
-                          "Electronics",
-                          "Sports",
-                          "Fashion",
-                          "Jewellery",
-                        ].map((option) => (
+                        {TAG_OPTIONS.map((option) => (
                           <MenuItem key={option} value={option}>
-                            <Checkbox
-                              checked={selectedOptions.indexOf(option) > -1}
-                            />
+                            <Checkbox checked={selectedTags.indexOf(option) > -1} />
                             <ListItemText primary={option} />
                           </MenuItem>
                         ))}
@@ -795,62 +610,35 @@ const CreateProduct: React.FC = () => {
               }}
               className="rmui-card"
             >
-              <Box
-                sx={{
-                  mb: "25px",
-                }}
-              >
+              <Box sx={{ mb: "25px" }}>
                 <Typography
                   variant="h3"
-                  sx={{
-                    fontSize: { xs: "16px", md: "18px" },
-                    fontWeight: 700,
-                  }}
+                  sx={{ fontSize: { xs: "16px", md: "18px" }, fontWeight: 700 }}
                   className="text-black"
                 >
                   Other Options
                 </Typography>
               </Box>
 
-              <Grid
-                container
-                spacing={3}
-                columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}
-              >
+              <Grid container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}>
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Title
                       </Typography>
-
                       <TextField
                         label="Enter Title"
                         placeholder="E.g. Google Pixel 7 Pro"
                         variant="filled"
                         id="title"
                         name="title"
+                        value={metaTitle}
+                        onChange={(e) => setMetaTitle(e.target.value)}
                         sx={{
-                          "& .MuiInputBase-root": {
-                            border: "1px solid #D5D9E2",
-                            backgroundColor: "#fff",
-                            borderRadius: "7px",
-                          },
-                          "& .MuiInputBase-root::before": {
-                            border: "none",
-                          },
-                          "& .MuiInputBase-root:hover::before": {
-                            border: "none",
-                          },
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
                         }}
                       />
                     </FormControl>
@@ -860,24 +648,16 @@ const CreateProduct: React.FC = () => {
                 <Grid item xs={12} md={12} lg={12} xl={12}>
                   <Box>
                     <FormControl fullWidth>
-                      <Typography
-                        component="label"
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "14px",
-                          mb: "10px",
-                          display: "block",
-                        }}
-                        className="text-black"
-                      >
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
                         Description
                       </Typography>
-
                       <textarea
                         id="description"
                         name="description"
                         placeholder="Description"
                         rows={5}
+                        value={metaDescription}
+                        onChange={(e) => setMetaDescription(e.target.value)}
                         style={{
                           width: "100%",
                           borderRadius: "6px",
@@ -893,24 +673,16 @@ const CreateProduct: React.FC = () => {
           </Grid>
         </Grid>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: { xs: "10px", sm: "20px" },
-              mb: "25px",
-            }}
-          >
+        {error && <Alert severity="error" sx={{ mb: "20px" }}>{error}</Alert>}
+        {success && <Alert severity="success" sx={{ mb: "20px" }}>{success}</Alert>}
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: "10px", sm: "20px" }, mb: "25px" }}>
             <Button
-              type="submit"
               variant="contained"
               color="error"
+              onClick={() => router.back()}
+              disabled={submitting}
               sx={{
                 textTransform: "capitalize",
                 borderRadius: "6px",
@@ -927,6 +699,7 @@ const CreateProduct: React.FC = () => {
             <Button
               type="submit"
               variant="contained"
+              disabled={submitting}
               sx={{
                 textTransform: "capitalize",
                 borderRadius: "6px",
@@ -937,7 +710,9 @@ const CreateProduct: React.FC = () => {
                 boxShadow: "none",
               }}
             >
-              <i className="material-symbols-outlined">add</i> Create Product
+              {submitting
+                ? <><CircularProgress size={16} color="inherit" sx={{ mr: 1 }} /> Creating…</>
+                : <><i className="material-symbols-outlined">add</i> Create Product</>}
             </Button>
           </Box>
         </Box>

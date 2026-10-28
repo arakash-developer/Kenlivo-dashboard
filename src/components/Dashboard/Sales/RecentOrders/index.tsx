@@ -1,30 +1,30 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import styles from "@/components/Dashboard/eCommerce/RecentOrders/RecentOrders.module.css";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
+  Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/Dashboard/eCommerce/RecentOrders/RecentOrders.module.css";
+import Image from "next/image";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -32,7 +32,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -41,13 +41,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -104,7 +104,7 @@ function createData(
   customerImage: string,
   created: string,
   total: number,
-  status: string
+  status: string,
 ) {
   return {
     orderID,
@@ -123,7 +123,7 @@ const rows = [
     "/images/users/user1.jpg",
     "12 Jun 2024",
     10490,
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-1323",
@@ -131,7 +131,7 @@ const rows = [
     "/images/users/user2.jpg",
     "11 Jun 2024",
     6575,
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#DEC-1234",
@@ -139,7 +139,7 @@ const rows = [
     "/images/users/user3.jpg",
     "10 Jun 2024",
     12870,
-    "Pending"
+    "Pending",
   ),
   createData(
     "#DEC-3567",
@@ -147,7 +147,7 @@ const rows = [
     "/images/users/user4.jpg",
     "09 Jun 2024",
     7895,
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#DEC-1098",
@@ -155,7 +155,7 @@ const rows = [
     "/images/users/user5.jpg",
     "08 Jun 2024",
     4680,
-    "Rejected"
+    "Rejected",
   ),
   createData(
     "#JAN-2346",
@@ -163,7 +163,7 @@ const rows = [
     "/images/users/user2.jpg",
     "07 Jun 2024",
     490,
-    "Pending"
+    "Pending",
   ),
   createData(
     "#JAN-2347",
@@ -171,7 +171,7 @@ const rows = [
     "/images/users/user1.jpg",
     "06 Jun 2024",
     9678,
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#JAN-2348",
@@ -179,7 +179,7 @@ const rows = [
     "/images/users/user4.jpg",
     "05 Jun 2024",
     6097,
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2349",
@@ -187,7 +187,7 @@ const rows = [
     "/images/users/user3.jpg",
     "04 Jun 2024",
     7097,
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#JAN-2350",
@@ -195,7 +195,7 @@ const rows = [
     "/images/users/user4.jpg",
     "03 Jun 2024",
     5097,
-    "Confirmed"
+    "Confirmed",
   ),
 ].sort((b, a) => (a.orderID < b.orderID ? -1 : 1));
 
@@ -216,13 +216,13 @@ const RecentOrders: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -372,7 +372,7 @@ const RecentOrders: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (
@@ -451,7 +451,7 @@ const RecentOrders: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    <div className={`trezo-badge ${row.status}`}>
+                    <div className={`kenlivo-badge ${row.status}`}>
                       {row.status}
                     </div>
                   </TableCell>

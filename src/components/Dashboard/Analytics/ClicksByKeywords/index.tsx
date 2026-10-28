@@ -1,28 +1,28 @@
 "use client";
 
-import * as React from "react"; 
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  IconButton,
+  Menu,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Menu
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight"; 
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import styles from "../ClicksByKeywords/ClicksByKeywords.module.css"
+import * as React from "react";
+import styles from "../ClicksByKeywords/ClicksByKeywords.module.css";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -30,7 +30,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -39,13 +39,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -139,14 +139,7 @@ const rows = [
     "bx-trending-down",
     534,
   ),
-  createData(
-    "4",
-    "saas metrics",
-    "bx-trending-up",
-    865,
-    "bx-trending-up",
-    560,
-  ),
+  createData("4", "saas metrics", "bx-trending-up", 865, "bx-trending-up", 560),
   createData(
     "5",
     "hubspot analytics",
@@ -173,7 +166,7 @@ const rows = [
   ),
   createData(
     "8",
-    "trezo dashboard",
+    "kenlivo dashboard",
     "bx-trending-up",
     660,
     "bx-trending-down",
@@ -181,7 +174,7 @@ const rows = [
   ),
   createData(
     "9",
-    "trezo dashboard",
+    "kenlivo dashboard",
     "bx-trending-up",
     660,
     "bx-trending-down",
@@ -266,13 +259,13 @@ const ClicksByKeywords: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -316,12 +309,13 @@ const ClicksByKeywords: React.FC = () => {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               sx={{
-                borderRadius: '0px',
-                padding: '1px 2px',
-                fontSize: '14px', 
+                borderRadius: "0px",
+                padding: "1px 2px",
+                fontSize: "14px",
               }}
             >
-              Oct 01 - Oct 31, 2024 <KeyboardArrowDownIcon sx={{ fontSize: "20px" }} />
+              Oct 01 - Oct 31, 2024{" "}
+              <KeyboardArrowDownIcon sx={{ fontSize: "20px" }} />
             </IconButton>
 
             <Menu
@@ -350,7 +344,7 @@ const ClicksByKeywords: React.FC = () => {
             >
               <MenuItem>Sep 01 - Sep 30, 2024</MenuItem>
               <MenuItem>Aug 01 - Aug 31, 2024</MenuItem>
-              <MenuItem>Jul 01 - Jul 31, 2024</MenuItem> 
+              <MenuItem>Jul 01 - Jul 31, 2024</MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -368,10 +362,10 @@ const ClicksByKeywords: React.FC = () => {
             <TableHead>
               <TableRow>
                 <TableCell
-                  sx={{ 
+                  sx={{
                     padding: "0 14px 7px",
-                    fontSize: "12px", 
-                    width: '30px'
+                    fontSize: "12px",
+                    width: "30px",
                   }}
                   className="border-bottom"
                 >
@@ -379,9 +373,9 @@ const ClicksByKeywords: React.FC = () => {
                 </TableCell>
 
                 <TableCell
-                  sx={{ 
+                  sx={{
                     padding: "0 14px 7px",
-                    fontSize: "12px", 
+                    fontSize: "12px",
                   }}
                   className="border-bottom"
                 >
@@ -389,26 +383,26 @@ const ClicksByKeywords: React.FC = () => {
                 </TableCell>
 
                 <TableCell
-                  sx={{ 
+                  sx={{
                     padding: "0 14px 7px",
                     fontSize: "12px",
-                    textAlign: 'end'
+                    textAlign: "end",
                   }}
                   className="border-bottom"
                 >
                   Impressions
                 </TableCell>
- 
+
                 <TableCell
-                  sx={{ 
+                  sx={{
                     padding: "0 14px 7px",
                     fontSize: "12px",
-                    textAlign: 'end'
+                    textAlign: "end",
                   }}
                   className="border-bottom"
                 >
                   Clicks
-                </TableCell> 
+                </TableCell>
               </TableRow>
             </TableHead>
 
@@ -416,7 +410,7 @@ const ClicksByKeywords: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (
@@ -424,9 +418,9 @@ const ClicksByKeywords: React.FC = () => {
                   <TableCell
                     sx={{
                       padding: "11px 14px",
-                      fontSize: "14px", 
-                      fontWeight: '500',
-                      width: '30px'
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      width: "30px",
                     }}
                     className="text-black border-bottom"
                   >
@@ -436,8 +430,8 @@ const ClicksByKeywords: React.FC = () => {
                   <TableCell
                     sx={{
                       padding: "11px 14px",
-                      fontSize: "14px", 
-                      fontWeight: '500'
+                      fontSize: "14px",
+                      fontWeight: "500",
                     }}
                     className="text-black border-bottom"
                   >
@@ -448,27 +442,27 @@ const ClicksByKeywords: React.FC = () => {
                     sx={{
                       padding: "11px 14px",
                       fontSize: "14px",
-                      textAlign: 'end',
-                      fontWeight: '500'
+                      textAlign: "end",
+                      fontWeight: "500",
                     }}
                     className="text-black border-bottom"
                   >
-                    <Box  
+                    <Box
                       sx={{
-                        fontWeight: '500',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        gap: '6px'
+                        fontWeight: "500",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                        gap: "6px",
                       }}
                     >
-                      <i 
+                      <i
                         className={`bx ${row.impressionsIcon}`}
                         style={{
-                          fontSize: '20px',
+                          fontSize: "20px",
                           lineHeight: 0,
                         }}
-                      ></i> 
+                      ></i>
                       {row.impressionsNumber}
                     </Box>
                   </TableCell>
@@ -477,24 +471,24 @@ const ClicksByKeywords: React.FC = () => {
                     sx={{
                       padding: "11px 14px",
                       fontSize: "14px",
-                      textAlign: 'end',
-                      fontWeight: '500'
+                      textAlign: "end",
+                      fontWeight: "500",
                     }}
                     className="text-black border-bottom"
                   >
-                    <Box  
+                    <Box
                       sx={{
-                        fontWeight: '500',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        gap: '6px'
+                        fontWeight: "500",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                        gap: "6px",
                       }}
                     >
-                      <i 
+                      <i
                         className={`bx ${row.clicksIcon}`}
                         style={{
-                          fontSize: '20px',
+                          fontSize: "20px",
                           lineHeight: 0,
                         }}
                       ></i>
@@ -513,12 +507,7 @@ const ClicksByKeywords: React.FC = () => {
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPageOptions={[
-                    5,
-                    10,
-                    25,
-                    { label: "All", value: -1 },
-                  ]}
+                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={4}
                   count={rows.length}
                   rowsPerPage={rowsPerPage}

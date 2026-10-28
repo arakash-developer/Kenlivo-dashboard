@@ -1,44 +1,43 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import styles from "@/components/Dashboard/ProjectManagement/ToDoList/ToDoList.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Dialog,
-  DialogTitle,
-  Grid,
-  Button,
   TextField,
+  Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-import styles from "@/components/Dashboard/ProjectManagement/ToDoList/ToDoList.module.css";
-import { styled } from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { styled, useTheme } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import PropTypes from "prop-types";
+import React, { FormEvent, useState } from "react";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -91,7 +90,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -100,13 +99,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -163,7 +162,7 @@ function createData(
   assignedTo: string,
   dueDate: string,
   priority: string,
-  status: string
+  status: string,
 ) {
   return {
     id,
@@ -182,7 +181,7 @@ const rows = [
     "Oliver Clark",
     "30 Apr 2024",
     "High",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#851",
@@ -190,7 +189,7 @@ const rows = [
     "Ethan Baker",
     "25 Apr 2024",
     "Low",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#852",
@@ -198,7 +197,7 @@ const rows = [
     "Sophia Carter",
     "20 Apr 2024",
     "Medium",
-    "In Progress"
+    "In Progress",
   ),
   createData(
     "#853",
@@ -206,7 +205,7 @@ const rows = [
     "Ava Cooper",
     "15 Apr 2024",
     "High",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#854",
@@ -214,7 +213,7 @@ const rows = [
     "Isabella Evans",
     "10 Apr 2024",
     "Low",
-    "Cancelled"
+    "Cancelled",
   ),
 
   createData(
@@ -223,7 +222,7 @@ const rows = [
     "Oliver Clark",
     "30 Apr 2024",
     "High",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#856",
@@ -231,7 +230,7 @@ const rows = [
     "Ethan Baker",
     "25 Apr 2024",
     "Low",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#857",
@@ -239,7 +238,7 @@ const rows = [
     "Sophia Carter",
     "20 Apr 2024",
     "Medium",
-    "In Progress"
+    "In Progress",
   ),
   createData(
     "#858",
@@ -247,7 +246,7 @@ const rows = [
     "Ava Cooper",
     "15 Apr 2024",
     "High",
-    "Finished"
+    "Finished",
   ),
   createData(
     "#869",
@@ -255,7 +254,7 @@ const rows = [
     "Isabella Evans",
     "10 Apr 2024",
     "Low",
-    "Cancelled"
+    "Cancelled",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -270,13 +269,13 @@ const ToDoList: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -438,7 +437,7 @@ const ToDoList: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -479,7 +478,7 @@ const ToDoList: React.FC = () => {
                     </TableCell>
 
                     <TableCell className="border-bottom">
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

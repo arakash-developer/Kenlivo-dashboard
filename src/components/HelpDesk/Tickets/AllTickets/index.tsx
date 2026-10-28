@@ -1,42 +1,41 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  Link,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Dialog,
-  DialogTitle,
-  Grid,
-  Button,
   TextField,
-  Link,
+  Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { styled } from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { styled, useTheme } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import PropTypes from "prop-types";
+import React, { FormEvent, useState } from "react";
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -89,7 +88,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -98,13 +97,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -164,7 +163,7 @@ function createData(
   dueDate: string,
   priority: string,
   status: string,
-  viewDetails: string
+  viewDetails: string,
 ) {
   return {
     id,
@@ -189,7 +188,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-853",
@@ -200,7 +199,7 @@ const rows = [
     "25 Apr 2024",
     "Low",
     "pending",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-852",
@@ -211,7 +210,7 @@ const rows = [
     "20 Apr 2024",
     "Medium",
     "inProgress",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-851",
@@ -222,7 +221,7 @@ const rows = [
     "15 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-850",
@@ -233,7 +232,7 @@ const rows = [
     "10 Apr 2024",
     "Low",
     "cancelled",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-849",
@@ -244,7 +243,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-848",
@@ -255,7 +254,7 @@ const rows = [
     "25 Apr 2024",
     "Low",
     "pending",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-847",
@@ -266,7 +265,7 @@ const rows = [
     "20 Apr 2024",
     "Medium",
     "inProgress",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-846",
@@ -277,7 +276,7 @@ const rows = [
     "15 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-845",
@@ -288,7 +287,7 @@ const rows = [
     "10 Apr 2024",
     "Low",
     "cancelled",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-844",
@@ -299,7 +298,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-843",
@@ -310,7 +309,7 @@ const rows = [
     "25 Apr 2024",
     "Low",
     "pending",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-842",
@@ -321,7 +320,7 @@ const rows = [
     "20 Apr 2024",
     "Medium",
     "inProgress",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-841",
@@ -332,7 +331,7 @@ const rows = [
     "15 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-839",
@@ -343,7 +342,7 @@ const rows = [
     "10 Apr 2024",
     "Low",
     "cancelled",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-838",
@@ -354,7 +353,7 @@ const rows = [
     "30 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-837",
@@ -365,7 +364,7 @@ const rows = [
     "25 Apr 2024",
     "Low",
     "pending",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-836",
@@ -376,7 +375,7 @@ const rows = [
     "20 Apr 2024",
     "Medium",
     "inProgress",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-835",
@@ -387,7 +386,7 @@ const rows = [
     "15 Apr 2024",
     "High",
     "finished",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
   createData(
     "#JAN-834",
@@ -398,7 +397,7 @@ const rows = [
     "10 Apr 2024",
     "Low",
     "cancelled",
-    "/helpdesk/tickets/details"
+    "/helpdesk/tickets/details",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -413,13 +412,13 @@ const AllTickets: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -621,7 +620,7 @@ const AllTickets: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (
@@ -703,7 +702,7 @@ const AllTickets: React.FC = () => {
                     className="border-bottom"
                   >
                     <div
-                      className={`trezo-badge ${row.status}`}
+                      className={`kenlivo-badge ${row.status}`}
                       style={{ textTransform: "capitalize" }}
                     >
                       {row.status}

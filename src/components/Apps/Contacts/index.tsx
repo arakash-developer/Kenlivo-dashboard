@@ -1,32 +1,32 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import styles from "@/components/Apps/Contacts/Contact.module.css";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  Checkbox,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
-  FormControl,
-  InputLabel,
-  MenuItem,
+  Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import styles from "@/components/Apps/Contacts/Contact.module.css";
+import { useTheme } from "@mui/material/styles";
+import Image from "next/image";
+import React from "react";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 interface TablePaginationActionsProps {
   count: number;
@@ -34,7 +34,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -43,13 +43,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -109,7 +109,7 @@ function createData(
   lastContacted: string,
   company: string,
   leadScore: number,
-  status: string
+  status: string,
 ) {
   return {
     id,
@@ -129,199 +129,199 @@ const rows = [
     "#850",
     "/images/users/user6.jpg",
     "Oliver Khan",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "+1 555-123-4567",
     "19 Jun 2024",
     "ABC Corporation",
     50,
-    "Active"
+    "Active",
   ),
   createData(
     "#851",
     "/images/users/user7.jpg",
     "Carolyn Barnes",
-    "carolyn@trezo.com",
+    "carolyn@kenlivo.com",
     "+1 555-987-6543",
     "18 Jun 2024",
     "XYZ Ltd",
     35,
-    "Active"
+    "Active",
   ),
   createData(
     "#852",
     "/images/users/user8.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "+1 555-456-7890",
     "17 Jun 2024",
     "Tech Solutions",
     40,
-    "Deactivate"
+    "Deactivate",
   ),
   createData(
     "#853",
     "/images/users/user9.jpg",
     "Barbara Cross",
-    "barbara@trezo.com",
+    "barbara@kenlivo.com",
     "+1 555-369-7878",
     "16 Jun 2024",
     "Global Solutions",
     25,
-    "Active"
+    "Active",
   ),
   createData(
     "#854",
     "/images/users/user10.jpg",
     "Rebecca Block",
-    "rebecca@trezo.com",
+    "rebecca@kenlivo.com",
     "+1 555-658-4488",
     "15 Jun 2024",
     "Acma Industries",
     27,
-    "Deactivate"
+    "Deactivate",
   ),
   createData(
     "#855",
     "/images/users/user11.jpg",
     "Ramiro McCarty",
-    "ramiro@trezo.com",
+    "ramiro@kenlivo.com",
     "+1 555-558-9966",
     "14 Jun 2024",
     "Synergy Ltd",
     16,
-    "Active"
+    "Active",
   ),
   createData(
     "#856",
     "/images/users/user12.jpg",
     "Robert Fairweather",
-    "robert@trezo.com",
+    "robert@kenlivo.com",
     "+1 555-357-5888",
     "13 Jun 2024",
     "Summit Solutions",
     38,
-    "Active"
+    "Active",
   ),
   createData(
     "#857",
     "/images/users/user13.jpg",
     "Marcelino Haddock",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "+1 555-456-8877",
     "12 Jun 2024",
     "Strategies Ltd",
     15,
-    "Active"
+    "Active",
   ),
   createData(
     "#858",
     "/images/users/user14.jpg",
     "Thomas Wilson",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "+1 555-622-4488",
     "11 Jun 2024",
     "Tech Enterprises",
     41,
-    "Deactivate"
+    "Deactivate",
   ),
   createData(
     "#859",
     "/images/users/user15.jpg",
     "Nathaniel Hulsey",
-    "nathaniel@trezo.com",
+    "nathaniel@kenlivo.com",
     "+1 555-225-4488",
     "10 Jun 2024",
     "Synetic Solutions",
     29,
-    "Active"
+    "Active",
   ),
   createData(
     "#860",
     "/images/users/user16.jpg",
     "Oliver Jake",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "+1 555-123-4117",
     "9 Jun 2024",
     "ABC Corporation",
     35,
-    "Active"
+    "Active",
   ),
   createData(
     "#861",
     "/images/users/user17.jpg",
     "Harry Barnes",
-    "harry@trezo.com",
+    "harry@kenlivo.com",
     "+1 555-911-6543",
     "8 Jun 2024",
     "XYZ Ltd",
     56,
-    "Active"
+    "Active",
   ),
   createData(
     "#862",
     "/images/users/user18.jpg",
     "Mason Miller",
-    "mason@trezo.com",
+    "mason@kenlivo.com",
     "+1 555-456-7811",
     "7 Jun 2024",
     "Tech Solutions",
     45,
-    "Deactivate"
+    "Deactivate",
   ),
   createData(
     "#863",
     "/images/users/user19.jpg",
     "Charlie Cross",
-    "charlie@trezo.com",
+    "charlie@kenlivo.com",
     "+1 555-369-2278",
     "6 Jun 2024",
     "Global Solutions",
     125,
-    "Active"
+    "Active",
   ),
   createData(
     "#864",
     "/images/users/user20.jpg",
     "William Block",
-    "william@trezo.com",
+    "william@kenlivo.com",
     "+1 555-644-4488",
     "5 Jun 2024",
     "Acma Industries",
     20,
-    "Deactivate"
+    "Deactivate",
   ),
   createData(
     "#865",
     "/images/users/user21.jpg",
     "Thomas McCarty",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "+1 555-558-9336",
     "4 Jun 2024",
     "Synergy Ltd",
     49,
-    "Active"
+    "Active",
   ),
   createData(
     "#866",
     "/images/users/user22.jpg",
     "David Fairweather",
-    "david@trezo.com",
+    "david@kenlivo.com",
     "+1 555-345-5888",
     "3 Jun 2024",
     "Summit Solutions",
     77,
-    "Active"
+    "Active",
   ),
   createData(
     "#867",
     "/images/users/user23.jpg",
     "Richard Haddock",
-    "richard@trezo.com",
+    "richard@kenlivo.com",
     "+1 555-456-8866",
     "2 Jun 2024",
     "Strategies Ltd",
     155,
-    "Active"
+    "Active",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -342,13 +342,13 @@ const Contacts: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -537,7 +537,7 @@ const Contacts: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -657,7 +657,7 @@ const Contacts: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

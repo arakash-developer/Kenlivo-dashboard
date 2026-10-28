@@ -1,23 +1,23 @@
 "use client";
 
-import * as React from "react";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -25,7 +25,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -34,13 +34,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -96,7 +96,7 @@ function createData(
   timestamp: string,
   type: string,
   content: string,
-  status: string
+  status: string,
 ) {
   return {
     id,
@@ -113,140 +113,140 @@ const rows = [
     "01 Dec 2024 09:30 AM",
     "Information",
     "New software update available. Click here to download.",
-    "unread"
+    "unread",
   ),
   createData(
     "#JAN-849",
     "30 Nov 2024 09:30 AM",
     "Alert",
     "Urgent: Server maintenance scheduled for tomorrow at 10:00 PM.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-848",
     "28 Nov 2024 09:30 AM",
     "Announcement",
     "Welcome to our new team member, Jane Smith, as Head of Sales",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-847",
     "27 Nov 2024 09:30 AM",
     "Information",
     "Check out our latest blog post for tips on improving efficiency.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-846",
     "26 Nov 2024 09:30 AM",
     "Alert",
     "Attention: Upcoming webinar on cybersecurity best practices.",
-    "unread"
+    "unread",
   ),
   createData(
     "#JAN-845",
     "25 Nov 2024 09:30 AM",
     "Announcement",
     "Happy Thanksgiving! Our office will be closed on Nov 30.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-844",
     "24 Nov 2024 09:30 AM",
     "Information",
     "Year-end financial reports are now available for download.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-843",
     "23 Nov 2024 09:30 AM",
     "Announcement",
     "Critical security update. Update your passwords immediately.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-842",
     "22 Nov 2024 09:30 AM",
     "Information",
     "Holiday Office Party on Dec 20. Save the date!",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-841",
     "20 Nov 2024 09:30 AM",
     "Alert",
     "Year-end sale: Up to 20% off on selected products.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-840",
     "01 Dec 2024 09:30 AM",
     "Information",
     "New software update available. Click here to download.",
-    "unread"
+    "unread",
   ),
   createData(
     "#JAN-839",
     "30 Nov 2024 09:30 AM",
     "Alert",
     "Urgent: Server maintenance scheduled for tomorrow at 10:00 PM.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-838",
     "28 Nov 2024 09:30 AM",
     "Announcement",
     "Welcome to our new team member, Jane Smith, as Head of Sales",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-837",
     "27 Nov 2024 09:30 AM",
     "Information",
     "Check out our latest blog post for tips on improving efficiency.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-836",
     "26 Nov 2024 09:30 AM",
     "Alert",
     "Attention: Upcoming webinar on cybersecurity best practices.",
-    "unread"
+    "unread",
   ),
   createData(
     "#JAN-835",
     "25 Nov 2024 09:30 AM",
     "Announcement",
     "Happy Thanksgiving! Our office will be closed on Nov 30.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-834",
     "24 Nov 2024 09:30 AM",
     "Information",
     "Year-end financial reports are now available for download.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-833",
     "23 Nov 2024 09:30 AM",
     "Announcement",
     "Critical security update. Update your passwords immediately.",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-831",
     "22 Nov 2024 09:30 AM",
     "Information",
     "Holiday Office Party on Dec 20. Save the date!",
-    "read"
+    "read",
   ),
   createData(
     "#JAN-830",
     "20 Nov 2024 09:30 AM",
     "Alert",
     "Year-end sale: Up to 20% off on selected products.",
-    "read"
+    "read",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -261,13 +261,13 @@ const NotificationsTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -329,7 +329,7 @@ const NotificationsTable: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (
@@ -358,7 +358,7 @@ const NotificationsTable: React.FC = () => {
 
                   <TableCell className="border-bottom">
                     <div
-                      className={`trezo-badge ${row.status}`}
+                      className={`kenlivo-badge ${row.status}`}
                       style={{ textTransform: "capitalize" }}
                     >
                       {row.status}
