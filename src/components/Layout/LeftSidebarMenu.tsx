@@ -262,7 +262,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                PAGES
+                PRODUCTS
               </Typography>
 
               <Accordion
