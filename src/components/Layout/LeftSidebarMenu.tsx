@@ -352,7 +352,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   aria-controls="panel5d-content"
                   id="panel5d-header"
                 >
-                  <i className="material-symbols-outlined">shopping_cart</i>
+                  <i className="material-symbols-outlined">inventory_2</i>
                   <span className="title">Products</span>
                 </AccordionSummary>
 
