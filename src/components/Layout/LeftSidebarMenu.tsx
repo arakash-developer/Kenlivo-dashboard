@@ -339,6 +339,17 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
+                PAGES
+              </Typography>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
                 SETUP
               </Typography>
 
