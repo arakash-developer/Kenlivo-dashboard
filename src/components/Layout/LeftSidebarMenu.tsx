@@ -519,17 +519,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
 
                     <li className="sidemenu-item">
                       <Link
-                        href="/ecommerce/categories/"
-                        className={`sidemenu-link ${
-                          pathname === "/ecommerce/categories/" ? "active" : ""
-                        }`}
-                      >
-                        Categories
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
                         href="/ecommerce/sellers/"
                         className={`sidemenu-link ${
                           pathname === "/ecommerce/sellers/" ? "active" : ""
@@ -2488,6 +2477,16 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
               >
                 SETUP
               </Typography>
+
+              <Link
+                href="/ecommerce/categories/"
+                className={`sidebar-menu-link ${
+                  pathname === "/ecommerce/categories/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">category</i>
+                <span className="title">Categories</span>
+              </Link>
 
               <Link
                 href="/authentication/logout/"
