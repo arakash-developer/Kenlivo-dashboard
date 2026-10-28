@@ -21,7 +21,7 @@ export default function Page() {
         </ul>
       </div>
 
-      <EditProduct />
+      <EditProduct id="" />
     </>
   );
 }
