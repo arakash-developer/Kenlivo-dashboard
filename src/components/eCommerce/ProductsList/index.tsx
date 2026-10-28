@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   IconButton,
   Paper,
   Table,
@@ -23,836 +24,186 @@ import {
 import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
-import * as React from "react";
-import NavList from "./NavList";
+import React, { useEffect, useState } from "react";
 
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number,
-  ) => void;
+interface Product {
+  _id: string;
+  name: string;
+  images?: string[];
+  price: number;
+  finalPrice?: number;
+  discountPercentage?: number;
+  stock: number;
+  rating?: number;
+  numReviews?: number;
+  isActive: boolean;
+  categoryName?: string;
+  createdAt?: string;
 }
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
+function TablePaginationActions({ count, page, rowsPerPage, onPageChange }: {
+  count: number; page: number; rowsPerPage: number;
+  onPageChange: (e: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
+}) {
   const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page + 1);
-  };
-
   return (
-    <Box
-      sx={{
-        flexShrink: 0,
-        display: "flex",
-        gap: "10px",
-        padding: "14px 20px",
-      }}
-    >
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
-        className="border"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
+    <Box sx={{ flexShrink: 0, display: "flex", gap: "10px", padding: "14px 20px" }}>
+      <IconButton onClick={(e) => onPageChange(e, page - 1)} disabled={page === 0} sx={{ borderRadius: "4px", padding: "6px" }} className="border">
+        {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
       </IconButton>
-
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
-        className="border"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
+      <IconButton onClick={(e) => onPageChange(e, page + 1)} disabled={page >= Math.ceil(count / rowsPerPage) - 1} sx={{ borderRadius: "4px", padding: "6px" }} className="border">
+        {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
       </IconButton>
     </Box>
   );
 }
 
-function createData(
-  orderID: string,
-  productImage: string,
-  productName: string,
-  date: string,
-  category: string,
-  price: string,
-  order: number,
-  stock: string,
-  amount: string,
-  rating: string,
-  status: string,
-  detailsLink: string,
-) {
-  return {
-    orderID,
-    productImage,
-    productName,
-    date,
-    category,
-    price,
-    order,
-    stock,
-    amount,
-    rating,
-    status,
-    detailsLink,
-  };
-}
-
-const rows = [
-  createData(
-    "#JAN-999",
-    "/images/products/product1.jpg",
-    "Smart Band",
-    "08 Jun 2024",
-    "Watch",
-    "$35.00",
-    75,
-    "750",
-    "$2,625",
-    "5.00 (141 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-998",
-    "/images/products/product2.jpg",
-    "Headphone",
-    "07 Jun 2024",
-    "Electronics",
-    "$49.00",
-    25,
-    "825",
-    "$1,225",
-    "5.00 (69 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-997",
-    "/images/products/product3.jpg",
-    "iPhone 15 Plus",
-    "06 Jun 2024",
-    "Apple",
-    "$99.00",
-    55,
-    "Stock Out",
-    "$5,445",
-    "5.00 (99 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-996",
-    "/images/products/product4.jpg",
-    "Bluetooth Speaker",
-    "05 Jun 2024",
-    "Google",
-    "$59.00",
-    40,
-    "535",
-    "$2,360",
-    "4.00 (75 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-995",
-    "/images/products/product5.jpg",
-    "Airbuds 2nd Gen",
-    "04 Jun 2024",
-    "Headphone",
-    "$79.00",
-    56,
-    "460",
-    "$4,424",
-    "5.00 (158 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-994",
-    "/images/products/product1.jpg",
-    "Smart Band",
-    "08 Jun 2024",
-    "Watch",
-    "$35.00",
-    75,
-    "750",
-    "$2,625",
-    "5.00 (141 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-993",
-    "/images/products/product2.jpg",
-    "Headphone",
-    "07 Jun 2024",
-    "Electronics",
-    "$49.00",
-    25,
-    "825",
-    "$1,225",
-    "5.00 (69 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-992",
-    "/images/products/product3.jpg",
-    "iPhone 15 Plus",
-    "06 Jun 2024",
-    "Apple",
-    "$99.00",
-    55,
-    "Stock Out",
-    "$5,445",
-    "5.00 (99 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-991",
-    "/images/products/product4.jpg",
-    "Bluetooth Speaker",
-    "05 Jun 2024",
-    "Google",
-    "$59.00",
-    40,
-    "535",
-    "$2,360",
-    "4.00 (75 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-990",
-    "/images/products/product5.jpg",
-    "Airbuds 2nd Gen",
-    "04 Jun 2024",
-    "Headphone",
-    "$79.00",
-    56,
-    "460",
-    "$4,424",
-    "5.00 (158 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-989",
-    "/images/products/product1.jpg",
-    "Smart Band",
-    "08 Jun 2024",
-    "Watch",
-    "$35.00",
-    75,
-    "750",
-    "$2,625",
-    "5.00 (141 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-988",
-    "/images/products/product2.jpg",
-    "Headphone",
-    "07 Jun 2024",
-    "Electronics",
-    "$49.00",
-    25,
-    "825",
-    "$1,225",
-    "5.00 (69 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-987",
-    "/images/products/product3.jpg",
-    "iPhone 15 Plus",
-    "06 Jun 2024",
-    "Apple",
-    "$99.00",
-    55,
-    "Stock Out",
-    "$5,445",
-    "5.00 (99 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-986",
-    "/images/products/product4.jpg",
-    "Bluetooth Speaker",
-    "05 Jun 2024",
-    "Google",
-    "$59.00",
-    40,
-    "535",
-    "$2,360",
-    "4.00 (75 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-985",
-    "/images/products/product5.jpg",
-    "Airbuds 2nd Gen",
-    "04 Jun 2024",
-    "Headphone",
-    "$79.00",
-    56,
-    "460",
-    "$4,424",
-    "5.00 (158 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-984",
-    "/images/products/product1.jpg",
-    "Smart Band",
-    "08 Jun 2024",
-    "Watch",
-    "$35.00",
-    75,
-    "750",
-    "$2,625",
-    "5.00 (141 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-983",
-    "/images/products/product2.jpg",
-    "Headphone",
-    "07 Jun 2024",
-    "Electronics",
-    "$49.00",
-    25,
-    "825",
-    "$1,225",
-    "5.00 (69 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-982",
-    "/images/products/product3.jpg",
-    "iPhone 15 Plus",
-    "06 Jun 2024",
-    "Apple",
-    "$99.00",
-    55,
-    "Stock Out",
-    "$5,445",
-    "5.00 (99 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-981",
-    "/images/products/product4.jpg",
-    "Bluetooth Speaker",
-    "05 Jun 2024",
-    "Google",
-    "$59.00",
-    40,
-    "535",
-    "$2,360",
-    "4.00 (75 reviews)",
-    "Published",
-    "/ecommerce/products-list/details/",
-  ),
-  createData(
-    "#JAN-980",
-    "/images/products/product5.jpg",
-    "Airbuds 2nd Gen",
-    "04 Jun 2024",
-    "Headphone",
-    "$79.00",
-    56,
-    "460",
-    "$4,424",
-    "5.00 (158 reviews)",
-    "Draft",
-    "/ecommerce/products-list/details/",
-  ),
-].sort((b, a) => (a.orderID < b.orderID ? -1 : 1));
-
 const ProductsList: React.FC = () => {
-  // Table
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/products");
+      const json = await res.json();
+      setProducts(json.data ?? []);
+    } catch {
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  useEffect(() => { fetchProducts(); }, []);
+
+  const filtered = products.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase()) ||
+    (p.categoryName ?? "").toLowerCase().includes(search.toLowerCase())
+  );
+
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filtered.length) : 0;
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this product?")) return;
+    await fetch("/api/products", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
+    fetchProducts();
   };
 
   return (
-    <>
-      <Card
-        sx={{
-          boxShadow: "none",
-          borderRadius: "7px",
-          mb: "25px",
-          padding: { xs: "18px", sm: "20px", lg: "25px" },
-        }}
-        className="rmui-card"
-      >
-        <NavList />
-
-        <Box>
-          <Box
-            sx={{
-              display: { xs: "block", sm: "flex" },
-              alignItems: "center",
-              justifyContent: "space-between",
-              mb: "25px",
-            }}
-          >
-            <Box
-              component="form"
-              className={styles.searchBox}
-              sx={{
-                width: "265px",
-              }}
-            >
-              <label>
-                <i className="material-symbols-outlined">search</i>
-              </label>
-              <input
-                type="text"
-                className={styles.inputSearch}
-                placeholder="Search product here....."
-              />
-            </Box>
-
-            <Link href="/ecommerce/create-product">
-              <Button
-                variant="outlined"
-                sx={{
-                  textTransform: "capitalize",
-                  borderRadius: "7px",
-                  fontWeight: "500",
-                  fontSize: "13px",
-                  padding: "6px 13px",
-                }}
-                color="primary"
-              >
-                <AddIcon sx={{ position: "relative", top: "-1px" }} /> Add New
-                Product
-              </Button>
-            </Link>
-          </Box>
-
-          {/* Table */}
-          <TableContainer
-            component={Paper}
-            sx={{
-              boxShadow: "none",
-              borderRadius: "7px",
-            }}
-            className="rmui-table border"
-          >
-            <Table sx={{ minWidth: 1250 }} aria-label="Table">
-              <TableHead className="bg-f6f7f9">
-                <TableRow>
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    ID
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Product
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Category
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Price
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Order
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Stock
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Amount
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Rating
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Status
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Action
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? rows.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage,
-                    )
-                  : rows
-                ).map((row) => (
-                  <TableRow key={row.orderID}>
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="border-bottom"
-                    >
-                      {row.orderID}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="border-bottom"
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "13px",
-                        }}
-                      >
-                        <Box sx={{ flexShrink: "0" }}>
-                          <Image
-                            src={row.productImage}
-                            alt="Product"
-                            width={40}
-                            height={40}
-                            style={{ borderRadius: "7px" }}
-                          />
-                        </Box>
-
-                        <Box>
-                          <Link href={row.detailsLink}>
-                            <Typography
-                              sx={{
-                                fontSize: "15px",
-                                fontWeight: "500",
-                              }}
-                              className="text-black"
-                            >
-                              {row.productName}
-                            </Typography>
-                          </Link>
-
-                          <Typography
-                            sx={{
-                              fontSize: "13px",
-                            }}
-                            className="text-body"
-                          >
-                            {row.date}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.category}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.price}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.order}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.stock}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.amount}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.rating}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        borderBottom: "1px solid #eceef2",
-                        padding: "14px 20px",
-                      }}
-                      className="border-bottom"
-                    >
-                      <div className={`kenlivo-badge ${row.status}`}>
-                        {row.status}
-                      </div>
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                      }}
-                      className="border-bottom"
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Link href={row.detailsLink}>
-                          <IconButton
-                            aria-label="view"
-                            color="primary"
-                            sx={{ padding: "5px" }}
-                          >
-                            <i
-                              className="material-symbols-outlined"
-                              style={{ fontSize: "16px" }}
-                            >
-                              visibility
-                            </i>
-                          </IconButton>
-                        </Link>
-
-                        <IconButton
-                          aria-label="edit"
-                          color="secondary"
-                          sx={{ padding: "5px" }}
-                        >
-                          <i
-                            className="material-symbols-outlined"
-                            style={{ fontSize: "16px" }}
-                          >
-                            edit
-                          </i>
-                        </IconButton>
-
-                        <IconButton
-                          aria-label="delete"
-                          color="error"
-                          sx={{ padding: "5px" }}
-                        >
-                          <i
-                            className="material-symbols-outlined"
-                            style={{ fontSize: "16px" }}
-                          >
-                            delete
-                          </i>
-                        </IconButton>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={10} />
-                  </TableRow>
-                )}
-              </TableBody>
-
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      { label: "All", value: -1 },
-                    ]}
-                    colSpan={10}
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    slotProps={{
-                      select: {
-                        inputProps: {
-                          "aria-label": "rows per page",
-                        },
-                        native: true,
-                      },
-                    }}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                    sx={{
-                      border: "none",
-                    }}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </TableContainer>
+    <Card sx={{ boxShadow: "none", borderRadius: "7px", mb: "25px", padding: { xs: "18px", sm: "20px", lg: "25px" } }} className="rmui-card">
+      <Box sx={{ display: { xs: "block", sm: "flex" }, alignItems: "center", justifyContent: "space-between", mb: "25px" }}>
+        <Box component="form" className={styles.searchBox} sx={{ width: "265px" }}>
+          <label><i className="material-symbols-outlined">search</i></label>
+          <input
+            type="text"
+            className={styles.inputSearch}
+            placeholder="Search product here....."
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(0); }}
+          />
         </Box>
-      </Card>
-    </>
+        <Link href="/ecommerce/create-product/">
+          <Button
+            variant="outlined"
+            sx={{ textTransform: "capitalize", borderRadius: "7px", fontWeight: "500", fontSize: "13px", padding: "6px 13px" }}
+            color="primary"
+          >
+            <AddIcon sx={{ position: "relative", top: "-1px" }} /> Add New Product
+          </Button>
+        </Link>
+      </Box>
+
+      <TableContainer component={Paper} sx={{ boxShadow: "none", borderRadius: "7px" }} className="rmui-table border">
+        <Table sx={{ minWidth: 1100 }} aria-label="Products Table">
+          <TableHead className="bg-f6f7f9">
+            <TableRow>
+              {["Product", "Category", "Price", "Discount", "Stock", "Rating", "Status", "Action"].map((h) => (
+                <TableCell key={h} sx={{ fontWeight: "500", padding: "10px 20px", fontSize: "14px" }} className="text-black border-bottom">{h}</TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {loading ? (
+              <TableRow><TableCell colSpan={8} align="center" sx={{ py: 4 }}><CircularProgress size={28} /></TableCell></TableRow>
+            ) : filtered.length === 0 ? (
+              <TableRow><TableCell colSpan={8} align="center" sx={{ py: 4, color: "#888" }}>No products found.</TableCell></TableRow>
+            ) : (
+              (rowsPerPage > 0 ? filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : filtered).map((row) => (
+                <TableRow key={row._id}>
+                  <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "13px" }}>
+                      {row.images?.[0] ? (
+                        <Image src={row.images[0]} alt={row.name} width={44} height={44} style={{ borderRadius: "7px", objectFit: "cover", flexShrink: 0 }} unoptimized />
+                      ) : (
+                        <Box sx={{ width: 44, height: 44, borderRadius: "7px", background: "#f6f7f9", flexShrink: 0 }} />
+                      )}
+                      <Box>
+                        <Typography sx={{ fontSize: "15px", fontWeight: "500" }} className="text-black">{row.name}</Typography>
+                        <Typography sx={{ fontSize: "12px", color: "#888" }}>
+                          {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : ""}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                    {row.categoryName || "—"}
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                    ${row.finalPrice ?? row.price}
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                    {row.discountPercentage ? `${row.discountPercentage}%` : "—"}
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                    {row.stock > 0 ? row.stock : <span style={{ color: "#ef4444" }}>Out of stock</span>}
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="text-black border-bottom">
+                    {row.rating ? `${row.rating} (${row.numReviews ?? 0})` : "—"}
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
+                    <div className={`kenlivo-badge ${row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                      {row.isActive ? "Active" : "Inactive"}
+                    </div>
+                  </TableCell>
+                  <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Link href={`/ecommerce/edit-product/${row._id}/`}>
+                        <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }}>
+                          <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
+                        </IconButton>
+                      </Link>
+                      <IconButton aria-label="delete" color="error" sx={{ padding: "5px" }} onClick={() => handleDelete(row._id)}>
+                        <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete</i>
+                      </IconButton>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+            {emptyRows > 0 && <TableRow style={{ height: 53 * emptyRows }}><TableCell colSpan={8} /></TableRow>}
+          </TableBody>
+
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={8} count={filtered.length} rowsPerPage={rowsPerPage} page={page}
+                slotProps={{ select: { inputProps: { "aria-label": "rows per page" }, native: true } }}
+                onPageChange={(_, newPage) => setPage(newPage)}
+                onRowsPerPageChange={(e) => { setRowsPerPage(parseInt(e.target.value, 10)); setPage(0); }}
+                ActionsComponent={TablePaginationActions}
+                sx={{ border: "none" }}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </TableContainer>
+    </Card>
   );
 };
 
