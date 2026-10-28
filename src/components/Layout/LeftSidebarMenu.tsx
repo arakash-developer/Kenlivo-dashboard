@@ -342,231 +342,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 PAGES
               </Typography>
 
-              <Link
-                href="/apps/to-do-list/"
-                className={`sidebar-menu-link ${
-                  pathname === "/apps/to-do-list/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">
-                  format_list_bulleted
-                </i>
-                <span className="title">To Do List</span>
-              </Link>
-
-              <Link
-                href="/apps/calendar/"
-                className={`sidebar-menu-link ${
-                  pathname === "/apps/calendar/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">date_range</i>
-                <span className="title">Calendar</span>
-              </Link>
-
-              <Link
-                href="/apps/contacts/"
-                className={`sidebar-menu-link ${
-                  pathname === "/apps/contacts/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">contact_page</i>
-                <span className="title">Contacts</span>
-              </Link>
-
-              <Link
-                href="/apps/chat/"
-                className={`sidebar-menu-link ${
-                  pathname === "/apps/chat/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">chat</i>
-                <span className="title">Chat</span>
-              </Link>
-
-              <Accordion
-                expanded={expanded === "panel3"}
-                onChange={handleChange("panel3")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel3d-content"
-                  id="panel3d-header"
-                >
-                  <i className="material-symbols-outlined">mail</i>
-                  <span className="title">Email</span>
-                  <span className="kenlivo-badge style-two">3</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/email/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/email/" ? "active" : ""
-                        }`}
-                      >
-                        Inbox
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/email/compose/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/email/compose/" ? "active" : ""
-                        }`}
-                      >
-                        Compose
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/email/read/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/email/read/" ? "active" : ""
-                        }`}
-                      >
-                        Read
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Link
-                href="/apps/kanban-board/"
-                className={`sidebar-menu-link ${
-                  pathname === "/apps/kanban-board/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">team_dashboard</i>
-                <span className="title">Kanban Board</span>
-              </Link>
-
-              <Accordion
-                expanded={expanded === "panel4"}
-                onChange={handleChange("panel4")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel4d-content"
-                  id="panel4d-header"
-                >
-                  <i className="material-symbols-outlined">folder_open</i>
-                  <span className="title">File Manager</span>
-                  <span className="kenlivo-badge style-three">7</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/" ? "active" : ""
-                        }`}
-                      >
-                        My Drive
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/assets/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/assets/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Assets
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/projects/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/projects/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Projects
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/personal/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/personal/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Personal
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/applications/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/applications/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Applications
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/documents/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/documents/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Documents
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/apps/file-manager/media/"
-                        className={`sidemenu-link ${
-                          pathname === "/apps/file-manager/media/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Media
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                MODULES
-              </Typography>
-
               <Accordion
                 expanded={expanded === "panel5"}
                 onChange={handleChange("panel5")}
@@ -1433,6 +1208,231 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 <i className="material-symbols-outlined">star_border</i>
                 <span className="title">Starter</span>
               </Link>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                MODULES
+              </Typography>
+
+              <Link
+                href="/apps/to-do-list/"
+                className={`sidebar-menu-link ${
+                  pathname === "/apps/to-do-list/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">
+                  format_list_bulleted
+                </i>
+                <span className="title">To Do List</span>
+              </Link>
+
+              <Link
+                href="/apps/calendar/"
+                className={`sidebar-menu-link ${
+                  pathname === "/apps/calendar/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">date_range</i>
+                <span className="title">Calendar</span>
+              </Link>
+
+              <Link
+                href="/apps/contacts/"
+                className={`sidebar-menu-link ${
+                  pathname === "/apps/contacts/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">contact_page</i>
+                <span className="title">Contacts</span>
+              </Link>
+
+              <Link
+                href="/apps/chat/"
+                className={`sidebar-menu-link ${
+                  pathname === "/apps/chat/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">chat</i>
+                <span className="title">Chat</span>
+              </Link>
+
+              <Accordion
+                expanded={expanded === "panel3"}
+                onChange={handleChange("panel3")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel3d-content"
+                  id="panel3d-header"
+                >
+                  <i className="material-symbols-outlined">mail</i>
+                  <span className="title">Email</span>
+                  <span className="kenlivo-badge style-two">3</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/email/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/email/" ? "active" : ""
+                        }`}
+                      >
+                        Inbox
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/email/compose/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/email/compose/" ? "active" : ""
+                        }`}
+                      >
+                        Compose
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/email/read/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/email/read/" ? "active" : ""
+                        }`}
+                      >
+                        Read
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Link
+                href="/apps/kanban-board/"
+                className={`sidebar-menu-link ${
+                  pathname === "/apps/kanban-board/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">team_dashboard</i>
+                <span className="title">Kanban Board</span>
+              </Link>
+
+              <Accordion
+                expanded={expanded === "panel4"}
+                onChange={handleChange("panel4")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel4d-content"
+                  id="panel4d-header"
+                >
+                  <i className="material-symbols-outlined">folder_open</i>
+                  <span className="title">File Manager</span>
+                  <span className="kenlivo-badge style-three">7</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/" ? "active" : ""
+                        }`}
+                      >
+                        My Drive
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/assets/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/assets/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Assets
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/projects/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/projects/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Projects
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/personal/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/personal/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Personal
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/applications/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/applications/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Applications
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/documents/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/documents/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Documents
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/apps/file-manager/media/"
+                        className={`sidemenu-link ${
+                          pathname === "/apps/file-manager/media/"
+                            ? "active"
+                            : ""
+                        }`}
+                      >
+                        Media
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
 
               <Typography
                 className="sub-title"
