@@ -339,7 +339,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   textTransform: "uppercase",
                 }}
               >
-                PAGES
+                SETUP
               </Typography>
 
               <Accordion
@@ -2466,17 +2466,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                SETUP
-              </Typography>
 
               <Link
                 href="/ecommerce/categories/"
