@@ -502,6 +502,17 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   <ul className="sidebar-sub-menu">
                     <li className="sidemenu-item">
                       <Link
+                        href="/users/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/" ? "active" : ""
+                        }`}
+                      >
+                        Team Members
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
                         href="/users/users-list/"
                         className={`sidemenu-link ${
                           pathname === "/users/users-list/" ? "active" : ""
