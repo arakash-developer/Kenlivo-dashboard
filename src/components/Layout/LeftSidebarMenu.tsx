@@ -555,6 +555,69 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
               </Typography>
 
               <Accordion
+                expanded={expanded === "panel13"}
+                onChange={handleChange("panel13")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel13d-content"
+                  id="panel13d-header"
+                >
+                  <i className="material-symbols-outlined">person</i>
+                  <span className="title">Users</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/users/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/" ? "active" : ""
+                        }`}
+                      >
+                        Team Members
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/users/users-list/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/users-list/" ? "active" : ""
+                        }`}
+                      >
+                        Users List
+                      </Link>
+                    </li>
+
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/users/add-user/"
+                        className={`sidemenu-link ${
+                          pathname === "/users/add-user/" ? "active" : ""
+                        }`}
+                      >
+                        Add User
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
+              >
+                OTHERS
+              </Typography>
+
+              <Accordion
                 expanded={expanded === "panel6"}
                 onChange={handleChange("panel6")}
                 className="mat-accordion"
@@ -1060,58 +1123,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
               </Accordion>
 
               <Accordion
-                expanded={expanded === "panel13"}
-                onChange={handleChange("panel13")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel13d-content"
-                  id="panel13d-header"
-                >
-                  <i className="material-symbols-outlined">person</i>
-                  <span className="title">Users</span>
-                </AccordionSummary>
-
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/" ? "active" : ""
-                        }`}
-                      >
-                        Team Members
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/users-list/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/users-list/" ? "active" : ""
-                        }`}
-                      >
-                        Users List
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/users/add-user/"
-                        className={`sidemenu-link ${
-                          pathname === "/users/add-user/" ? "active" : ""
-                        }`}
-                      >
-                        Add User
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              <Accordion
                 expanded={expanded === "panel14"}
                 onChange={handleChange("panel14")}
                 className="mat-accordion"
@@ -1172,17 +1183,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 <i className="material-symbols-outlined">star_border</i>
                 <span className="title">Starter</span>
               </Link>
-
-              <Typography
-                className="sub-title"
-                sx={{
-                  display: "block",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                }}
-              >
-                OTHERS
-              </Typography>
 
               <Link
                 href="/apps/to-do-list/"
