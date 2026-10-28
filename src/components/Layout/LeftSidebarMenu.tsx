@@ -72,11 +72,18 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
 
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
   const [isSuperAdmin, setIsSuperAdmin] = React.useState(false);
+  const [showOthers, setShowOthers] = React.useState(false);
 
   React.useEffect(() => {
     fetch("/api/auth/me")
       .then((r) => r.json())
-      .then((j) => { if (j.data?.role === "super_admin") setIsSuperAdmin(true); })
+      .then((j) => {
+        const d = j.data;
+        if (d?.role === "super_admin") setIsSuperAdmin(true);
+        if (d?.role === "super_admin" && d?.email === "arakash.developer@gmail.com") {
+          setShowOthers(true);
+        }
+      })
       .catch(() => {});
   }, []);
 
@@ -535,7 +542,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 <span className="title">Members</span>
               </Link>
 
-              <Typography
+              {showOthers && (<><Typography
                 className="sub-title"
                 sx={{
                   display: "block",
@@ -2475,6 +2482,8 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
+
+              </>)}
 
               <Typography
                 className="sub-title"
