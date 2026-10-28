@@ -1,42 +1,42 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
-import Image from "next/image";
+import styles from "@/components/ProjectManagement/Search.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
+  styled,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
-  MenuItem,
-  Dialog,
-  DialogTitle,
-  Button,
-  Grid,
   TextField,
-  FormControl,
-  InputLabel,
-  styled,
+  Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import styles from "@/components/ProjectManagement/Search.module.css";
+import { useTheme } from "@mui/material/styles";
+import Image from "next/image";
+import PropTypes from "prop-types";
+import React, { FormEvent, useState } from "react";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -89,7 +89,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -98,13 +98,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -162,7 +162,7 @@ function createData(
   email: string,
   role: string,
   projectAccess: string,
-  status: string
+  status: string,
 ) {
   return {
     id,
@@ -180,181 +180,181 @@ const rows = [
     "#854",
     "/images/users/user6.jpg",
     "Oliver Khan",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "Project Manager",
     "Hotel Management System, Python Upgrade",
-    "active"
+    "active",
   ),
   createData(
     "#853",
     "/images/users/user7.jpg",
     "Carolyn Barnes",
-    "carolyn@trezo.com",
+    "carolyn@kenlivo.com",
     "Developer",
     "Project Monitoring, Project Alpho",
-    "active"
+    "active",
   ),
   createData(
     "#852",
     "/images/users/user8.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "Business Analyst",
     "Aegis Accounting Service, Beja Banking Finance",
-    "deactive"
+    "deactive",
   ),
   createData(
     "#851",
     "/images/users/user9.jpg",
     "Barbara Cros",
-    "barbara@trezo.com",
+    "barbara@kenlivo.com",
     "UI/UX Designer",
     "Aoriv AI Design, Vaxo App Design",
-    "active"
+    "active",
   ),
   createData(
     "#850",
     "/images/users/user10.jpg",
     "Rebecca Block",
-    "Rebecca@trezo.com",
+    "Rebecca@kenlivo.com",
     "QA Tester",
-    "Product Development, Trezo Dashboard Design",
-    "deactive"
+    "Product Development, Kenlivo Dashboard Design",
+    "deactive",
   ),
   createData(
     "#849",
     "/images/users/user11.jpg",
     "Ramiro McCarty",
-    "ramiro@trezo.com",
+    "ramiro@kenlivo.com",
     "Admin",
     "Hotel Management System, Python Upgrad",
-    "active"
+    "active",
   ),
   createData(
     "#848",
     "/images/users/user12.jpg",
     "Robert Fairweather",
-    "robert@trezo.com",
+    "robert@kenlivo.com",
     "Editor",
     "Project Monitoring, Project Alph",
-    "active"
+    "active",
   ),
   createData(
     "#847",
     "/images/users/user13.jpg",
     "Marcelino Haddock",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "Project Manager",
     "Aegis Accounting Service, Beja Banking Finance",
-    "active"
+    "active",
   ),
   createData(
     "#846",
     "/images/users/user14.jpg",
     "Thomas Wilson",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "UI/UX Designer",
     "Aoriv AI Design, Vaxo App Design",
-    "deactive"
+    "deactive",
   ),
   createData(
     "#845",
     "/images/users/user15.jpg",
     "Nathaniel Hulsey",
-    "nathaniel@trezo.com",
+    "nathaniel@kenlivo.com",
     "Web Developer",
-    "Product Development, Trezo Dashboard Design",
-    "deactive"
+    "Product Development, Kenlivo Dashboard Design",
+    "deactive",
   ),
   createData(
     "#844",
     "/images/users/user16.jpg",
     "Jake Khan",
-    "jake@trezo.com",
+    "jake@kenlivo.com",
     "+1 555-123-4567",
     "19 Jun 2024",
-    "active"
+    "active",
   ),
   createData(
     "#843",
     "/images/users/user17.jpg",
     "Noah Barnes",
-    "noah@trezo.com",
+    "noah@kenlivo.com",
     "Web Developer",
-    "Product Development, Trezo Dashboard Design",
-    "active"
+    "Product Development, Kenlivo Dashboard Design",
+    "active",
   ),
   createData(
     "#842",
     "/images/users/user18.jpg",
     "James Miller",
-    "james@trezo.com",
+    "james@kenlivo.com",
     "UI/UX Designer",
     "Aoriv AI Design, Vaxo App Design",
-    "deactive"
+    "deactive",
   ),
   createData(
     "#841",
     "/images/users/user19.jpg",
     "Connor Cros",
-    "connor@trezo.com",
+    "connor@kenlivo.com",
     "Project Manager",
     "Aegis Accounting Service, Beja Banking Finance",
-    "active"
+    "active",
   ),
   createData(
     "#840",
     "/images/users/user20.jpg",
     "Liam Block",
-    "liam@trezo.com",
+    "liam@kenlivo.com",
     "Editor",
     "Project Monitoring, Project Alpho",
-    "deactive"
+    "deactive",
   ),
   createData(
     "#839",
     "/images/users/user21.jpg",
     "Harry McCarty",
-    "harry@trezo.com",
+    "harry@kenlivo.com",
     "Admin",
     "Hotel Management System, Python Upgrade",
-    "active"
+    "active",
   ),
   createData(
     "#838",
     "/images/users/user22.jpg",
     "Harry Fairweather",
-    "harry@trezo.com",
+    "harry@kenlivo.com",
     "QA Tester",
-    "Product Development, Trezo Dashboard Design",
-    "active"
+    "Product Development, Kenlivo Dashboard Design",
+    "active",
   ),
   createData(
     "#837",
     "/images/users/user23.jpg",
     "Jacob Haddock",
-    "jacob@trezo.com",
+    "jacob@kenlivo.com",
     "UI/UX Designer",
     "Aoriv AI Design, Vaxo App Design",
-    "active"
+    "active",
   ),
   createData(
     "#836",
     "/images/users/user24.jpg",
     "Jacob Wilson",
-    "jacob@trezo.com",
+    "jacob@kenlivo.com",
     "Business Analyst",
     "Aegis Accounting Service, Beja Banking Finance",
-    "deactive"
+    "deactive",
   ),
   createData(
     "#835",
     "/images/users/user25.jpg",
     "Michael Hulsey",
-    "michael@trezo.com",
+    "michael@kenlivo.com",
     "Developer",
     "Project Monitoring, Project Alpho",
-    "deactive"
+    "deactive",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -369,13 +369,13 @@ const UsersTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -571,7 +571,7 @@ const UsersTable: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -672,7 +672,7 @@ const UsersTable: React.FC = () => {
                       className="border-bottom"
                     >
                       <Box
-                        className={`trezo-badge ${row.status}`}
+                        className={`kenlivo-badge ${row.status}`}
                         sx={{ textTransform: "capitalize" }}
                       >
                         {row.status}
@@ -943,7 +943,7 @@ const UsersTable: React.FC = () => {
                         <MenuItem value={6}>Aoriv AI Design</MenuItem>
                         <MenuItem value={7}>Vaxo App Design</MenuItem>
                         <MenuItem value={8}>Product Development</MenuItem>
-                        <MenuItem value={9}>Trezo Dashboard</MenuItem>
+                        <MenuItem value={9}>Kenlivo Dashboard</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>

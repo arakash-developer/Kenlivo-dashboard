@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { Grid, Box, Link } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import Image from "next/image";
+import * as React from "react";
 
 const Footer: React.FC = () => {
   return (
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
                 <h3>Our Products</h3>
                 <ul className="custom-links">
                   <li>
-                    <Link href="#">Trezo Dashboard</Link>
+                    <Link href="#">Kenlivo Dashboard</Link>
                   </li>
                   <li>
                     <Link href="#">Tagus Admin</Link>
@@ -134,7 +134,7 @@ const Footer: React.FC = () => {
         <div className="copyright-area bg-white text-center">
           <div className="container">
             <p>
-              © <span>Trezo</span> is Proudly Owned by{" "}
+              © <span>Kenlivo</span> is Proudly Owned by{" "}
               <a href="https://envytheme.com/" target="_blank">
                 EnvyTheme
               </a>

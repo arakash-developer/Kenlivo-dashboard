@@ -1,15 +1,15 @@
 "use client";
 
-import * as React from "react";
 import {
-  Grid,
-  Button,
   Box,
-  Typography,
+  Button,
   FormControl,
+  Grid,
   TextField,
+  Typography,
 } from "@mui/material";
 import Image from "next/image";
+import * as React from "react";
 
 const LockScreenForm: React.FC = () => {
   return (
@@ -93,7 +93,7 @@ const LockScreenForm: React.FC = () => {
                       fontWeight: "600",
                     }}
                   >
-                    Welcome back to Trezo!
+                    Welcome back to Kenlivo!
                   </Typography>
 
                   <Typography sx={{ fontWeight: "500", fontSize: "16px" }}>

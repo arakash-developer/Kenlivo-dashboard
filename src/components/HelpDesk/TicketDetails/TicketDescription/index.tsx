@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { Card, Box, Typography } from "@mui/material";
 import styles from "@/components/HelpDesk/TicketDetails/TicketDescription/TicketDescription.module.css";
+import { Card } from "@mui/material";
+import * as React from "react";
 
 const TicketDescription: React.FC = () => {
   return (
@@ -31,7 +31,7 @@ const TicketDescription: React.FC = () => {
             PageMaker including versions of <a href="#">Lorem Ipsum</a>.
           </p>
 
-          <h6>Network Infrastructure for Trezo</h6>
+          <h6>Network Infrastructure for Kenlivo</h6>
 
           <ul>
             <li>Login Issues</li>

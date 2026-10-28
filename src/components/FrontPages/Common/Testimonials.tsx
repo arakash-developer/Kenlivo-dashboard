@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import * as React from "react";
 
 const Testimonials: React.FC = () => {
   return (
@@ -37,7 +37,7 @@ const Testimonials: React.FC = () => {
                 fontSize: { xs: "24px", md: "28px", lg: "34px", xl: "36px" },
               }}
             >
-              Inspiring Feedback: What Users Love About Trezo Dashboard
+              Inspiring Feedback: What Users Love About Kenlivo Dashboard
             </Typography>
           </div>
 
@@ -57,7 +57,7 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 <p>
-                  Trezo Dashboard Template has transformed how we manage our
+                  Kenlivo Dashboard Template has transformed how we manage our
                   data. Its intuitive design and customizable features have
                   streamlined our analytics process, enabling us to make
                   informed decisions faster than ever before.
@@ -91,7 +91,7 @@ const Testimonials: React.FC = () => {
 
                 <p>
                   As a developer, I appreciate the flexibility and robustness of
-                  Trezo Dashboard Template. It offers a wide range of features
+                  Kenlivo Dashboard Template. It offers a wide range of features
                   that cater to our diverse needs, and its clean codebase has
                   made customization a breeze. Highly recommended!
                 </p>
@@ -123,7 +123,7 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 <p>
-                  Trezo Dashboard Template has been a lifesaver for our
+                  Kenlivo Dashboard Template has been a lifesaver for our
                   organization. It's helped us streamline our reporting
                   processes and communicate insights effectively across
                   departments. The time saved has allowed us to focus more on
@@ -157,7 +157,7 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 <p>
-                  I can't recommend the Trezo Template enough. It's helped us
+                  I can't recommend the Kenlivo Template enough. It's helped us
                   gain a deeper understanding of our business metrics and
                   identify areas for improvement. The responsive support team is
                   a bonus, we are always ready to assist whenever needed.
@@ -190,9 +190,9 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 <p>
-                  Using Trezo Dashboard Template has been a game-changer for our
-                  team. The ability to customize widgets to suit our specific
-                  needs has allowed us to gain deeper insights into our
+                  Using Kenlivo Dashboard Template has been a game-changer for
+                  our team. The ability to customize widgets to suit our
+                  specific needs has allowed us to gain deeper insights into our
                   performance metrics and drive business growth.
                 </p>
 
@@ -224,8 +224,8 @@ const Testimonials: React.FC = () => {
 
                 <p>
                   As a startup, we needed a dashboard solution that was both
-                  powerful and cost-effective. Trezo Dashboard Template checked
-                  all the boxes for us. It's helped us stay agile and
+                  powerful and cost-effective. Kenlivo Dashboard Template
+                  checked all the boxes for us. It's helped us stay agile and
                   competitive in a fast-paced market.
                 </p>
 

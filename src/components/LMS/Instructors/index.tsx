@@ -1,40 +1,39 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
-import Image from "next/image";
+import styles from "@/components/LMS/Search.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
   Button,
+  Card,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
   MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Dialog,
-  DialogTitle,
-  Grid,
   TextField,
-  FormControl,
-  InputLabel,
+  Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import AddIcon from "@mui/icons-material/Add";
-import styles from "@/components/LMS/Search.module.css";
-import { styled } from "@mui/material/styles";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { styled, useTheme } from "@mui/material/styles";
+import Image from "next/image";
+import PropTypes from "prop-types";
+import React, { FormEvent, useState } from "react";
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -87,7 +86,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -96,13 +95,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -178,7 +177,7 @@ function createData(
   totalEarnings: string,
   email: string,
   ratings: Ratings[],
-  status: string
+  status: string,
 ): Instructors {
   return {
     id,
@@ -201,7 +200,7 @@ const rows = [
     "Big Data",
     55,
     "$6,855.00",
-    "olivia@trezo.com",
+    "olivia@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -219,7 +218,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1216",
@@ -228,7 +227,7 @@ const rows = [
     "UX/UI",
     120,
     "$258.00",
-    "ava@trezo.com",
+    "ava@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -246,7 +245,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "deactive"
+    "deactive",
   ),
   createData(
     "#A-1215",
@@ -255,7 +254,7 @@ const rows = [
     "Developer",
     86,
     "$3890.00",
-    "lucas@trezo.com",
+    "lucas@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -273,7 +272,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1214",
@@ -282,7 +281,7 @@ const rows = [
     "Designer",
     75,
     "$2500.00",
-    "isabella@trezo.com",
+    "isabella@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -300,7 +299,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1213",
@@ -309,7 +308,7 @@ const rows = [
     "Big Data",
     55,
     "$6,855.00",
-    "olivia@trezo.com",
+    "olivia@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -327,7 +326,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1212",
@@ -336,7 +335,7 @@ const rows = [
     "UX/UI",
     120,
     "$258.00",
-    "ava@trezo.com",
+    "ava@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -354,7 +353,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "deactive"
+    "deactive",
   ),
   createData(
     "#A-1211",
@@ -363,7 +362,7 @@ const rows = [
     "Developer",
     86,
     "$3890.00",
-    "lucas@trezo.com",
+    "lucas@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -381,7 +380,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1210",
@@ -390,7 +389,7 @@ const rows = [
     "Big Data",
     55,
     "$6,855.00",
-    "olivia@trezo.com",
+    "olivia@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -408,7 +407,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1209",
@@ -417,7 +416,7 @@ const rows = [
     "UX/UI",
     120,
     "$258.00",
-    "ava@trezo.com",
+    "ava@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -435,7 +434,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "deactive"
+    "deactive",
   ),
   createData(
     "#A-1208",
@@ -444,7 +443,7 @@ const rows = [
     "Developer",
     86,
     "$3890.00",
-    "lucas@trezo.com",
+    "lucas@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -462,7 +461,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1207",
@@ -471,7 +470,7 @@ const rows = [
     "Designer",
     75,
     "$2500.00",
-    "isabella@trezo.com",
+    "isabella@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -489,7 +488,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1206",
@@ -498,7 +497,7 @@ const rows = [
     "Big Data",
     55,
     "$6,855.00",
-    "olivia@trezo.com",
+    "olivia@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -516,7 +515,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
   createData(
     "#A-1205",
@@ -525,7 +524,7 @@ const rows = [
     "UX/UI",
     120,
     "$258.00",
-    "ava@trezo.com",
+    "ava@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -543,7 +542,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "deactive"
+    "deactive",
   ),
   createData(
     "#A-1204",
@@ -552,7 +551,7 @@ const rows = [
     "Developer",
     86,
     "$3890.00",
-    "lucas@trezo.com",
+    "lucas@kenlivo.com",
     [
       {
         star: "ri-star-fill",
@@ -570,7 +569,7 @@ const rows = [
         star: "ri-star-fill",
       },
     ],
-    "active"
+    "active",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -585,13 +584,13 @@ const Instructors: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -794,7 +793,7 @@ const Instructors: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -911,7 +910,7 @@ const Instructors: React.FC = () => {
                       className="text-black border-bottom"
                     >
                       <div
-                        className={`trezo-badge ${row.status}`}
+                        className={`kenlivo-badge ${row.status}`}
                         style={{ textTransform: "capitalize" }}
                       >
                         {row.status}

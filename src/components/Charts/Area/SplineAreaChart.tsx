@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { Box, Card, Typography } from "@mui/material";
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
-import { Card, Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 // Dynamically import react-apexcharts with Next.js dynamic import
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -18,7 +18,7 @@ const SplineAreaChart: React.FC = () => {
 
   const series = [
     {
-      name: "Trezo",
+      name: "Kenlivo",
       data: [31, 40, 28, 51, 42, 109, 100],
     },
     {
@@ -105,7 +105,7 @@ const SplineAreaChart: React.FC = () => {
         colors: "#64748B",
       },
       markers: {
-        shape: 'diamond',
+        shape: "diamond",
         offsetX: -2,
         offsetY: -0.5,
       },

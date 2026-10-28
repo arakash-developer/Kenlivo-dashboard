@@ -1,18 +1,18 @@
 "use client";
 
-import * as React from "react";
 import styles from "@/components/Layout/TopNavbar/Notifications/Notifications.module.css";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import {
-  IconButton,
-  Button,
-  Typography,
-  Tooltip,
-  Menu,
   Badge,
   Box,
+  Button,
+  IconButton,
+  Menu,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 import Link from "next/link";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import * as React from "react";
 
 const Notifications: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -140,7 +140,7 @@ const Notifications: React.FC = () => {
               className="text-black"
             >
               <strong style={{ fontWeight: "600" }}>A new user</strong> added in
-              Trezo
+              Kenlivo
             </Box>
 
             <Box component="span" sx={{ display: "block" }}>

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import { Box, Card, Typography } from "@mui/material";
 import Image from "next/image";
-import { Card, Box, Typography } from "@mui/material";
+import React from "react";
 
 const CourseInstructor: React.FC = () => {
   return (
@@ -48,7 +48,7 @@ const CourseInstructor: React.FC = () => {
             <Typography fontWeight={500} fontSize="17px" className="text-black">
               Aliva Cohen
             </Typography>
-            <Typography fontSize="13px">aliva@trezo.com</Typography>
+            <Typography fontSize="13px">aliva@kenlivo.com</Typography>
           </Box>
         </Box>
 

@@ -1,44 +1,44 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import styles from "@/components/CRM/Search.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
+  Dialog,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Checkbox,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Dialog,
-  DialogTitle,
-  Grid,
-  Button,
   TextField,
+  Typography,
   styled,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-import styles from "@/components/CRM/Search.module.css";
-import AddIcon from "@mui/icons-material/Add";
-import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useTheme } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import PropTypes from "prop-types";
+import React, { FormEvent, useState } from "react";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 // Modal
 interface BootstrapDialogTitleProps {
@@ -91,7 +91,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -100,13 +100,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -165,7 +165,7 @@ function createData(
   stage: string,
   probability: number,
   createdAt: string,
-  closeDate: string
+  closeDate: string,
 ) {
   return {
     id,
@@ -184,11 +184,11 @@ const rows = [
     "#854",
     "Tech Solutions",
     "Shawn Kennedy",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "$25,000.00",
     80,
     "15 Nov 2024",
-    "08 Nov 2024 10:30 AM"
+    "08 Nov 2024 10:30 AM",
   ),
   createData(
     "#853",
@@ -198,7 +198,7 @@ const rows = [
     "Presentation",
     50,
     "14 Nov 2024",
-    "09 Nov 2024 02:15 PM"
+    "09 Nov 2024 02:15 PM",
   ),
   createData(
     "#852",
@@ -208,7 +208,7 @@ const rows = [
     "Negotiation",
     75,
     "13 Nov 2024",
-    "10 Nov 2024 09:45 AM"
+    "10 Nov 2024 09:45 AM",
   ),
   createData(
     "#851",
@@ -218,7 +218,7 @@ const rows = [
     "Discovery",
     90,
     "12 Nov 2024",
-    "11 Nov 2024 03:45 PM"
+    "11 Nov 2024 03:45 PM",
   ),
   createData(
     "#850",
@@ -228,7 +228,7 @@ const rows = [
     "Contract Sent",
     60,
     "13 Nov 2024",
-    "12 Nov 2024 01:00 PM"
+    "12 Nov 2024 01:00 PM",
   ),
   createData(
     "#849",
@@ -238,7 +238,7 @@ const rows = [
     "Proposal",
     55,
     "19 Nov 2024",
-    "13 Nov 2024 01:00 PM"
+    "13 Nov 2024 01:00 PM",
   ),
   createData(
     "#848",
@@ -248,7 +248,7 @@ const rows = [
     "Negotiation",
     79,
     "26 Nov 2024",
-    "14 Nov 2024 01:00 PM"
+    "14 Nov 2024 01:00 PM",
   ),
   createData(
     "#847",
@@ -258,7 +258,7 @@ const rows = [
     "Presentation",
     85,
     "23 Nov 2024",
-    "15 Nov 2024 01:00 PM"
+    "15 Nov 2024 01:00 PM",
   ),
   createData(
     "#846",
@@ -268,27 +268,27 @@ const rows = [
     "Proposal",
     11,
     "14 Nov 2024",
-    "08 Nov 2024 10:30 AM"
+    "08 Nov 2024 10:30 AM",
   ),
   createData(
     "#845",
-    "Trezo Admin",
+    "Kenlivo Admin",
     "David Warner",
     "$12,421.00",
     "Discovery",
     53,
     "11 Nov 2024",
-    "07 Nov 2024 10:30 AM"
+    "07 Nov 2024 10:30 AM",
   ),
   createData(
     "#845",
-    "Trezo Admin",
+    "Kenlivo Admin",
     "David Warner",
     "$12,421.00",
     "Discovery",
     53,
     "11 Nov 2024",
-    "07 Nov 2024 10:30 AM"
+    "07 Nov 2024 10:30 AM",
   ),
   createData(
     "#844",
@@ -298,17 +298,17 @@ const rows = [
     "Proposal",
     11,
     "14 Nov 2024",
-    "08 Nov 2024 10:30 AM"
+    "08 Nov 2024 10:30 AM",
   ),
   createData(
     "#843",
     "Tech Solutions",
     "Shawn Kennedy",
-    "oliver@trezo.com",
+    "oliver@kenlivo.com",
     "$25,000.00",
     80,
     "15 Nov 2024",
-    "08 Nov 2024 10:30 AM"
+    "08 Nov 2024 10:30 AM",
   ),
   createData(
     "#842",
@@ -318,7 +318,7 @@ const rows = [
     "Presentation",
     50,
     "14 Nov 2024",
-    "09 Nov 2024 02:15 PM"
+    "09 Nov 2024 02:15 PM",
   ),
   createData(
     "#841",
@@ -328,7 +328,7 @@ const rows = [
     "Negotiation",
     75,
     "13 Nov 2024",
-    "10 Nov 2024 09:45 AM"
+    "10 Nov 2024 09:45 AM",
   ),
   createData(
     "#840",
@@ -338,7 +338,7 @@ const rows = [
     "Discovery",
     90,
     "12 Nov 2024",
-    "11 Nov 2024 03:45 PM"
+    "11 Nov 2024 03:45 PM",
   ),
   createData(
     "#839",
@@ -348,7 +348,7 @@ const rows = [
     "Contract Sent",
     60,
     "13 Nov 2024",
-    "12 Nov 2024 01:00 PM"
+    "12 Nov 2024 01:00 PM",
   ),
   createData(
     "#838",
@@ -358,7 +358,7 @@ const rows = [
     "Proposal",
     55,
     "19 Nov 2024",
-    "13 Nov 2024 01:00 PM"
+    "13 Nov 2024 01:00 PM",
   ),
   createData(
     "#837",
@@ -368,7 +368,7 @@ const rows = [
     "Negotiation",
     79,
     "26 Nov 2024",
-    "14 Nov 2024 01:00 PM"
+    "14 Nov 2024 01:00 PM",
   ),
   createData(
     "#836",
@@ -378,7 +378,7 @@ const rows = [
     "Presentation",
     85,
     "23 Nov 2024",
-    "15 Nov 2024 01:00 PM"
+    "15 Nov 2024 01:00 PM",
   ),
   createData(
     "#835",
@@ -388,27 +388,27 @@ const rows = [
     "Proposal",
     11,
     "14 Nov 2024",
-    "08 Nov 2024 10:30 AM"
+    "08 Nov 2024 10:30 AM",
   ),
   createData(
     "#834",
-    "Trezo Admin",
+    "Kenlivo Admin",
     "David Warner",
     "$12,421.00",
     "Discovery",
     53,
     "11 Nov 2024",
-    "07 Nov 2024 10:30 AM"
+    "07 Nov 2024 10:30 AM",
   ),
   createData(
     "#833",
-    "Trezo Admin",
+    "Kenlivo Admin",
     "David Warner",
     "$12,421.00",
     "Discovery",
     53,
     "11 Nov 2024",
-    "07 Nov 2024 10:30 AM"
+    "07 Nov 2024 10:30 AM",
   ),
   createData(
     "#832",
@@ -418,7 +418,7 @@ const rows = [
     "Proposal",
     11,
     "14 Nov 2024",
-    "08 Nov 2024 10:30 AM"
+    "08 Nov 2024 10:30 AM",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -433,13 +433,13 @@ const DealsTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -656,7 +656,7 @@ const DealsTable: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (

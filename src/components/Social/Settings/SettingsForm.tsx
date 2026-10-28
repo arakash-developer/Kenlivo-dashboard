@@ -1,24 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
   InputLabel,
   MenuItem,
-  TextField,
-  Button,
-  Checkbox,
+  Radio,
+  RadioGroup,
   Select,
   SelectChangeEvent,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
+  TextField,
+  Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 import CustomEditor from "./CustomEditor";
 
 const SettingsForm: React.FC = () => {
@@ -176,7 +176,7 @@ const SettingsForm: React.FC = () => {
 
                       <TextField
                         label="Enter email address"
-                        defaultValue="johnson@trezo.com"
+                        defaultValue="johnson@kenlivo.com"
                         variant="filled"
                         id="email"
                         name="email"
@@ -568,7 +568,7 @@ const SettingsForm: React.FC = () => {
 
                       <TextField
                         label="Enter company name"
-                        defaultValue="Trezo Admin"
+                        defaultValue="Kenlivo Admin"
                         variant="filled"
                         id="companyName"
                         name="companyName"

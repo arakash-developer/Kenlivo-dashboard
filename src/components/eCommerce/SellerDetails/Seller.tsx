@@ -1,20 +1,19 @@
 "use client";
 
-import React from "react";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
-  Card,
   Box,
-  Typography,
-  Menu,
-  IconButton,
-  MenuItem,
   Button,
-  styled,
+  Card,
   FormControl,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz"; 
+import React from "react";
 
 const Seller: React.FC = () => {
   // Dropdown
@@ -26,7 +25,7 @@ const Seller: React.FC = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
- 
+
   return (
     <>
       <Card
@@ -69,7 +68,7 @@ const Seller: React.FC = () => {
                 </Typography>
               </Link>
 
-              <Typography fontSize="13px">turner&#64;trezo.com</Typography>
+              <Typography fontSize="13px">turner&#64;kenlivo.com</Typography>
             </Box>
           </Box>
 
@@ -156,17 +155,17 @@ const Seller: React.FC = () => {
               Contact Support
             </Typography>
 
-            <textarea 
-              id="contactSupport" 
-              name="contactSupport" 
+            <textarea
+              id="contactSupport"
+              name="contactSupport"
               placeholder="Contact Support"
               rows={5}
               style={{
-                width: '100%',
-                borderRadius: '6px',
-                padding: '10px 15px',
-                border: '1px solid #D5D9E2'
-              }} 
+                width: "100%",
+                borderRadius: "6px",
+                padding: "10px 15px",
+                border: "1px solid #D5D9E2",
+              }}
             ></textarea>
           </FormControl>
 

@@ -2,18 +2,18 @@
 
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import { Box, Typography } from "@mui/material";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
-import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import { Box, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import * as React from "react";
 
 // Toggle sidebar sections on/off here. Set a flag to `false` to hide its
 // section, `true` to show it. Reuse this pattern for any other section you
@@ -89,7 +89,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 width={26}
                 height={26}
               />
-              <span>Trezo</span>
+              <span>Kenlivo</span>
             </Link>
           </div>
 
@@ -124,7 +124,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 >
                   <i className="material-symbols-outlined">dashboard</i>
                   <span className="title">Dashboard</span>
-                  <span className="trezo-badge">9</span>
+                  <span className="kenlivo-badge">9</span>
                 </AccordionSummary>
 
                 <AccordionDetails className="mat-details">
@@ -141,86 +141,87 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                     </li>
 
                     {SIDEBAR_SECTIONS.dashboardCRM && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/crm/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/crm/" ? "active" : ""
-                        }`}
-                      >
-                        CRM
-                        <span className="trezo-badge style-two">Hot</span>
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/crm/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/crm/" ? "active" : ""
+                          }`}
+                        >
+                          CRM
+                          <span className="kenlivo-badge style-two">Hot</span>
+                        </Link>
+                      </li>
                     )}
 
                     {SIDEBAR_SECTIONS.dashboardProjectManagement && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/project-management/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/project-management/"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        Project Management
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/project-management/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/project-management/"
+                              ? "active"
+                              : ""
+                          }`}
+                        >
+                          Project Management
+                        </Link>
+                      </li>
                     )}
 
                     {SIDEBAR_SECTIONS.dashboardLMS && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/lms/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/lms/" ? "active" : ""
-                        }`}
-                      >
-                        LMS <span className="trezo-badge style-two">Top</span>
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/lms/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/lms/" ? "active" : ""
+                          }`}
+                        >
+                          LMS{" "}
+                          <span className="kenlivo-badge style-two">Top</span>
+                        </Link>
+                      </li>
                     )}
 
                     {SIDEBAR_SECTIONS.dashboardHelpDesk && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/helpdesk/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/helpdesk/" ? "active" : ""
-                        }`}
-                      >
-                        HelpDesk
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/helpdesk/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/helpdesk/" ? "active" : ""
+                          }`}
+                        >
+                          HelpDesk
+                        </Link>
+                      </li>
                     )}
 
                     {SIDEBAR_SECTIONS.dashboardAnalytics && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/analytics/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/analytics/" ? "active" : ""
-                        }`}
-                      >
-                        Analytics
-                        <span className="trezo-badge">New</span>
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/analytics/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/analytics/" ? "active" : ""
+                          }`}
+                        >
+                          Analytics
+                          <span className="kenlivo-badge">New</span>
+                        </Link>
+                      </li>
                     )}
 
                     {SIDEBAR_SECTIONS.dashboardCrypto && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/crypto/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/crypto/" ? "active" : ""
-                        }`}
-                      >
-                        Crypto
-                        <span className="trezo-badge">New</span>
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/crypto/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/crypto/" ? "active" : ""
+                          }`}
+                        >
+                          Crypto
+                          <span className="kenlivo-badge">New</span>
+                        </Link>
+                      </li>
                     )}
 
                     <li className="sidemenu-item">
@@ -231,101 +232,103 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         }`}
                       >
                         Sales
-                        <span className="trezo-badge">New</span>
+                        <span className="kenlivo-badge">New</span>
                       </Link>
                     </li>
 
                     {SIDEBAR_SECTIONS.dashboardHospital && (
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/dashboard/hospital/"
-                        className={`sidemenu-link ${
-                          pathname === "/dashboard/hospital/" ? "active" : ""
-                        }`}
-                      >
-                        Hospital
-                        <span className="trezo-badge">New</span>
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/dashboard/hospital/"
+                          className={`sidemenu-link ${
+                            pathname === "/dashboard/hospital/" ? "active" : ""
+                          }`}
+                        >
+                          Hospital
+                          <span className="kenlivo-badge">New</span>
+                        </Link>
+                      </li>
                     )}
                   </ul>
                 </AccordionDetails>
               </Accordion>
 
               {SIDEBAR_SECTIONS.frontPages && (
-              <Accordion
-                expanded={expanded === "panel2"}
-                onChange={handleChange("panel2")}
-                className="mat-accordion"
-              >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel2d-content"
-                  id="panel2d-header"
+                <Accordion
+                  expanded={expanded === "panel2"}
+                  onChange={handleChange("panel2")}
+                  className="mat-accordion"
                 >
-                  <i className="material-symbols-outlined">note_stack</i>
-                  <span className="title">Front Pages</span>
-                </AccordionSummary>
+                  <AccordionSummary
+                    className="mat-summary"
+                    aria-controls="panel2d-content"
+                    id="panel2d-header"
+                  >
+                    <i className="material-symbols-outlined">note_stack</i>
+                    <span className="title">Front Pages</span>
+                  </AccordionSummary>
 
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/"
-                        className={`sidemenu-link ${
-                          pathname === "/" ? "active" : ""
-                        }`}
-                      >
-                        Home
-                      </Link>
-                    </li>
+                  <AccordionDetails className="mat-details">
+                    <ul className="sidebar-sub-menu">
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/"
+                          className={`sidemenu-link ${
+                            pathname === "/" ? "active" : ""
+                          }`}
+                        >
+                          Home
+                        </Link>
+                      </li>
 
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/features/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/features/" ? "active" : ""
-                        }`}
-                      >
-                        Features
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/front-pages/features/"
+                          className={`sidemenu-link ${
+                            pathname === "/front-pages/features/"
+                              ? "active"
+                              : ""
+                          }`}
+                        >
+                          Features
+                        </Link>
+                      </li>
 
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/team/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/team/" ? "active" : ""
-                        }`}
-                      >
-                        Our Team
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/front-pages/team/"
+                          className={`sidemenu-link ${
+                            pathname === "/front-pages/team/" ? "active" : ""
+                          }`}
+                        >
+                          Our Team
+                        </Link>
+                      </li>
 
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/faq/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/faq/" ? "active" : ""
-                        }`}
-                      >
-                        FAQ’s
-                      </Link>
-                    </li>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/front-pages/faq/"
+                          className={`sidemenu-link ${
+                            pathname === "/front-pages/faq/" ? "active" : ""
+                          }`}
+                        >
+                          FAQ’s
+                        </Link>
+                      </li>
 
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/front-pages/contact/"
-                        className={`sidemenu-link ${
-                          pathname === "/front-pages/contact/" ? "active" : ""
-                        }`}
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
+                      <li className="sidemenu-item">
+                        <Link
+                          href="/front-pages/contact/"
+                          className={`sidemenu-link ${
+                            pathname === "/front-pages/contact/" ? "active" : ""
+                          }`}
+                        >
+                          Contact
+                        </Link>
+                      </li>
+                    </ul>
+                  </AccordionDetails>
+                </Accordion>
               )}
 
               <Typography
@@ -393,7 +396,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 >
                   <i className="material-symbols-outlined">mail</i>
                   <span className="title">Email</span>
-                  <span className="trezo-badge style-two">3</span>
+                  <span className="kenlivo-badge style-two">3</span>
                 </AccordionSummary>
 
                 <AccordionDetails className="mat-details">
@@ -456,7 +459,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 >
                   <i className="material-symbols-outlined">folder_open</i>
                   <span className="title">File Manager</span>
-                  <span className="trezo-badge style-three">7</span>
+                  <span className="kenlivo-badge style-three">7</span>
                 </AccordionSummary>
 
                 <AccordionDetails className="mat-details">
@@ -1421,8 +1424,8 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
-              <Link 
-                href="/starter/"  
+              <Link
+                href="/starter/"
                 className={`sidebar-menu-link ${
                   pathname === "/starter/" ? "active" : ""
                 }`}
@@ -2396,8 +2399,8 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 OTHERS
               </Typography>
 
-              <Link 
-                href="/my-profile/" 
+              <Link
+                href="/my-profile/"
                 className={`sidebar-menu-link ${
                   pathname === "/my-profile/" ? "active" : ""
                 }`}

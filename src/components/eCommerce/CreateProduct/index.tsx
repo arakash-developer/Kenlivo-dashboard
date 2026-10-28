@@ -1,26 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  TextField,
   Button,
-  OutlinedInput,
-  ListItemText,
+  Card,
   Checkbox,
+  FormControl,
+  Grid,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
   Select,
   SelectChangeEvent,
-  styled,
+  TextField,
+  Typography,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import React, { useState } from "react";
 import CustomEditor from "./CustomEditor";
 
 const CreateProduct: React.FC = () => {
@@ -245,7 +244,7 @@ const CreateProduct: React.FC = () => {
                         <MenuItem value={1}>Fediz</MenuItem>
                         <MenuItem value={2}>Debilop</MenuItem>
                         <MenuItem value={3}>Canin</MenuItem>
-                        <MenuItem value={4}>Trezo</MenuItem>
+                        <MenuItem value={4}>Kenlivo</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
@@ -873,18 +872,18 @@ const CreateProduct: React.FC = () => {
                       >
                         Description
                       </Typography>
- 
-                      <textarea 
-                        id="description" 
-                        name="description" 
+
+                      <textarea
+                        id="description"
+                        name="description"
                         placeholder="Description"
                         rows={5}
                         style={{
-                          width: '100%',
-                          borderRadius: '6px',
-                          padding: '10px 15px',
-                          border: '1px solid #D5D9E2'
-                        }} 
+                          width: "100%",
+                          borderRadius: "6px",
+                          padding: "10px 15px",
+                          border: "1px solid #D5D9E2",
+                        }}
                       ></textarea>
                     </FormControl>
                   </Box>

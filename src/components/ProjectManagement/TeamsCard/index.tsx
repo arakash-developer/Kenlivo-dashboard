@@ -1,21 +1,21 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
-  Grid,
-  Card,
+  Avatar,
+  AvatarGroup,
   Box,
-  Typography,
+  Button,
+  Card,
+  Grid,
+  IconButton,
   Menu,
   MenuItem,
-  IconButton,
-  AvatarGroup,
-  Avatar,
-  Button,
+  Typography,
 } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import React from "react";
 
 const TeamsCard: React.FC = () => {
   // Dropdown
@@ -1253,7 +1253,7 @@ const TeamsCard: React.FC = () => {
                   borderRadius: "30px",
                 }}
               >
-                Trezo - Angular
+                Kenlivo - Angular
               </Typography>
             </Box>
 

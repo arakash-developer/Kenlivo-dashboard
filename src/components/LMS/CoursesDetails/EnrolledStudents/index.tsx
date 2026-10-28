@@ -1,25 +1,25 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import Image from "next/image";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -27,7 +27,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -36,13 +36,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -97,7 +97,7 @@ function createData(
   id: string,
   studentsImg: string,
   studentsName: string,
-  email: string
+  email: string,
 ) {
   return {
     id,
@@ -112,49 +112,49 @@ const rows = [
     "#A-1217",
     "/images/users/user13.jpg",
     "Olivia Clark",
-    "olivia@trezo.com"
+    "olivia@kenlivo.com",
   ),
   createData(
     "#A-1218",
     "/images/users/user16.jpg",
     "Ava Turner",
-    "ava@trezo.com"
+    "ava@kenlivo.com",
   ),
   createData(
     "#A-1219",
     "/images/users/user17.jpg",
     "Lucas Morgan",
-    "lucas@trezo.com"
+    "lucas@kenlivo.com",
   ),
   createData(
     "#A-1220",
     "/images/users/user18.jpg",
     "Isabella Cooper",
-    "isabella@trezo.com"
+    "isabella@kenlivo.com",
   ),
   createData(
     "#A-1221",
     "/images/users/user31.jpg",
     "Jhon Smith",
-    "olivia@trezo.com"
+    "olivia@kenlivo.com",
   ),
   createData(
     "#A-1222",
     "/images/users/user30.jpg",
     "Lucas Morgan",
-    "lucas@trezo.com"
+    "lucas@kenlivo.com",
   ),
   createData(
     "#A-1223",
     "/images/users/user29.jpg",
     "Isabella Cooper",
-    "isabella@trezo.com"
+    "isabella@kenlivo.com",
   ),
   createData(
     "#A-1224",
     "/images/users/user28.jpg",
     "Mason Cooper",
-    "mason@trezo.com"
+    "mason@kenlivo.com",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -169,13 +169,13 @@ const EnrolledStudents: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -269,7 +269,7 @@ const EnrolledStudents: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (

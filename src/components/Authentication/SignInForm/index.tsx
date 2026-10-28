@@ -1,18 +1,18 @@
 "use client";
 
-import * as React from "react";
-import {
-  Grid,
-  Button,
-  Box,
-  Typography,
-  FormControl,
-  TextField,
-} from "@mui/material";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { authApi } from "@/lib/api/auth";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import * as React from "react";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();
@@ -38,7 +38,9 @@ const SignInForm: React.FC = () => {
       await authApi.login({ email, password });
       router.push("/dashboard/ecommerce/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Invalid email or password.");
+      setError(
+        err instanceof Error ? err.message : "Invalid email or password.",
+      );
     } finally {
       setLoading(false);
     }
@@ -125,7 +127,7 @@ const SignInForm: React.FC = () => {
                       fontWeight: "600",
                     }}
                   >
-                    Welcome back to Trezo!
+                    Welcome back to Kenlivo!
                   </Typography>
 
                   <Typography sx={{ fontWeight: "500", fontSize: "16px" }}>
@@ -225,7 +227,7 @@ const SignInForm: React.FC = () => {
                       </Typography>
 
                       <TextField
-                        label="example&#64;trezo.com"
+                        label="example&#64;kenlivo.com"
                         variant="filled"
                         id="email"
                         name="email"

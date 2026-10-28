@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { Card, Typography } from "@mui/material";
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
-import { Card, Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 // Dynamically import react-apexcharts with Next.js dynamic import
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -18,7 +18,7 @@ const BasicRadarChart: React.FC = () => {
 
   const series = [
     {
-      name: "Trezo",
+      name: "Kenlivo",
       data: [80, 50, 30, 40, 100, 20],
     },
   ];

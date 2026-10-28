@@ -1,31 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
   Button,
+  Card,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  FormControl,
-  InputLabel,
-  MenuItem,
   TextField,
-  IconButton,
-  Select,
-  SelectChangeEvent,
+  Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const EditInvoice: React.FC = () => {
   const [status, setStatus] = useState<string>("");
@@ -208,7 +208,7 @@ const EditInvoice: React.FC = () => {
                   </Typography>
 
                   <Typography mt="5px !important">
-                    olivia&#64;trezo.com
+                    olivia&#64;kenlivo.com
                   </Typography>
 
                   <Typography mt="5px !important">

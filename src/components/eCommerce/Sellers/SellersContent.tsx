@@ -1,20 +1,20 @@
 "use client";
 
-import React from "react";
-import {
-  Card,
-  Box,
-  Typography,
-  Menu,
-  IconButton,
-  MenuItem,
-  Grid,
-  Button,
-} from "@mui/material";
-import Link from "next/link";
-import Image from "next/image";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import styles from "@/components/eCommerce/Search.module.css";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const SellersContent: React.FC = () => {
   // Dropdown
@@ -125,7 +125,9 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">turner&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">
+                    turner&#64;kenlivo.com
+                  </Typography>
                 </Box>
               </Box>
 
@@ -244,7 +246,7 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">ethan&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">ethan&#64;kenlivo.com</Typography>
                 </Box>
               </Box>
 
@@ -364,7 +366,7 @@ const SellersContent: React.FC = () => {
                   </Link>
 
                   <Typography fontSize="13px">
-                    isabella&#64;trezo.com
+                    isabella&#64;kenlivo.com
                   </Typography>
                 </Box>
               </Box>
@@ -485,7 +487,7 @@ const SellersContent: React.FC = () => {
                   </Link>
 
                   <Typography fontSize="13px">
-                    thompson&#64;trezo.com
+                    thompson&#64;kenlivo.com
                   </Typography>
                 </Box>
               </Box>
@@ -605,7 +607,7 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">lucas&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">lucas&#64;kenlivo.com</Typography>
                 </Box>
               </Box>
 
@@ -724,7 +726,9 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">morgan&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">
+                    morgan&#64;kenlivo.com
+                  </Typography>
                 </Box>
               </Box>
 
@@ -843,7 +847,9 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">sophia&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">
+                    sophia&#64;kenlivo.com
+                  </Typography>
                 </Box>
               </Box>
 
@@ -963,7 +969,7 @@ const SellersContent: React.FC = () => {
                   </Link>
 
                   <Typography fontSize="13px">
-                    rodriguez&#64;trezo.com
+                    rodriguez&#64;kenlivo.com
                   </Typography>
                 </Box>
               </Box>
@@ -1083,7 +1089,9 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">olivia&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">
+                    olivia&#64;kenlivo.com
+                  </Typography>
                 </Box>
               </Box>
 
@@ -1202,7 +1210,7 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">david&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">david&#64;kenlivo.com</Typography>
                 </Box>
               </Box>
 
@@ -1321,7 +1329,7 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">alice&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">alice&#64;kenlivo.com</Typography>
                 </Box>
               </Box>
 
@@ -1440,7 +1448,7 @@ const SellersContent: React.FC = () => {
                     </Typography>
                   </Link>
 
-                  <Typography fontSize="13px">emily&#64;trezo.com</Typography>
+                  <Typography fontSize="13px">emily&#64;kenlivo.com</Typography>
                 </Box>
               </Box>
 

@@ -1,29 +1,29 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import styles from "@/components/eCommerce/Search.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Button,
+  Typography,
 } from "@mui/material";
-import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/eCommerce/Search.module.css";
-import AddIcon from "@mui/icons-material/Add";
+import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 import NavList from "../NavList";
 
 interface TablePaginationActionsProps {
@@ -32,7 +32,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -41,13 +41,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -110,7 +110,7 @@ function createData(
   amount: string,
   rating: string,
   status: string,
-  detailsLink: string
+  detailsLink: string,
 ) {
   return {
     orderID,
@@ -141,7 +141,7 @@ const rows = [
     "$2,625",
     "5.00 (141 reviews)",
     "Draft",
-    "/ecommerce/products-list/details/"
+    "/ecommerce/products-list/details/",
   ),
   createData(
     "#JAN-998",
@@ -155,7 +155,7 @@ const rows = [
     "$1,225",
     "5.00 (69 reviews)",
     "Draft",
-    "/ecommerce/products-list/details/"
+    "/ecommerce/products-list/details/",
   ),
   createData(
     "#JAN-996",
@@ -169,7 +169,7 @@ const rows = [
     "$2,360",
     "4.00 (75 reviews)",
     "Draft",
-    "/ecommerce/products-list/details/"
+    "/ecommerce/products-list/details/",
   ),
 ].sort((b, a) => (a.orderID < b.orderID ? -1 : 1));
 
@@ -184,13 +184,13 @@ const Draft: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -381,7 +381,7 @@ const Draft: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -512,7 +512,7 @@ const Draft: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

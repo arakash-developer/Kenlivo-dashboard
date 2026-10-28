@@ -1,28 +1,28 @@
 "use client";
 
-import * as React from "react";
-import Image from "next/image";
+import styles from "@/components/eCommerce/Search.module.css";
+import AddIcon from "@mui/icons-material/Add";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  Button,
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/eCommerce/Search.module.css";
-import AddIcon from "@mui/icons-material/Add";
+import Image from "next/image";
+import * as React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -30,7 +30,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -39,13 +39,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -104,7 +104,7 @@ function createData(
   created: string,
   total: string,
   vendor: string,
-  status: string
+  status: string,
 ) {
   return {
     orderID,
@@ -127,7 +127,7 @@ const rows = [
     "12 Jun 2024",
     "$10,490",
     "Dennis Matthews",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2346",
@@ -137,7 +137,7 @@ const rows = [
     "11 Jun 2024",
     "$6,575",
     "Kathryn Turner",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#JAN-2347",
@@ -147,7 +147,7 @@ const rows = [
     "10 Jun 2024",
     "$12,870",
     "John Valdez",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#JAN-2348",
@@ -157,7 +157,7 @@ const rows = [
     "09 Jun 2024",
     "$7,89",
     "Douglas Harvey",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2349",
@@ -167,7 +167,7 @@ const rows = [
     "08 Jun 2024",
     "$4,680",
     "Susan Rader",
-    "Rejected"
+    "Rejected",
   ),
   createData(
     "#JAN-2350",
@@ -177,7 +177,7 @@ const rows = [
     "12 Jun 2024",
     "$10,490",
     "Dennis Matthews",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2351",
@@ -187,7 +187,7 @@ const rows = [
     "11 Jun 2024",
     "$6,575",
     "Kathryn Turner",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#JAN-2352",
@@ -197,7 +197,7 @@ const rows = [
     "10 Jun 2024",
     "$12,870",
     "John Valdez",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#JAN-2353",
@@ -207,7 +207,7 @@ const rows = [
     "09 Jun 2024",
     "$7,89",
     "Douglas Harvey",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2354",
@@ -217,7 +217,7 @@ const rows = [
     "08 Jun 2024",
     "$4,680",
     "Susan Rader",
-    "Rejected"
+    "Rejected",
   ),
   createData(
     "#JAN-2355",
@@ -227,7 +227,7 @@ const rows = [
     "12 Jun 2024",
     "$10,490",
     "Dennis Matthews",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2356",
@@ -237,7 +237,7 @@ const rows = [
     "11 Jun 2024",
     "$6,575",
     "Kathryn Turner",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#JAN-2357",
@@ -247,7 +247,7 @@ const rows = [
     "10 Jun 2024",
     "$12,870",
     "John Valdez",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#JAN-2358",
@@ -257,7 +257,7 @@ const rows = [
     "09 Jun 2024",
     "$7,89",
     "Douglas Harvey",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2359",
@@ -267,7 +267,7 @@ const rows = [
     "08 Jun 2024",
     "$4,680",
     "Susan Rader",
-    "Rejected"
+    "Rejected",
   ),
   createData(
     "#JAN-2360",
@@ -277,7 +277,7 @@ const rows = [
     "12 Jun 2024",
     "$10,490",
     "Dennis Matthews",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2361",
@@ -287,7 +287,7 @@ const rows = [
     "11 Jun 2024",
     "$6,575",
     "Kathryn Turner",
-    "Confirmed"
+    "Confirmed",
   ),
   createData(
     "#JAN-2362",
@@ -297,7 +297,7 @@ const rows = [
     "10 Jun 2024",
     "$12,870",
     "John Valdez",
-    "Pending"
+    "Pending",
   ),
   createData(
     "#JAN-2363",
@@ -307,7 +307,7 @@ const rows = [
     "09 Jun 2024",
     "$7,89",
     "Douglas Harvey",
-    "Shipped"
+    "Shipped",
   ),
   createData(
     "#JAN-2364",
@@ -317,7 +317,7 @@ const rows = [
     "08 Jun 2024",
     "$4,680",
     "Susan Rader",
-    "Rejected"
+    "Rejected",
   ),
 ].sort((b, a) => (a.orderID < b.orderID ? -1 : 1));
 
@@ -332,13 +332,13 @@ const OrdersTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -502,7 +502,7 @@ const OrdersTable: React.FC = () => {
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
+                      page * rowsPerPage + rowsPerPage,
                     )
                   : rows
                 ).map((row) => (
@@ -602,7 +602,7 @@ const OrdersTable: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`trezo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

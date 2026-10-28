@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { Box, Typography } from "@mui/material";
+import * as React from "react";
 
 const Footer: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
         }}
       >
         <Typography>
-          © <span className="text-purple">Trezo</span> is Proudly Owned by{" "}
+          © <span className="text-purple">Kenlivo</span> is Proudly Owned by{" "}
           <a
             href="https://envytheme.com/"
             target="_blank"

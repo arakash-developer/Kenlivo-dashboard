@@ -1,14 +1,14 @@
 "use client";
 
-import React from "react";
-import { Card, Box, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import { Box, Card, Typography } from "@mui/material";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
-import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import { styled } from "@mui/material/styles";
+import React from "react";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -87,7 +87,7 @@ const FaqContent: React.FC = () => {
           </Typography>
 
           <Typography sx={{ lineHeight: "1.8" }}>
-            Trezo offers customization options to tailor the platform to your
+            Kenlivo offers customization options to tailor the platform to your
             team's unique requirements. You can customize workflows, templates,
             and dashboards to align with your processes.
           </Typography>
@@ -124,7 +124,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                What is Trezo?
+                What is Kenlivo?
               </Typography>
             </AccordionSummary>
 
@@ -135,9 +135,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -167,7 +167,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                What features does Trezo offer?
+                What features does Kenlivo offer?
               </Typography>
             </AccordionSummary>
 
@@ -178,9 +178,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -210,7 +210,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                How can Trezo benefit my team?
+                How can Kenlivo benefit my team?
               </Typography>
             </AccordionSummary>
 
@@ -221,9 +221,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -253,7 +253,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                Is Trezo suitable for small businesses?
+                Is Kenlivo suitable for small businesses?
               </Typography>
             </AccordionSummary>
 
@@ -264,9 +264,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -296,7 +296,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                Can I customize Trezo to fit my team's specific needs?
+                Can I customize Kenlivo to fit my team's specific needs?
               </Typography>
             </AccordionSummary>
 
@@ -307,9 +307,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -339,7 +339,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                Is Trezo cloud-based or on-premises?
+                Is Kenlivo cloud-based or on-premises?
               </Typography>
             </AccordionSummary>
 
@@ -350,9 +350,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -382,7 +382,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                Does Trezo integrate with other tools?
+                Does Kenlivo integrate with other tools?
               </Typography>
             </AccordionSummary>
 
@@ -393,9 +393,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -425,7 +425,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                How secure is Trezo?
+                How secure is Kenlivo?
               </Typography>
             </AccordionSummary>
 
@@ -436,9 +436,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -468,7 +468,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                Can I try Trezo before purchasing?
+                Can I try Kenlivo before purchasing?
               </Typography>
             </AccordionSummary>
 
@@ -479,9 +479,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -511,7 +511,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                What type of customer support does Trezo provide?
+                What type of customer support does Kenlivo provide?
               </Typography>
             </AccordionSummary>
 
@@ -522,9 +522,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -554,7 +554,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                How do I get started with Trezo?
+                How do I get started with Kenlivo?
               </Typography>
             </AccordionSummary>
 
@@ -565,9 +565,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -597,7 +597,7 @@ const FaqContent: React.FC = () => {
                 fontSize="14px"
                 className="text-black"
               >
-                Does Trezo offer training for new users?
+                Does Kenlivo offer training for new users?
               </Typography>
             </AccordionSummary>
 
@@ -608,9 +608,9 @@ const FaqContent: React.FC = () => {
               }}
             >
               <Typography sx={{ lineHeight: "1.8" }} mb="15px">
-                Trezo is a comprehensive project management software designed to
-                help teams streamline their workflow, collaborate effectively,
-                and achieve project success.
+                Kenlivo is a comprehensive project management software designed
+                to help teams streamline their workflow, collaborate
+                effectively, and achieve project success.
               </Typography>
             </AccordionDetails>
           </Accordion>

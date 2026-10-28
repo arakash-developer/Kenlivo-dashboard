@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Grid,
-  Card,
   Box,
-  Typography,
+  Button,
+  Card,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
-  TextField,
-  Button,
   Select,
   SelectChangeEvent,
+  TextField,
+  Typography,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import React, { useState } from "react";
 import NavList from "../NavList";
 import CustomEditor from "./CustomEditor";
 
@@ -185,7 +185,7 @@ const AccountSettings: React.FC = () => {
 
                   <TextField
                     label="Enter amail address"
-                    defaultValue="olivia@trezo.com"
+                    defaultValue="olivia@kenlivo.com"
                     variant="filled"
                     id="emailAddress"
                     name="emailAddress"
@@ -501,7 +501,7 @@ const AccountSettings: React.FC = () => {
 
                   <TextField
                     label="Enter company name"
-                    defaultValue="Trezo Admin"
+                    defaultValue="Kenlivo Admin"
                     variant="filled"
                     id="companyName"
                     name="companyName"

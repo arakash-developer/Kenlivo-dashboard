@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Box } from "@mui/material";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 
 const Cta: React.FC = () => {
   return (
@@ -30,11 +30,11 @@ const Cta: React.FC = () => {
           }}
         >
           <div className="fp-cta-content text-center">
-            <h2>Unlock a world of possibilities with Trezo Dashboard.</h2>
+            <h2>Unlock a world of possibilities with Kenlivo Dashboard.</h2>
             <p>
-              Experience the difference with Trezo Dashboard. Sign up for a free
-              trial today and see how our intuitive platform can revolutionize
-              your data analysis process.
+              Experience the difference with Kenlivo Dashboard. Sign up for a
+              free trial today and see how our intuitive platform can
+              revolutionize your data analysis process.
             </p>
 
             <Link href="/dashboard/ecommerce/" className="cta-button">

@@ -1,31 +1,31 @@
 "use client";
 
-import React from "react";
+import styles from "@/components/Invoices/InvoiceTable/Search.module.css";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import {
-  Card,
   Box,
-  Typography,
+  Card,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableFooter,
+  TableHead,
   TablePagination,
   TableRow,
-  Paper,
-  IconButton,
-  TableHead,
-  InputLabel,
-  MenuItem,
-  FormControl,
+  Typography,
 } from "@mui/material";
-import Link from "next/link";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import styles from "@/components/Invoices/InvoiceTable/Search.module.css";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -33,7 +33,7 @@ interface TablePaginationActionsProps {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 }
 
@@ -42,13 +42,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     onPageChange(event, page + 1);
   };
@@ -108,7 +108,7 @@ function createData(
   total: string,
   quantity: number,
   walletBalance: string,
-  viewLink: string
+  viewLink: string,
 ) {
   return {
     invoiceId,
@@ -128,221 +128,221 @@ const rows = [
     "#JAN-158",
     "/images/users/user6.jpg",
     "Marcia Baker",
-    "marcia@trezo.com",
+    "marcia@kenlivo.com",
     "$5,000",
     "10 Nov 2024",
     6,
     "$2,000",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-157",
     "/images/users/user7.jpg",
     "Carolyn Barnes",
-    "barnes@trezo.com",
+    "barnes@kenlivo.com",
     "$8,750",
     "11 Nov 2024",
     10,
     "$4,500",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-156",
     "/images/users/user8.jpg",
     "Donna Miller",
-    "donna@trezo.com",
+    "donna@kenlivo.com",
     "$3,200",
     "12 Nov 2024",
     10,
     "$1,550",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-155",
     "/images/users/user9.jpg",
     "Barbara Cross",
-    "cross@trezo.com",
+    "cross@kenlivo.com",
     "$3,750",
     "13 Nov 2024",
     4,
     "$2,490",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-154",
     "/images/users/user10.jpg",
     "Rebecca Block",
-    "block@trezo.com",
+    "block@kenlivo.com",
     "$6,000",
     "14 Nov 2024",
     2,
     "$3,599",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-153",
     "/images/users/user11.jpg",
     "Ramiro McCarty",
-    "ramiro@trezo.com",
+    "ramiro@kenlivo.com",
     "$9,200",
     "15 Nov 2024",
     8,
     "$5,800",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-152",
     "/images/users/user12.jpg",
     "Robert Fairweather",
-    "robert@trezo.com",
+    "robert@kenlivo.com",
     "$2,500",
     "16 Nov 2024",
     6,
     "$1,200",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-151",
     "/images/users/user13.jpg",
     "Marcelino Haddock",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "$7,300",
     "17 Nov 2024",
     9,
     "$4,850",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-150",
     "/images/users/user14.jpg",
     "Thomas Wilson",
-    "thomas@trezo.com",
+    "thomas@kenlivo.com",
     "$4,800",
     "18 Nov 2024",
     5,
     "$2,300",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-149",
     "/images/users/user15.jpg",
     "Nathaniel Hulsey",
-    "nathaniel@trezo.com",
+    "nathaniel@kenlivo.com",
     "$6,500",
     "19 Nov 2024",
     5,
     "$4,560",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-148",
     "/images/users/user16.jpg",
     "Baker",
-    "baker@trezo.com",
+    "baker@kenlivo.com",
     "$5,400",
     "20 Nov 2024",
     8,
     "$2,400",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-147",
     "/images/users/user17.jpg",
     "Barnes",
-    "barnes@trezo.com",
+    "barnes@kenlivo.com",
     "$8,450",
     "21 Nov 2024",
     15,
     "$4,400",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-146",
     "/images/users/user18.jpg",
     "Miller",
-    "miller@trezo.com",
+    "miller@kenlivo.com",
     "$3,400",
     "22 Nov 2024",
     22,
     "$1,450",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-145",
     "/images/users/user19.jpg",
     "Cross",
-    "cross@trezo.com",
+    "cross@kenlivo.com",
     "$3,450",
     "23 Nov 2024",
     5,
     "$2,450",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-144",
     "/images/users/user20.jpg",
     "Rebecca",
-    "rebecca@trezo.com",
+    "rebecca@kenlivo.com",
     "$6,400",
     "24 Nov 2024",
     6,
     "$3,499",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-143",
     "/images/users/user21.jpg",
     "McCarty",
-    "mccarty@trezo.com",
+    "mccarty@kenlivo.com",
     "$9,400",
     "25 Nov 2024",
     7,
     "$5,400",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-142",
     "/images/users/user22.jpg",
     "Fairweather",
-    "fairweather@trezo.com",
+    "fairweather@kenlivo.com",
     "$2,400",
     "26 Nov 2024",
     9,
     "$1,400",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-141",
     "/images/users/user23.jpg",
     "Marcelino",
-    "marcelino@trezo.com",
+    "marcelino@kenlivo.com",
     "$7,400",
     "27 Nov 2024",
     3,
     "$4,450",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-140",
     "/images/users/user24.jpg",
     "Wilson",
-    "wilson@trezo.com",
+    "wilson@kenlivo.com",
     "$4,400",
     "28 Nov 2024",
     7,
     "$2,400",
-    "/invoices/details"
+    "/invoices/details",
   ),
   createData(
     "#JAN-139",
     "/images/users/user25.jpg",
     "Hulsey",
-    "hulsey@trezo.com",
+    "hulsey@kenlivo.com",
     "$6,400",
     "29 Nov 2024",
     8,
     "$4,460",
-    "/invoices/details"
+    "/invoices/details",
   ),
 ].sort((b, a) => (a.invoiceId < b.invoiceId ? -1 : 1));
 
@@ -357,13 +357,13 @@ const InvoiceTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -532,7 +532,7 @@ const InvoiceTable: React.FC = () => {
               {(rowsPerPage > 0
                 ? rows.slice(
                     page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+                    page * rowsPerPage + rowsPerPage,
                   )
                 : rows
               ).map((row) => (

@@ -1,16 +1,16 @@
 "use client";
 
-import * as React from "react";
 import {
-  Grid,
-  Button,
   Box,
-  Typography,
+  Button,
   FormControl,
+  Grid,
   TextField,
+  Typography,
 } from "@mui/material";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 const SignUpForm: React.FC = () => {
   const [loading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -19,7 +19,9 @@ const SignUpForm: React.FC = () => {
     e.preventDefault();
     // This is an admin-only dashboard; accounts are provisioned by an
     // administrator, so self sign-up is disabled.
-    setError("Account creation is managed by an administrator. Please sign in.");
+    setError(
+      "Account creation is managed by an administrator. Please sign in.",
+    );
   };
 
   return (
@@ -103,7 +105,7 @@ const SignUpForm: React.FC = () => {
                       fontWeight: "600",
                     }}
                   >
-                    Sign up to Trezo Dashboard
+                    Sign up to Kenlivo Dashboard
                   </Typography>
 
                   <Typography sx={{ fontWeight: "500", fontSize: "16px" }}>
@@ -240,7 +242,7 @@ const SignUpForm: React.FC = () => {
                       </Typography>
 
                       <TextField
-                        label="example&#64;trezo.com"
+                        label="example&#64;kenlivo.com"
                         variant="filled"
                         id="email"
                         name="email"
