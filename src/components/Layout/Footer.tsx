@@ -16,7 +16,10 @@ const Footer: React.FC = () => {
         }}
       >
         <Typography>
-          © <span className="text-purple">Kenlivo</span> — Developed by Akash
+          © <span className="text-purple">Kenlivo</span> — Developed by{" "}
+          <a href="https://arakash.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-purple">
+            Akash
+          </a>
         </Typography>
       </Box>
     </>
