@@ -427,6 +427,16 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
+              <Link
+                href="/members/"
+                className={`sidebar-menu-link ${
+                  pathname === "/members/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">people</i>
+                <span className="title">Members</span>
+              </Link>
+
               <Typography
                 className="sub-title"
                 sx={{
@@ -2350,15 +2360,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 <span className="title">Notifications</span>
               </Link>
 
-              <Link
-                href="/members/"
-                className={`sidebar-menu-link ${
-                  pathname === "/members/" ? "active" : ""
-                }`}
-              >
-                <i className="material-symbols-outlined">people</i>
-                <span className="title">Members</span>
-              </Link>
 
               <Link
                 href="/my-profile/"
