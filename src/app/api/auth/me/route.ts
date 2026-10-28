@@ -12,6 +12,7 @@ interface UserDoc {
   email: string;
   role: "customer" | "admin" | "super_admin";
   phone?: string;
+  image?: string;
   isActive?: boolean;
   createdAt?: Date;
 }
@@ -54,6 +55,7 @@ export async function GET() {
       email: user.email,
       role: user.role,
       phone: user.phone ?? null,
+      image: user.image ?? null,
       createdAt: user.createdAt ?? null,
     },
   });
