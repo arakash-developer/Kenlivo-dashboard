@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { ObjectId } from "mongodb";
 import { getDb } from "@/lib/mongodb";
 import { SESSION_COOKIE, verifySession } from "@/lib/session";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 interface UserDoc {
   _id: ObjectId;

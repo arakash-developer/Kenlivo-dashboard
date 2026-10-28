@@ -1,9 +1,10 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getDb } from "@/lib/mongodb";
 import { SESSION_COOKIE, signSession, sessionCookieOptions } from "@/lib/session";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 interface UserDoc {
   name: string;

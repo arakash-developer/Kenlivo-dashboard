@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
@@ -6,6 +6,7 @@ import { getDb } from "@/lib/mongodb";
 import { SESSION_COOKIE, verifySession } from "@/lib/session";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 async function requireSuperAdmin() {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
