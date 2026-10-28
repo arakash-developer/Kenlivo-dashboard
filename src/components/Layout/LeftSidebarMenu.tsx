@@ -20,6 +20,14 @@ import { Box, Typography } from "@mui/material";
 // want to make optional.
 const SIDEBAR_SECTIONS = {
   frontPages: false,
+  // Dashboard sub-items — set true to restore
+  dashboardCRM: false,
+  dashboardProjectManagement: false,
+  dashboardLMS: false,
+  dashboardHelpDesk: false,
+  dashboardAnalytics: false,
+  dashboardCrypto: false,
+  dashboardHospital: false,
 };
 
 const Accordion = styled((props: AccordionProps) => (
@@ -132,6 +140,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                       </Link>
                     </li>
 
+                    {SIDEBAR_SECTIONS.dashboardCRM && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/crm/"
@@ -143,7 +152,9 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         <span className="trezo-badge style-two">Hot</span>
                       </Link>
                     </li>
+                    )}
 
+                    {SIDEBAR_SECTIONS.dashboardProjectManagement && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/project-management/"
@@ -156,7 +167,9 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         Project Management
                       </Link>
                     </li>
+                    )}
 
+                    {SIDEBAR_SECTIONS.dashboardLMS && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/lms/"
@@ -167,7 +180,9 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         LMS <span className="trezo-badge style-two">Top</span>
                       </Link>
                     </li>
+                    )}
 
+                    {SIDEBAR_SECTIONS.dashboardHelpDesk && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/helpdesk/"
@@ -178,7 +193,9 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         HelpDesk
                       </Link>
                     </li>
+                    )}
 
+                    {SIDEBAR_SECTIONS.dashboardAnalytics && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/analytics/"
@@ -190,7 +207,9 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         <span className="trezo-badge">New</span>
                       </Link>
                     </li>
+                    )}
 
+                    {SIDEBAR_SECTIONS.dashboardCrypto && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/crypto/"
@@ -202,6 +221,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         <span className="trezo-badge">New</span>
                       </Link>
                     </li>
+                    )}
 
                     <li className="sidemenu-item">
                       <Link
@@ -215,6 +235,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                       </Link>
                     </li>
 
+                    {SIDEBAR_SECTIONS.dashboardHospital && (
                     <li className="sidemenu-item">
                       <Link
                         href="/dashboard/hospital/"
@@ -226,6 +247,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         <span className="trezo-badge">New</span>
                       </Link>
                     </li>
+                    )}
                   </ul>
                 </AccordionDetails>
               </Accordion>
