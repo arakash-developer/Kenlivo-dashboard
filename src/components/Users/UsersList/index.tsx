@@ -38,6 +38,7 @@ interface UserRow {
   email: string;
   role: string;
   phone?: string;
+  image?: string;
   isActive?: boolean;
   createdAt?: string;
 }
@@ -79,6 +80,7 @@ const UsersList: React.FC = () => {
   const [editName, setEditName] = useState("");
   const [editEmail, setEditEmail] = useState("");
   const [editPhone, setEditPhone] = useState("");
+  const [editImage, setEditImage] = useState("");
   const [editRole, setEditRole] = useState("admin");
   const [editStatus, setEditStatus] = useState("active");
 
@@ -110,6 +112,7 @@ const UsersList: React.FC = () => {
     setEditName(u.name);
     setEditEmail(u.email);
     setEditPhone(u.phone ?? "");
+    setEditImage(u.image ?? "");
     setEditRole(u.role ?? "admin");
     setEditStatus(u.isActive !== false ? "active" : "inactive");
     setEditError("");
@@ -124,7 +127,7 @@ const UsersList: React.FC = () => {
       const res = await fetch("/api/users", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editId, name: editName.trim(), email: editEmail.trim(), phone: editPhone.trim(), role: editRole, isActive: editStatus === "active" }),
+        body: JSON.stringify({ id: editId, name: editName.trim(), email: editEmail.trim(), phone: editPhone.trim(), image: editImage.trim(), role: editRole, isActive: editStatus === "active" }),
       });
       const json = await res.json();
       if (!res.ok) { setEditError(json.message ?? "Failed to update"); return; }
@@ -278,6 +281,10 @@ const UsersList: React.FC = () => {
                   <Grid item xs={12} md={6}>
                     <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Phone</Typography>
                     <TextField fullWidth label="Phone number" value={editPhone} onChange={(e) => setEditPhone(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Profile Image URL</Typography>
+                    <TextField fullWidth label="https://example.com/image.jpg" value={editImage} onChange={(e) => setEditImage(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <Typography component="h5" sx={{ fontWeight: "500", fontSize: "14px", mb: "12px" }} className="text-black">Role</Typography>

@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   if (!session) return NextResponse.json({ success: false, message: "Forbidden" }, { status: 403 });
 
   const body = await req.json().catch(() => null);
-  const { name, email, password, role = "admin", phone = "", isActive = true } = body ?? {};
+  const { name, email, password, role = "admin", phone = "", image = "", isActive = true } = body ?? {};
 
   if (!name?.trim() || !email?.trim() || !password?.trim()) {
     return NextResponse.json({ success: false, message: "Name, email and password are required" }, { status: 400 });
@@ -59,13 +59,14 @@ export async function POST(req: NextRequest) {
     password: hashed,
     role,
     phone: phone.trim(),
+    image: image.trim(),
     isActive,
     createdAt: now,
     updatedAt: now,
   });
 
   return NextResponse.json(
-    { success: true, data: { _id: insertedId.toString(), name: name.trim(), email: email.toLowerCase().trim(), role, phone, isActive } },
+    { success: true, data: { _id: insertedId.toString(), name: name.trim(), email: email.toLowerCase().trim(), role, phone, image, isActive } },
     { status: 201 },
   );
 }
@@ -75,7 +76,7 @@ export async function PUT(req: NextRequest) {
   if (!session) return NextResponse.json({ success: false, message: "Forbidden" }, { status: 403 });
 
   const body = await req.json().catch(() => null);
-  const { id, name, email, role, phone, isActive } = body ?? {};
+  const { id, name, email, role, phone, image, isActive } = body ?? {};
 
   if (!id || !name?.trim() || !email?.trim()) {
     return NextResponse.json({ success: false, message: "ID, name and email are required" }, { status: 400 });
@@ -92,6 +93,7 @@ export async function PUT(req: NextRequest) {
   };
   if (role) updates.role = role;
   if (phone !== undefined) updates.phone = phone.trim();
+  if (image !== undefined) updates.image = image.trim();
   if (isActive !== undefined) updates.isActive = isActive;
 
   const { matchedCount } = await db.collection("users").updateOne({ _id: oid }, { $set: updates });

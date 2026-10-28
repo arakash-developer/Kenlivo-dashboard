@@ -24,6 +24,7 @@ const AddUser: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [image, setImage] = useState("");
   const [role, setRole] = useState("admin");
   const [status, setStatus] = useState("active");
   const [submitting, setSubmitting] = useState(false);
@@ -48,6 +49,7 @@ const AddUser: React.FC = () => {
           email: email.trim(),
           password,
           phone: phone.trim(),
+          image: image.trim(),
           role,
           isActive: status === "active",
         }),
@@ -112,6 +114,16 @@ const AddUser: React.FC = () => {
                 <TextField
                   fullWidth placeholder="Enter phone number"
                   value={phone} onChange={(e) => setPhone(e.target.value)}
+                  InputProps={{ style: { borderRadius: 8 } }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
+                  Profile Image URL
+                </Typography>
+                <TextField
+                  fullWidth placeholder="https://example.com/image.jpg"
+                  value={image} onChange={(e) => setImage(e.target.value)}
                   InputProps={{ style: { borderRadius: 8 } }}
                 />
               </Grid>

@@ -15,6 +15,7 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -24,6 +25,7 @@ interface UserRow {
   email: string;
   role: string;
   phone?: string;
+  image?: string;
   isActive?: boolean;
   createdAt?: string;
 }
@@ -144,17 +146,27 @@ const TeamMembers: React.FC = () => {
                 >
                   <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: "15px" }}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
-                      {/* Avatar with initials */}
-                      <Box
-                        sx={{
-                          width: 65, height: 65, borderRadius: "100px", flexShrink: 0,
-                          background: avatarColor(user.name),
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                          color: "#fff", fontWeight: 700, fontSize: "22px",
-                        }}
-                      >
-                        {initials(user.name)}
-                      </Box>
+                      {user.image ? (
+                        <Image
+                          src={user.image}
+                          alt={user.name}
+                          width={65}
+                          height={65}
+                          style={{ borderRadius: "100px", objectFit: "cover", flexShrink: 0 }}
+                          unoptimized
+                        />
+                      ) : (
+                        <Box
+                          sx={{
+                            width: 65, height: 65, borderRadius: "100px", flexShrink: 0,
+                            background: avatarColor(user.name),
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            color: "#fff", fontWeight: 700, fontSize: "22px",
+                          }}
+                        >
+                          {initials(user.name)}
+                        </Box>
+                      )}
                       <Box>
                         <Typography variant="h6" fontSize="16px" className="text-black">
                           {user.name}
