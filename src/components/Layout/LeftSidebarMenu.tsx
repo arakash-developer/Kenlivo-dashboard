@@ -353,7 +353,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   id="panel5d-header"
                 >
                   <i className="material-symbols-outlined">shopping_cart</i>
-                  <span className="title">eCommerce</span>
+                  <span className="title">Products</span>
                 </AccordionSummary>
 
                 <AccordionDetails className="mat-details">
