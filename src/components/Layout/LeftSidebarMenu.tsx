@@ -15,6 +15,13 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { Box, Typography } from "@mui/material";
 
+// Toggle sidebar sections on/off here. Set a flag to `false` to hide its
+// section, `true` to show it. Reuse this pattern for any other section you
+// want to make optional.
+const SIDEBAR_SECTIONS = {
+  frontPages: false,
+};
+
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -223,6 +230,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
+              {SIDEBAR_SECTIONS.frontPages && (
               <Accordion
                 expanded={expanded === "panel2"}
                 onChange={handleChange("panel2")}
@@ -296,6 +304,7 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
+              )}
 
               <Typography
                 className="sub-title"
