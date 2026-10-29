@@ -89,7 +89,7 @@ const Cardano: React.FC = () => {
           fontSize: "12px",
         },
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
       },
       axisBorder: {
@@ -183,7 +183,7 @@ const Cardano: React.FC = () => {
                 gap: "10px",
               }}
             >
-              $0.38
+              ৳0.38
               <Typography
                 component="span"
                 sx={{
@@ -248,7 +248,7 @@ const Cardano: React.FC = () => {
             >
               Market Cap:
             </Typography>
-            $25B
+            ৳25B
           </Box>
 
           <Box
@@ -270,7 +270,7 @@ const Cardano: React.FC = () => {
             >
               Volume (24h):
             </Typography>
-            $1.3B
+            ৳1.3B
           </Box>
         </Box>
       </Box>

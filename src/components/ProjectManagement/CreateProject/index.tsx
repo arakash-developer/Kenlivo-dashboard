@@ -234,7 +234,7 @@ const CreateProject: React.FC = () => {
 
                   <TextField
                     label="Enter budget"
-                    placeholder="E.g. $90"
+                    placeholder="E.g. ৳90"
                     variant="filled"
                     id="budget"
                     name="budget"

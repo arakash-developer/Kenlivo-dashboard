@@ -89,7 +89,7 @@ const Solana: React.FC = () => {
           fontSize: "12px",
         },
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
       },
       axisBorder: {
@@ -183,7 +183,7 @@ const Solana: React.FC = () => {
                 gap: "10px",
               }}
             >
-              $35
+              ৳35
               <Typography
                 component="span"
                 sx={{
@@ -248,7 +248,7 @@ const Solana: React.FC = () => {
             >
               Market Cap:
             </Typography>
-            $12B
+            ৳12B
           </Box>
 
           <Box
@@ -270,7 +270,7 @@ const Solana: React.FC = () => {
             >
               Volume (24h):
             </Typography>
-            $3.5B
+            ৳3.5B
           </Box>
         </Box>
       </Box>

@@ -19,7 +19,7 @@ const PricingStyle1: React.FC = () => {
                     </div>
 
                     <div className={`text-black ${styles.price}`}>
-                      $89<span>.99</span>
+                      ৳89<span>.99</span>
                     </div>
 
                     <Typography
@@ -101,7 +101,7 @@ const PricingStyle1: React.FC = () => {
                     </div>
 
                     <div className={`text-black ${styles.price}`}>
-                      $119<span>.99</span>
+                      ৳119<span>.99</span>
                     </div>
 
                     <Typography

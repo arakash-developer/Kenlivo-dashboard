@@ -455,7 +455,7 @@ const EditInvoice: React.FC = () => {
                     <FormControl fullWidth>
                       <TextField
                         label="Enter price"
-                        defaultValue="$80.00"
+                        defaultValue="৳80.00"
                         variant="filled"
                         id="price"
                         name="price"
@@ -485,7 +485,7 @@ const EditInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $160.00
+                    ৳160.00
                   </TableCell>
 
                   <TableCell
@@ -599,7 +599,7 @@ const EditInvoice: React.FC = () => {
                     <FormControl fullWidth>
                       <TextField
                         label="Enter price"
-                        defaultValue="$80.00"
+                        defaultValue="৳80.00"
                         variant="filled"
                         id="price"
                         name="price"
@@ -629,7 +629,7 @@ const EditInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $160.00
+                    ৳160.00
                   </TableCell>
 
                   <TableCell
@@ -893,7 +893,7 @@ const EditInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $971.00
+                    ৳971.00
                   </TableCell>
 
                   <TableCell
@@ -947,7 +947,7 @@ const EditInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $5.55
+                    ৳5.55
                   </TableCell>
 
                   <TableCell
@@ -1056,7 +1056,7 @@ const EditInvoice: React.FC = () => {
                     }}
                     className="border-bottom text-black"
                   >
-                    $1,172.55
+                    ৳1,172.55
                   </TableCell>
 
                   <TableCell
@@ -1076,7 +1076,7 @@ const EditInvoice: React.FC = () => {
             sx={{
               mt: "25px",
               display: "flex",
-              alignItems: "çenter",
+              alignItems: "�enter",
               justifyContent: "center",
               gap: "10px",
             }}

@@ -111,7 +111,7 @@ const BasicColumnChart: React.FC = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$" + val;
+          return "৳" + val;
         },
       },
     },

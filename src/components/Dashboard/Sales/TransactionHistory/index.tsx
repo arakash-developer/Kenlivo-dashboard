@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import {
@@ -291,7 +291,7 @@ const TransactionHistory: React.FC = () => {
                   height: "41px",
                 }}
               >
-                <i className="material-symbols-outlined">currency_ruble</i>
+                <i className="material-symbols-outlined">currency_exchange</i>
               </Box>
 
               <Box>

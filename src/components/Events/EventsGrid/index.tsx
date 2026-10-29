@@ -61,7 +61,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $120
+                ৳120
               </Box>
             </Box>
 
@@ -194,7 +194,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $59
+                ৳59
               </Box>
             </Box>
 
@@ -326,7 +326,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $123
+                ৳123
               </Box>
             </Box>
 
@@ -457,7 +457,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $99
+                ৳99
               </Box>
             </Box>
 
@@ -588,7 +588,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $35
+                ৳35
               </Box>
             </Box>
 
@@ -721,7 +721,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $76
+                ৳76
               </Box>
             </Box>
 
@@ -851,7 +851,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $30
+                ৳30
               </Box>
             </Box>
 
@@ -982,7 +982,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $87
+                ৳87
               </Box>
             </Box>
 
@@ -1115,7 +1115,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $50
+                ৳50
               </Box>
             </Box>
 
@@ -1248,7 +1248,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $89
+                ৳89
               </Box>
             </Box>
 
@@ -1381,7 +1381,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $105
+                ৳105
               </Box>
             </Box>
 
@@ -1514,7 +1514,7 @@ const EventsGrid: React.FC = () => {
                   fontSize: "16px",
                 }}
               >
-                $120
+                ৳120
               </Box>
             </Box>
 

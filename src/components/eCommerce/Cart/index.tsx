@@ -206,7 +206,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $150.00
+                      ৳150.00
                     </TableCell>
 
                     <TableCell
@@ -216,7 +216,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $450.00
+                      ৳450.00
                     </TableCell>
                   </TableRow>
 
@@ -289,7 +289,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $750.00
+                      ৳750.00
                     </TableCell>
 
                     <TableCell
@@ -299,7 +299,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $750.00
+                      ৳750.00
                     </TableCell>
                   </TableRow>
 
@@ -372,7 +372,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $15.00
+                      ৳15.00
                     </TableCell>
 
                     <TableCell
@@ -382,7 +382,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $75.00
+                      ৳75.00
                     </TableCell>
                   </TableRow>
 
@@ -455,7 +455,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $25.00
+                      ৳25.00
                     </TableCell>
 
                     <TableCell
@@ -465,7 +465,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $50.00
+                      ৳50.00
                     </TableCell>
                   </TableRow>
 
@@ -538,7 +538,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $150.00
+                      ৳150.00
                     </TableCell>
 
                     <TableCell
@@ -548,7 +548,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      $450.00
+                      ৳450.00
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -683,7 +683,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom text-end"
                     >
-                      $1,105.00
+                      ৳1,105.00
                     </TableCell>
                   </TableRow>
 
@@ -727,7 +727,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom text-end"
                     >
-                      $75.00
+                      ৳75.00
                     </TableCell>
                   </TableRow>
 
@@ -750,7 +750,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom text-end"
                     >
-                      $1,000.00
+                      ৳1,000.00
                     </TableCell>
                   </TableRow>
 
@@ -772,7 +772,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom text-end"
                     >
-                      $80.00
+                      ৳80.00
                     </TableCell>
                   </TableRow>
 
@@ -794,7 +794,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom text-end"
                     >
-                      $20.00
+                      ৳20.00
                     </TableCell>
                   </TableRow>
 
@@ -817,7 +817,7 @@ const Cart: React.FC = () => {
                       }}
                       className="border-bottom text-end"
                     >
-                      $900.00
+                      ৳900.00
                     </TableCell>
                   </TableRow>
                 </TableBody>

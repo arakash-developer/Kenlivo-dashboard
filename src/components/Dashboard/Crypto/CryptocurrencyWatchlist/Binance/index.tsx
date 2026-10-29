@@ -89,7 +89,7 @@ const Binance: React.FC = () => {
           fontSize: "12px",
         },
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
       },
       axisBorder: {
@@ -183,7 +183,7 @@ const Binance: React.FC = () => {
                 gap: "10px",
               }}
             >
-              $250
+              ৳250
               <Typography
                 component="span"
                 sx={{
@@ -248,7 +248,7 @@ const Binance: React.FC = () => {
             >
               Market Cap:
             </Typography>
-            $40B
+            ৳40B
           </Box>
 
           <Box
@@ -270,7 +270,7 @@ const Binance: React.FC = () => {
             >
               Volume (24h):
             </Typography>
-            $1.8B
+            ৳1.8B
           </Box>
         </Box>
       </Box>

@@ -140,7 +140,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filtered.length) : 0;
 
-  // ── Add handlers ──
+  // -- Add handlers --
   const openAdd = () => {
     setAddName(""); setAddDescription(""); setAddStatus("active"); setAddError("");
     setAddOpen(true);
@@ -167,7 +167,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
     }
   };
 
-  // ── Edit handlers ──
+  // -- Edit handlers --
   const openEdit = (row: SetupItem) => {
     setEditId(row._id);
     setEditName(row.name);
@@ -198,7 +198,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
     }
   };
 
-  // ── Delete handler ──
+  // -- Delete handler --
   const handleDelete = async (id: string) => {
     if (!confirm(`Delete this ${label.toLowerCase()}?`)) return;
     await fetch(apiUrl, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
@@ -306,9 +306,9 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
                     </TableCell>
                     <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="text-black border-bottom">{row.name}</TableCell>
                     <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">{row.slug}</TableCell>
-                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">{row.description || "—"}</TableCell>
+                    <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">{row.description || "�"}</TableCell>
                     <TableCell sx={{ padding: "15px 20px" }} className="border-bottom">
-                      <div className={`kenlivo-badge ${row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                      <div className={`kenlivo-badge ৳{row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
                         {row.isActive ? "Active" : "Inactive"}
                       </div>
                     </TableCell>
@@ -345,7 +345,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
         </TableContainer>
       </Card>
 
-      {/* ── Add Modal ── */}
+      {/* -- Add Modal -- */}
       <BootstrapDialog onClose={() => setAddOpen(false)} open={addOpen} className="rmu-modal">
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
@@ -364,7 +364,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
         </Box>
       </BootstrapDialog>
 
-      {/* ── Edit Modal ── */}
+      {/* -- Edit Modal -- */}
       <BootstrapDialog onClose={() => setEditOpen(false)} open={editOpen} className="rmu-modal">
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">

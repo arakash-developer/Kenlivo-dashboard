@@ -95,7 +95,7 @@ const RecentEarnings: React.FC = () => {
       min: 0,
       labels: {
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
         style: {
           colors: "#64748B",

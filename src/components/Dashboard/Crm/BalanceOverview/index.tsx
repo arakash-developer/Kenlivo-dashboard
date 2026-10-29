@@ -99,7 +99,7 @@ const BalanceOverview: React.FC = () => {
       min: 0,
       labels: {
         formatter: (val) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",
@@ -224,7 +224,7 @@ const BalanceOverview: React.FC = () => {
               sx={{ fontSize: { xs: "18px", md: "20px" } }}
               className="text-primary"
             >
-              $628k
+              ৳628k
             </Typography>
             <Typography component="span" display="block">
               Revenue
@@ -244,7 +244,7 @@ const BalanceOverview: React.FC = () => {
               sx={{ fontSize: { xs: "18px", md: "20px" } }}
               className="text-purple"
             >
-              $379k
+              ৳379k
             </Typography>
             <Typography component="span" display="block">
               Expenses

@@ -99,7 +99,7 @@ const OrderSummary: React.FC = () => {
                   }}
                   className="border-bottom text-end"
                 >
-                  $1,105.00
+                  ৳1,105.00
                 </TableCell>
               </TableRow>
 
@@ -143,7 +143,7 @@ const OrderSummary: React.FC = () => {
                   }}
                   className="border-bottom text-end"
                 >
-                  $75.00
+                  ৳75.00
                 </TableCell>
               </TableRow>
 
@@ -166,7 +166,7 @@ const OrderSummary: React.FC = () => {
                   }}
                   className="border-bottom text-end"
                 >
-                  $1,000.00
+                  ৳1,000.00
                 </TableCell>
               </TableRow>
 
@@ -188,7 +188,7 @@ const OrderSummary: React.FC = () => {
                   }}
                   className="border-bottom text-end"
                 >
-                  $80.00
+                  ৳80.00
                 </TableCell>
               </TableRow>
 
@@ -210,7 +210,7 @@ const OrderSummary: React.FC = () => {
                   }}
                   className="border-bottom text-end"
                 >
-                  $20.00
+                  ৳20.00
                 </TableCell>
               </TableRow>
 
@@ -233,7 +233,7 @@ const OrderSummary: React.FC = () => {
                   }}
                   className="border-bottom text-end"
                 >
-                  $900.00
+                  ৳900.00
                 </TableCell>
               </TableRow>
             </TableBody>

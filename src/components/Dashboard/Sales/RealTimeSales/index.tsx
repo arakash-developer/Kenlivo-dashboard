@@ -239,7 +239,7 @@ const RealTimeSales: React.FC = () => {
                 fontSize: "18px",
               }}
             >
-              $150.7k{" "}
+              ৳150.7k{" "}
               <Typography
                 component="span"
                 sx={{
@@ -274,7 +274,7 @@ const RealTimeSales: React.FC = () => {
                 fontSize: "18px",
               }}
             >
-              $19.2k {"  "}
+              ৳19.2k {"  "}
               <Typography
                 component="span"
                 sx={{

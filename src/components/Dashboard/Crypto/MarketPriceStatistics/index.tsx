@@ -658,7 +658,7 @@ const MarketPriceStatistics: React.FC = () => {
                     gap: "10px",
                   }}
                 >
-                  $27,500
+                  ৳27,500
                   <Typography
                     component="span"
                     sx={{
@@ -701,7 +701,7 @@ const MarketPriceStatistics: React.FC = () => {
                 >
                   Closing Price
                 </Typography>
-                $27,200
+                ৳27,200
               </Box>
 
               <Box
@@ -717,7 +717,7 @@ const MarketPriceStatistics: React.FC = () => {
                 >
                   24h Volume
                 </Typography>
-                $35B
+                ৳35B
               </Box>
             </Box>
 

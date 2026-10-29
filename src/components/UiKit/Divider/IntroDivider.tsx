@@ -55,7 +55,7 @@ const IntroDivider: React.FC = () => {
                 component="div"
                 className="text-black"
               >
-                $4.50
+                ৳4.50
               </Typography>
             </Stack>
             <Typography color="text.secondary" variant="body2">

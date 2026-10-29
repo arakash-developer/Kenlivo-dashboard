@@ -109,7 +109,7 @@ const ProductDevelopment: React.FC = () => {
                     fontWeight={600}
                     fontSize="16px"
                   >
-                    $25,500
+                    ৳25,500
                   </Typography>
                 </Box>
               </Box>

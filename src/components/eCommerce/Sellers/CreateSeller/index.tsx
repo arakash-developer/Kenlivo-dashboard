@@ -379,7 +379,7 @@ const CreateSeller: React.FC = () => {
 
                   <TextField
                     label="Enter wallet balance"
-                    placeholder="E.g. $12,092.00"
+                    placeholder="E.g. ৳12,092.00"
                     variant="filled"
                     id="walletBalance"
                     name="walletBalance"

@@ -185,12 +185,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $9,999.50
+                ৳9,999.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $5,999.50
+                ৳5,999.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -304,12 +304,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $6,756.50
+                ৳6,756.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $4,645.50
+                ৳4,645.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -425,12 +425,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $5,550.00
+                ৳5,550.00
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $4,350.50
+                ৳4,350.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -546,12 +546,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $2,100.50
+                ৳2,100.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $1,500.50
+                ৳1,500.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -665,12 +665,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $15,250.50
+                ৳15,250.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $10,200.50
+                ৳10,200.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -786,12 +786,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $10,500.50
+                ৳10,500.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $5,458.50
+                ৳5,458.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -907,12 +907,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $2,580.00
+                ৳2,580.00
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $1,500.00
+                ৳1,500.00
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -1028,12 +1028,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $9,000.00
+                ৳9,000.00
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $6,000.00
+                ৳6,000.00
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -1149,12 +1149,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $7,500.50
+                ৳7,500.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $4,500.50
+                ৳4,500.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -1268,12 +1268,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $18,500.00
+                ৳18,500.00
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $13,200.00
+                ৳13,200.00
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -1387,12 +1387,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $6,300.50
+                ৳6,300.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $4,000.50
+                ৳4,000.50
               </Box>
 
               <Box className="text-black" mt="10px">
@@ -1506,12 +1506,12 @@ const SellersContent: React.FC = () => {
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Wallet Balance:</span>
-                $3,699.50
+                ৳3,699.50
               </Box>
 
               <Box className="text-black" mt="10px">
                 <span className="text-body mr-5">Revenue:</span>
-                $5,999.50
+                ৳5,999.50
               </Box>
 
               <Box className="text-black" mt="10px">

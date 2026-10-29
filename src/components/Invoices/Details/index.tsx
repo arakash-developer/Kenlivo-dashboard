@@ -199,7 +199,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $80
+                  ৳80
                 </TableCell>
 
                 <TableCell
@@ -209,7 +209,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $320
+                  ৳320
                 </TableCell>
               </TableRow>
 
@@ -252,7 +252,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $45
+                  ৳45
                 </TableCell>
 
                 <TableCell
@@ -262,7 +262,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $135
+                  ৳135
                 </TableCell>
               </TableRow>
 
@@ -305,7 +305,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $30
+                  ৳30
                 </TableCell>
 
                 <TableCell
@@ -315,7 +315,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $150
+                  ৳150
                 </TableCell>
               </TableRow>
 
@@ -358,7 +358,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $56
+                  ৳56
                 </TableCell>
 
                 <TableCell
@@ -368,7 +368,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $56
+                  ৳56
                 </TableCell>
               </TableRow>
 
@@ -411,7 +411,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $90
+                  ৳90
                 </TableCell>
 
                 <TableCell
@@ -421,7 +421,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $360
+                  ৳360
                 </TableCell>
               </TableRow>
 
@@ -464,7 +464,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $75
+                  ৳75
                 </TableCell>
 
                 <TableCell
@@ -474,7 +474,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $150
+                  ৳150
                 </TableCell>
               </TableRow>
 
@@ -520,7 +520,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $1,171
+                  ৳1,171
                 </TableCell>
               </TableRow>
 
@@ -566,7 +566,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom"
                 >
-                  $5.55
+                  ৳5.55
                 </TableCell>
               </TableRow>
 
@@ -659,7 +659,7 @@ const Details: React.FC = () => {
                   }}
                   className="border-bottom text-black"
                 >
-                  $1,172.55
+                  ৳1,172.55
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -671,7 +671,7 @@ const Details: React.FC = () => {
           sx={{
             mt: "25px",
             display: "flex",
-            alignItems: "çenter",
+            alignItems: "�enter",
             justifyContent: "center",
             gap: "10px",
           }}

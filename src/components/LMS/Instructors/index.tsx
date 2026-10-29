@@ -199,7 +199,7 @@ const rows = [
     "Olivia Clark",
     "Big Data",
     55,
-    "$6,855.00",
+    "৳6,855.00",
     "olivia@kenlivo.com",
     [
       {
@@ -226,7 +226,7 @@ const rows = [
     "Ava Turner",
     "UX/UI",
     120,
-    "$258.00",
+    "৳258.00",
     "ava@kenlivo.com",
     [
       {
@@ -253,7 +253,7 @@ const rows = [
     "Lucas Morgan",
     "Developer",
     86,
-    "$3890.00",
+    "৳3890.00",
     "lucas@kenlivo.com",
     [
       {
@@ -280,7 +280,7 @@ const rows = [
     "Isabella Cooper",
     "Designer",
     75,
-    "$2500.00",
+    "৳2500.00",
     "isabella@kenlivo.com",
     [
       {
@@ -307,7 +307,7 @@ const rows = [
     "Olivia Clark",
     "Big Data",
     55,
-    "$6,855.00",
+    "৳6,855.00",
     "olivia@kenlivo.com",
     [
       {
@@ -334,7 +334,7 @@ const rows = [
     "Ava Turner",
     "UX/UI",
     120,
-    "$258.00",
+    "৳258.00",
     "ava@kenlivo.com",
     [
       {
@@ -361,7 +361,7 @@ const rows = [
     "Lucas Morgan",
     "Developer",
     86,
-    "$3890.00",
+    "৳3890.00",
     "lucas@kenlivo.com",
     [
       {
@@ -388,7 +388,7 @@ const rows = [
     "Olivia Clark",
     "Big Data",
     55,
-    "$6,855.00",
+    "৳6,855.00",
     "olivia@kenlivo.com",
     [
       {
@@ -415,7 +415,7 @@ const rows = [
     "Ava Turner",
     "UX/UI",
     120,
-    "$258.00",
+    "৳258.00",
     "ava@kenlivo.com",
     [
       {
@@ -442,7 +442,7 @@ const rows = [
     "Lucas Morgan",
     "Developer",
     86,
-    "$3890.00",
+    "৳3890.00",
     "lucas@kenlivo.com",
     [
       {
@@ -469,7 +469,7 @@ const rows = [
     "Isabella Cooper",
     "Designer",
     75,
-    "$2500.00",
+    "৳2500.00",
     "isabella@kenlivo.com",
     [
       {
@@ -496,7 +496,7 @@ const rows = [
     "Olivia Clark",
     "Big Data",
     55,
-    "$6,855.00",
+    "৳6,855.00",
     "olivia@kenlivo.com",
     [
       {
@@ -523,7 +523,7 @@ const rows = [
     "Ava Turner",
     "UX/UI",
     120,
-    "$258.00",
+    "৳258.00",
     "ava@kenlivo.com",
     [
       {
@@ -550,7 +550,7 @@ const rows = [
     "Lucas Morgan",
     "Developer",
     86,
-    "$3890.00",
+    "৳3890.00",
     "lucas@kenlivo.com",
     [
       {
@@ -910,7 +910,7 @@ const Instructors: React.FC = () => {
                       className="text-black border-bottom"
                     >
                       <div
-                        className={`kenlivo-badge ${row.status}`}
+                        className={`kenlivo-badge ৳{row.status}`}
                         style={{ textTransform: "capitalize" }}
                       >
                         {row.status}

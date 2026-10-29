@@ -94,7 +94,7 @@ const SalesReport: React.FC = () => {
       min: 0,
       labels: {
         formatter: (val) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",

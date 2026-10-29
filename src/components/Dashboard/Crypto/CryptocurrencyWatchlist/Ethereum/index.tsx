@@ -89,7 +89,7 @@ const Ethereum: React.FC = () => {
           fontSize: "12px",
         },
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
       },
       axisBorder: {
@@ -183,7 +183,7 @@ const Ethereum: React.FC = () => {
                 gap: "10px",
               }}
             >
-              $1,750
+              ৳1,750
               <Typography
                 component="span"
                 sx={{
@@ -248,7 +248,7 @@ const Ethereum: React.FC = () => {
             >
               Market Cap:
             </Typography>
-            $210B
+            ৳210B
           </Box>
 
           <Box
@@ -270,7 +270,7 @@ const Ethereum: React.FC = () => {
             >
               Volume (24h):
             </Typography>
-            $20B
+            ৳20B
           </Box>
         </Box>
       </Box>

@@ -27,7 +27,7 @@ const TotalRevenue: React.FC = () => {
           }}
           className="text-black"
         >
-          $34.5m+
+          ৳34.5m+
         </Typography>
 
         <Box

@@ -137,7 +137,7 @@ const SellerOverview: React.FC = () => {
                     fontWeight={700}
                     className="text-black"
                   >
-                    $23.91k
+                    ৳23.91k
                   </Typography>
                 </div>
               </Box>

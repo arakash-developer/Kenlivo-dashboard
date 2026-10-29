@@ -204,7 +204,7 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setProductType(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        {productTypeOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {productTypeOptions.length === 0 && <MenuItem disabled value="">Loading�</MenuItem>}
                         {productTypeOptions.map((t) => <MenuItem key={t._id} value={t._id}>{t.name}</MenuItem>)}
                       </Select>
                     </FormControl>
@@ -250,7 +250,7 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setBrandName(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        {brandOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {brandOptions.length === 0 && <MenuItem disabled value="">Loading�</MenuItem>}
                         {brandOptions.map((b) => <MenuItem key={b._id} value={b._id}>{b.name}</MenuItem>)}
                       </Select>
                     </FormControl>
@@ -274,7 +274,7 @@ const CreateProduct: React.FC = () => {
                       </Typography>
                       <TextField
                         label="Enter Regular Price"
-                        placeholder="E.g. $99"
+                        placeholder="E.g. ৳99"
                         variant="filled"
                         id="regularPrice"
                         name="regularPrice"
@@ -301,7 +301,7 @@ const CreateProduct: React.FC = () => {
                       </Typography>
                       <TextField
                         label="Enter Sale Price"
-                        placeholder="E.g. $29"
+                        placeholder="E.g. ৳29"
                         variant="filled"
                         id="salePrice"
                         name="salePrice"
@@ -391,7 +391,7 @@ const CreateProduct: React.FC = () => {
                       </Typography>
                       <TextField
                         label="Enter Discount / Offer"
-                        placeholder="E.g. $20"
+                        placeholder="E.g. ৳20"
                         variant="filled"
                         id="discountOffer"
                         name="discountOffer"
@@ -524,7 +524,7 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setCategory(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        {categories.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {categories.length === 0 && <MenuItem disabled value="">Loading�</MenuItem>}
                         {categories.map((c) => (
                           <MenuItem key={c._id} value={c._id}>{c.name}</MenuItem>
                         ))}
@@ -548,7 +548,7 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setVendor(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        {vendorOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {vendorOptions.length === 0 && <MenuItem disabled value="">Loading�</MenuItem>}
                         {vendorOptions.map((v) => <MenuItem key={v._id} value={v._id}>{v.name}</MenuItem>)}
                       </Select>
                     </FormControl>
@@ -570,7 +570,7 @@ const CreateProduct: React.FC = () => {
                         onChange={(e: SelectChangeEvent) => setCollection(e.target.value)}
                         sx={{ "& fieldset": { border: "1px solid #D5D9E2", borderRadius: "7px" } }}
                       >
-                        {collectionOptions.length === 0 && <MenuItem disabled value="">Loading…</MenuItem>}
+                        {collectionOptions.length === 0 && <MenuItem disabled value="">Loading�</MenuItem>}
                         {collectionOptions.map((c) => <MenuItem key={c._id} value={c._id}>{c.name}</MenuItem>)}
                       </Select>
                     </FormControl>
@@ -716,7 +716,7 @@ const CreateProduct: React.FC = () => {
               }}
             >
               {submitting
-                ? <><CircularProgress size={16} color="inherit" sx={{ mr: 1 }} /> Creating…</>
+                ? <><CircularProgress size={16} color="inherit" sx={{ mr: 1 }} /> Creating�</>
                 : <><i className="material-symbols-outlined">add</i> Create Product</>}
             </Button>
           </Box>

@@ -126,12 +126,12 @@ const Seller: React.FC = () => {
 
           <Box className="text-black" mt="10px">
             <span className="text-body mr-5">Wallet Balance:</span>
-            $9,999.50
+            ৳9,999.50
           </Box>
 
           <Box className="text-black" mt="10px">
             <span className="text-body mr-5">Revenue:</span>
-            $5,999.50
+            ৳5,999.50
           </Box>
 
           <Box className="text-black" mt="10px">

@@ -437,7 +437,7 @@ const TopSellingProducts: React.FC = () => {
                     }}
                     className="text-black border-bottom"
                   >
-                    ${row.price}
+                    ৳{row.price}
                   </TableCell>
 
                   <TableCell
@@ -468,7 +468,7 @@ const TopSellingProducts: React.FC = () => {
                     }}
                     className="text-black border-bottom"
                   >
-                    ${row.amount}
+                    ৳{row.amount}
                   </TableCell>
                 </TableRow>
               ))}

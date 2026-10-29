@@ -66,7 +66,7 @@ const RevenueGrowth: React.FC = () => {
       show: false,
       labels: {
         formatter: (val) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",
@@ -134,7 +134,7 @@ const RevenueGrowth: React.FC = () => {
               }}
               className="text-black"
             >
-              $32,420
+              ৳32,420
             </Typography>
           </Box>
 

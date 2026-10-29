@@ -97,7 +97,7 @@ const TotalSalesChart: React.FC = () => {
       min: 0,
       labels: {
         formatter: (val) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
         style: {
           colors: "#64748B",
@@ -134,7 +134,7 @@ const TotalSalesChart: React.FC = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
       },
     },

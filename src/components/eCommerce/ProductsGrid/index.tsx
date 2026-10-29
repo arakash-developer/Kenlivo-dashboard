@@ -91,10 +91,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $3479
+                    ৳3479
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $3599
+                    ৳3599
                   </Typography>
                 </Box>
 
@@ -168,7 +168,7 @@ const ProductsGrid: React.FC = () => {
                   className="text-black hover-text-color"
                   style={{ fontSize: "16px" }}
                 >
-                  SAMSUNG Galaxy Tab A9+ Tablet 11”
+                  SAMSUNG Galaxy Tab A9+ Tablet 11�
                 </NextLink>
               </Typography>
 
@@ -192,10 +192,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $549
+                    ৳549
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $649
+                    ৳649
                   </Typography>
                 </Box>
 
@@ -293,10 +293,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $1479
+                    ৳1479
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $1599
+                    ৳1599
                   </Typography>
                 </Box>
 
@@ -394,10 +394,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $79
+                    ৳79
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $89
+                    ৳89
                   </Typography>
                 </Box>
 
@@ -495,10 +495,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $849
+                    ৳849
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $999
+                    ৳999
                   </Typography>
                 </Box>
 
@@ -596,10 +596,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $49
+                    ৳49
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $69
+                    ৳69
                   </Typography>
                 </Box>
 
@@ -697,10 +697,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $39
+                    ৳39
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $49
+                    ৳49
                   </Typography>
                 </Box>
 
@@ -798,10 +798,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $25
+                    ৳25
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $39
+                    ৳39
                   </Typography>
                 </Box>
 
@@ -899,10 +899,10 @@ const ProductsGrid: React.FC = () => {
                     fontSize="20px"
                     className="text-black"
                   >
-                    $149
+                    ৳149
                   </Typography>
                   <Typography fontSize="16px" className="text-body">
-                    $299
+                    ৳299
                   </Typography>
                 </Box>
 

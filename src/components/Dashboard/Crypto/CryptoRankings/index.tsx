@@ -129,11 +129,11 @@ const rows = [
     "/images/cryptocurrencies/bitcoin.svg",
     "Bitcoin",
     "BTC",
-    "$520B",
-    "$27,500",
+    "৳520B",
+    "৳27,500",
     "+2.3%",
     "+10.2%",
-    "$35B",
+    "৳35B",
     "19M BT"
   ),
 
@@ -142,11 +142,11 @@ const rows = [
     "/images/cryptocurrencies/ethereum.svg",
     "Ethereum",
     "ETH",
-    "$210B",
-    "$1,750",
+    "৳210B",
+    "৳1,750",
     "-1.2%",
     "+6.3%",
-    "$20B",
+    "৳20B",
     "120M ETH"
   ),
   createData(
@@ -154,11 +154,11 @@ const rows = [
     "/images/cryptocurrencies/binance.svg",
     "Binance",
     "BNB",
-    "$40B",
-    "$250",
+    "৳40B",
+    "৳250",
     "+1.5%",
     "+7.8%",
-    "$1.8B",
+    "৳1.8B",
     "160M BNB"
   ),
   createData(
@@ -166,11 +166,11 @@ const rows = [
     "/images/cryptocurrencies/tether.svg",
     "Tether",
     "USDT",
-    "$83B",
-    "$1.00",
+    "৳83B",
+    "৳1.00",
     "+0.01%",
     "+0.02%",
-    "$45B",
+    "৳45B",
     "83B USDT"
   ),
   createData(
@@ -178,11 +178,11 @@ const rows = [
     "/images/cryptocurrencies/xrp.svg",
     "XRP",
     "XRP",
-    "$25B",
-    "$0.50",
+    "৳25B",
+    "৳0.50",
     "+0.9%",
     "-8.6%",
-    "$2.2B",
+    "৳2.2B",
     "50B XRP"
   ),
   createData(
@@ -190,11 +190,11 @@ const rows = [
     "/images/cryptocurrencies/solana.svg",
     "Solana",
     "SOL",
-    "$12B",
-    "$35",
+    "৳12B",
+    "৳35",
     "+5.8%",
     "+15.5%",
-    "$3.5B",
+    "৳3.5B",
     "400M SOL"
   ),
   createData(
@@ -202,11 +202,11 @@ const rows = [
     "/images/cryptocurrencies/usdc.png",
     "USDC",
     "USDC",
-    "$36B",
-    "$0.9999",
+    "৳36B",
+    "৳0.9999",
     "+0.01%",
     "+0.02%",
-    "$4B",
+    "৳4B",
     "36 USDC"
   ),
   createData(
@@ -214,11 +214,11 @@ const rows = [
     "/images/cryptocurrencies/dogecoin.png",
     "Dogecoin",
     "DOGE",
-    "$17B",
-    "$0,1221",
+    "৳17B",
+    "৳0,1221",
     "-0.56%",
     "-3.57%",
-    "$85B",
+    "৳85B",
     "146M DOGE"
   ),
   createData(
@@ -226,11 +226,11 @@ const rows = [
     "/images/cryptocurrencies/toncoin.png",
     "Toncoin",
     "TON",
-    "$14B",
-    "$5.82",
+    "৳14B",
+    "৳5.82",
     "+0.13%",
     "+0.88%",
-    "$21B",
+    "৳21B",
     "25M TON"
   ),
   createData(
@@ -238,11 +238,11 @@ const rows = [
     "/images/cryptocurrencies/cardano.png",
     "Cardano",
     "ADA",
-    "$13B",
-    "$0,3884",
+    "৳13B",
+    "৳0,3884",
     "-0.59%",
     "-1.80%",
-    "$32B",
+    "৳32B",
     "86M ADA"
   ),
   createData(
@@ -250,11 +250,11 @@ const rows = [
     "/images/cryptocurrencies/tron.png",
     "TRON",
     "TRX",
-    "$130B",
-    "$0.1554",
+    "৳130B",
+    "৳0.1554",
     "+0.17%",
     "+0.02%",
-    "$33B",
+    "৳33B",
     "86M TRX"
   ),
   createData(
@@ -262,11 +262,11 @@ const rows = [
     "/images/cryptocurrencies/avalanche.png",
     "Avalanche",
     "AVAX",
-    "$11B",
-    "$28.77",
+    "৳11B",
+    "৳28.77",
     "-0.08%",
     "+0.51%",
-    "$32B",
+    "৳32B",
     "40M AVAX"
   ),
 ].sort((a, b) => (a.id < b.id ? 1 : 1));

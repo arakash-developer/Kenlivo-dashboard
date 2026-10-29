@@ -119,7 +119,7 @@ const CoursesSales: React.FC = () => {
           fontSize: "12px",
         },
         formatter: (val) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
       },
       axisBorder: {
@@ -222,7 +222,7 @@ const CoursesSales: React.FC = () => {
             }}
             className="text-black"
           >
-            $57.2k
+            ৳57.2k
           </Typography>
 
           <Typography

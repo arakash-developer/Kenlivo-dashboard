@@ -68,7 +68,7 @@ const TotalSales: React.FC = () => {
       // min: 0,
       labels: {
         formatter: (val: any) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",
@@ -158,7 +158,7 @@ const TotalSales: React.FC = () => {
               }}
               className="text-black"
             >
-              $150,000
+              ৳150,000
             </Typography>
 
             <Typography component="span" sx={{ mt: "2px", display: "block" }}>

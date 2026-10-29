@@ -79,7 +79,7 @@ const GrossEarnings: React.FC = () => {
       show: false,
       labels: {
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
         style: {
           colors: "#64748B",
@@ -146,7 +146,7 @@ const GrossEarnings: React.FC = () => {
                 gap: "10px", 
               }}
             >
-              $78,350.00
+              ৳78,350.00
               <Typography
                 component="span"
                 sx={{
@@ -212,7 +212,7 @@ const GrossEarnings: React.FC = () => {
                 fontSize: "18px",
               }}
             >
-              $3,42,890
+              ৳3,42,890
             </Typography>
           </Box>
 
@@ -234,7 +234,7 @@ const GrossEarnings: React.FC = () => {
                 fontSize: "18px",
               }}
             >
-              $2,35,425
+              ৳2,35,425
             </Typography>
           </Box>
         </Box>

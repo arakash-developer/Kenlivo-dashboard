@@ -67,7 +67,7 @@ const WebsiteVisits: React.FC = () => {
       show: false,
       labels: {
         formatter: (val) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",

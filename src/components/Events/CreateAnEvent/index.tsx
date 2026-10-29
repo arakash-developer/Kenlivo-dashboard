@@ -168,7 +168,7 @@ const CreateAnEvent: React.FC = () => {
 
                   <TextField
                     label="Enter ticket price"
-                    placeholder="E.g. $20.00"
+                    placeholder="E.g. ৳20.00"
                     variant="filled"
                     id="ticketPrice"
                     name="ticketPrice"

@@ -85,7 +85,7 @@ const TotalOrders: React.FC = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$" + val;
+          return "৳" + val;
         },
       },
     },
@@ -123,7 +123,7 @@ const TotalOrders: React.FC = () => {
               }}
               className="text-black"
             >
-              $72,458
+              ৳72,458
             </Typography>
           </Box>
 

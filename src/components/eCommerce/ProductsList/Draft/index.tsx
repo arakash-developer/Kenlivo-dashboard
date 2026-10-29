@@ -135,10 +135,10 @@ const rows = [
     "Smart Band",
     "08 Jun 2024",
     "Watch",
-    "$35.00",
+    "৳35.00",
     75,
     "750",
-    "$2,625",
+    "৳2,625",
     "5.00 (141 reviews)",
     "Draft",
     "/ecommerce/products-list/details/",
@@ -149,10 +149,10 @@ const rows = [
     "Headphone",
     "07 Jun 2024",
     "Electronics",
-    "$49.00",
+    "৳49.00",
     25,
     "825",
-    "$1,225",
+    "৳1,225",
     "5.00 (69 reviews)",
     "Draft",
     "/ecommerce/products-list/details/",
@@ -163,10 +163,10 @@ const rows = [
     "Bluetooth Speaker",
     "05 Jun 2024",
     "Google",
-    "$59.00",
+    "৳59.00",
     40,
     "535",
-    "$2,360",
+    "৳2,360",
     "4.00 (75 reviews)",
     "Draft",
     "/ecommerce/products-list/details/",
@@ -512,7 +512,7 @@ const Draft: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`kenlivo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ৳{row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

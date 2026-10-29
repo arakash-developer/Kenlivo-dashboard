@@ -41,70 +41,70 @@ const rows = [
     "Bitcoin",
     "BTC",
     "0.50 BTC",
-    "$13,500"
+    "৳13,500"
   ),
   createData(
     "2",
     "Ethereum",
     "ETH",
     "5.00 ETH",
-    "$8,750"
+    "৳8,750"
   ),
   createData(
     "3",
     "Binance",
     "BNB",
     "100 SOL",
-    "$250",
+    "৳250",
   ),
   createData(
     "4",
     "Tether",
     "USDT",
     "10 BNB",
-    "$1.00",
+    "৳1.00",
   ),
   createData(
     "5",
     "XRP",
     "XRP",
     "1,000 ADA",
-    "$0.50",
+    "৳0.50",
   ),
   createData(
     "6",
     "Solana",
     "SOL",
     "0.40 BTC",
-    "$35",
+    "৳35",
   ),
   createData(
     "7",
     "USDC",
     "USDC",
     "3.00 USDC",
-    "$0.9999",
+    "৳0.9999",
   ),
   createData(
     "8",
     "Dogecoin",
     "DOGE",
     "3.00 DOGE",
-    "$0,1221",
+    "৳0,1221",
   ),
   createData(
     "9",
     "Toncoin",
     "TON",
     "3.00 TON",
-    "$5.82",
+    "৳5.82",
   ),
   createData(
     "10",
     "Cardano",
     "ADA",
     "3.00 ADA",
-    "$0,3884",
+    "৳0,3884",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
@@ -190,7 +190,7 @@ const Portfolio: React.FC = () => {
                 color: '#fff !important'
               }}
             >
-              $78,350.00
+              ৳78,350.00
               <Typography
                 component="span"
                 sx={{

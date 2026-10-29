@@ -163,7 +163,7 @@ const rows = [
         image: "/images/users/user3.jpg",
       },
     ],
-    "$4,500",
+    "৳4,500",
     "25 Mar 2024",
     "25 Apr 2024",
     "Finished",
@@ -195,7 +195,7 @@ const rows = [
         image: "/images/users/user13.jpg",
       },
     ],
-    "$6,800",
+    "৳6,800",
     "20 Mar 2024",
     "20 Apr 2024",
     "In Progress",
@@ -221,7 +221,7 @@ const rows = [
         image: "/images/users/user20.jpg",
       },
     ],
-    "$2,500",
+    "৳2,500",
     "15 Mar 2024",
     "15 Apr 2024",
     "Pending",
@@ -247,7 +247,7 @@ const rows = [
         image: "/images/users/user25.jpg",
       },
     ],
-    "$7,500",
+    "৳7,500",
     "10 Mar 2024",
     "10 Apr 2024",
     "Pending",
@@ -273,7 +273,7 @@ const rows = [
         image: "/images/users/user30.jpg",
       },
     ],
-    "$3,400",
+    "৳3,400",
     "05 Mar 2024",
     "05 Apr 2024",
     "Finished",
@@ -293,7 +293,7 @@ const rows = [
         image: "/images/users/user3.jpg",
       },
     ],
-    "$4,680",
+    "৳4,680",
     "25 Mar 2024",
     "25 Apr 2025",
     "Finished",
@@ -319,7 +319,7 @@ const rows = [
         image: "/images/users/user30.jpg",
       },
     ],
-    "$4,780",
+    "৳4,780",
     "20 Mar 2024",
     "20 Apr 2024",
     "In Progress",
@@ -345,7 +345,7 @@ const rows = [
         image: "/images/users/user20.jpg",
       },
     ],
-    "$4,980",
+    "৳4,980",
     "03 Mar 2024",
     "15 Apr 2024",
     "Pending",
@@ -371,7 +371,7 @@ const rows = [
         image: "/images/users/user11.jpg",
       },
     ],
-    "$4,550",
+    "৳4,550",
     "10 Mar 2024",
     "10 Apr 2024",
     "Pending",
@@ -391,7 +391,7 @@ const rows = [
         image: "/images/users/user8.jpg",
       },
     ],
-    "$3,450",
+    "৳3,450",
     "05 Mar 2024",
     "05 Apr 2024",
     "Finished",
@@ -716,7 +716,7 @@ const AllProjects: React.FC = () => {
                       }}
                       className="text-black border-bottom"
                     >
-                      <div className={`kenlivo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ৳{row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

@@ -131,8 +131,8 @@ const rows = [
     "oliver@kenlivo.com",
     "+1 555-123-4567",
     "19 Jun 2024",
-    "$6,855",
-    "$125",
+    "৳6,855",
+    "৳125",
     "active",
   ),
   createData(
@@ -142,8 +142,8 @@ const rows = [
     "carolyn@kenlivo.com",
     "+1 555-987-6543",
     "18 Jun 2024",
-    "$258",
-    "$99",
+    "৳258",
+    "৳99",
     "active",
   ),
   createData(
@@ -153,8 +153,8 @@ const rows = [
     "donna@kenlivo.com",
     "+1 555-456-7890",
     "17 Jun 2024",
-    "$3,890",
-    "$0",
+    "৳3,890",
+    "৳0",
     "deactive",
   ),
   createData(
@@ -164,8 +164,8 @@ const rows = [
     "barbara@kenlivo.com",
     "+1 555-369-7878",
     "16 Jun 2024",
-    "$2,500",
-    "$279",
+    "৳2,500",
+    "৳279",
     "active",
   ),
   createData(
@@ -175,8 +175,8 @@ const rows = [
     "rebecca@kenlivo.com",
     "+1 555-658-4488",
     "15 Jun 2024",
-    "$8,200",
-    "$0",
+    "৳8,200",
+    "৳0",
     "deactive",
   ),
   createData(
@@ -186,8 +186,8 @@ const rows = [
     "ramiro@kenlivo.com",
     "+1 555-558-9966",
     "14 Jun 2024",
-    "$640",
-    "$46",
+    "৳640",
+    "৳46",
     "active",
   ),
   createData(
@@ -197,8 +197,8 @@ const rows = [
     "robert@kenlivo.com",
     "+1 555-357-5888",
     "13 Jun 2024",
-    "$9,100",
-    "$184",
+    "৳9,100",
+    "৳184",
     "active",
   ),
   createData(
@@ -208,8 +208,8 @@ const rows = [
     "marcelino@kenlivo.com",
     "+1 555-456-8877",
     "12 Jun 2024",
-    "$7,300",
-    "$166",
+    "৳7,300",
+    "৳166",
     "active",
   ),
   createData(
@@ -219,8 +219,8 @@ const rows = [
     "thomas@kenlivo.com",
     "+1 555-622-4488",
     "11 Jun 2024",
-    "$6,600",
-    "$0",
+    "৳6,600",
+    "৳0",
     "deactive",
   ),
   createData(
@@ -230,8 +230,8 @@ const rows = [
     "nathaniel@kenlivo.com",
     "+1 555-225-4488",
     "10 Jun 2024",
-    "$2,800",
-    "$55",
+    "৳2,800",
+    "৳55",
     "deactive",
   ),
   createData(
@@ -241,8 +241,8 @@ const rows = [
     "jake@kenlivo.com",
     "+1 555-123-4567",
     "19 Jun 2024",
-    "$2,800",
-    "$55",
+    "৳2,800",
+    "৳55",
     "active",
   ),
   createData(
@@ -252,8 +252,8 @@ const rows = [
     "noah@kenlivo.com",
     "+1 555-987-6543",
     "18 Jun 2024",
-    "$6,600",
-    "$0",
+    "৳6,600",
+    "৳0",
     "active",
   ),
   createData(
@@ -263,8 +263,8 @@ const rows = [
     "james@kenlivo.com",
     "+1 555-456-7890",
     "17 Jun 2024",
-    "$7,300",
-    "$166",
+    "৳7,300",
+    "৳166",
     "deactive",
   ),
   createData(
@@ -274,8 +274,8 @@ const rows = [
     "connor@kenlivo.com",
     "+1 555-369-7878",
     "16 Jun 2024",
-    "$9,100",
-    "$184",
+    "৳9,100",
+    "৳184",
     "active",
   ),
   createData(
@@ -285,8 +285,8 @@ const rows = [
     "liam@kenlivo.com",
     "+1 555-658-4488",
     "15 Jun 2024",
-    "$640",
-    "$46",
+    "৳640",
+    "৳46",
     "deactive",
   ),
   createData(
@@ -296,8 +296,8 @@ const rows = [
     "harry@kenlivo.com",
     "+1 555-558-9966",
     "14 Jun 2024",
-    "$8,200",
-    "$0",
+    "৳8,200",
+    "৳0",
     "active",
   ),
   createData(
@@ -307,8 +307,8 @@ const rows = [
     "harry@kenlivo.com",
     "+1 555-357-5888",
     "13 Jun 2024",
-    "$2,500",
-    "$279",
+    "৳2,500",
+    "৳279",
     "active",
   ),
   createData(
@@ -318,8 +318,8 @@ const rows = [
     "jacob@kenlivo.com",
     "+1 555-456-8877",
     "12 Jun 2024",
-    "$3,890",
-    "$0",
+    "৳3,890",
+    "৳0",
     "active",
   ),
   createData(
@@ -329,8 +329,8 @@ const rows = [
     "jacob@kenlivo.com",
     "+1 555-622-4488",
     "11 Jun 2024",
-    "$258",
-    "$99",
+    "৳258",
+    "৳99",
     "deactive",
   ),
   createData(
@@ -340,8 +340,8 @@ const rows = [
     "michael@kenlivo.com",
     "+1 555-225-4488",
     "10 Jun 2024",
-    "$6,855",
-    "$125",
+    "৳6,855",
+    "৳125",
     "deactive",
   ),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
@@ -712,7 +712,7 @@ const CustomersTable: React.FC = () => {
                       className="border-bottom"
                     >
                       <Box
-                        className={`kenlivo-badge ${row.status}`}
+                        className={`kenlivo-badge ৳{row.status}`}
                         sx={{ textTransform: "capitalize" }}
                       >
                         {row.status}

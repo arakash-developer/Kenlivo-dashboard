@@ -20,7 +20,7 @@ const PricingStyle2: React.FC = () => {
                 </div>
 
                 <div className={`text-black ${styles.price}`}>
-                  $29 <span className="text-body">/ per month</span>
+                  ৳29 <span className="text-body">/ per month</span>
                 </div>
 
                 <Typography
@@ -98,7 +98,7 @@ const PricingStyle2: React.FC = () => {
                 </div>
 
                 <div className={`text-black ${styles.price}`}>
-                  $49 <span className="text-body">/ per month</span>
+                  ৳49 <span className="text-body">/ per month</span>
                 </div>
 
                 <Typography
@@ -184,7 +184,7 @@ const PricingStyle2: React.FC = () => {
                 </div>
 
                 <div className={`text-black ${styles.price}`}>
-                  $79 <span className="text-body fw-normal">/ per month</span>
+                  ৳79 <span className="text-body fw-normal">/ per month</span>
                 </div>
 
                 <Typography

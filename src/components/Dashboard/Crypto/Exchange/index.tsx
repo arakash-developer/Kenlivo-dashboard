@@ -363,7 +363,7 @@ const Exchange: React.FC = () => {
                 />
 
                 <Box className={styles.price}>
-                  $1750
+                  ৳1750
                 </Box>
               </FormControl> 
             </Box>
@@ -631,7 +631,7 @@ const Exchange: React.FC = () => {
                 />
 
                 <Box className={styles.price}>
-                  $35
+                  ৳35
                 </Box>
               </FormControl> 
             </Box>

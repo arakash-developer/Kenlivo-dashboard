@@ -449,7 +449,7 @@ const CreateInvoice: React.FC = () => {
                     <FormControl fullWidth>
                       <TextField
                         label="Enter price"
-                        placeholder="E.g. $0.00"
+                        placeholder="E.g. ৳0.00"
                         variant="filled"
                         id="price"
                         name="price"
@@ -477,7 +477,7 @@ const CreateInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $0.00
+                    ৳0.00
                   </TableCell>
 
                   <TableCell
@@ -620,7 +620,7 @@ const CreateInvoice: React.FC = () => {
                       <TextField
                         label="Enter discount price"
                         placeholder="E.g. 0.00"
-                        defaultValue="$0"
+                        defaultValue="৳0"
                         variant="filled"
                         id="discount"
                         name="discount"
@@ -665,7 +665,7 @@ const CreateInvoice: React.FC = () => {
                       <TextField
                         label="Enter tax"
                         placeholder="E.g. 0.00"
-                        defaultValue="$0"
+                        defaultValue="৳0"
                         variant="filled"
                         id="tax"
                         name="tax"
@@ -739,7 +739,7 @@ const CreateInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $0.00
+                    ৳0.00
                   </TableCell>
 
                   <TableCell
@@ -793,7 +793,7 @@ const CreateInvoice: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    $5.55
+                    ৳5.55
                   </TableCell>
 
                   <TableCell
@@ -902,7 +902,7 @@ const CreateInvoice: React.FC = () => {
                     }}
                     className="border-bottom text-black"
                   >
-                    $1,172.55
+                    ৳1,172.55
                   </TableCell>
 
                   <TableCell
@@ -922,7 +922,7 @@ const CreateInvoice: React.FC = () => {
             sx={{
               mt: "25px",
               display: "flex",
-              alignItems: "çenter",
+              alignItems: "�enter",
               justifyContent: "center",
               gap: "10px",
             }}

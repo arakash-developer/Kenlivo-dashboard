@@ -164,7 +164,7 @@ const TotalOrders: React.FC = () => {
               }}
               className="text-black"
             >
-              $72,458
+              ৳72,458
             </Typography>
           </Box>
 

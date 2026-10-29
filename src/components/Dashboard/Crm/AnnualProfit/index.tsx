@@ -65,7 +65,7 @@ const AnnualProfit: React.FC = () => {
       show: false,
       labels: {
         formatter: (val) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",
@@ -133,7 +133,7 @@ const AnnualProfit: React.FC = () => {
               }}
               className="text-black"
             >
-              $879.6k
+              ৳879.6k
             </Typography>
           </Box>
 

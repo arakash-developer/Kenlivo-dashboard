@@ -119,7 +119,7 @@ const ProductDetailsContent: React.FC = () => {
                   fontSize="18px"
                   className="text-black"
                 >
-                  $3,499
+                  ৳3,499
                 </Typography>
                 <Typography
                   variant="h6"
@@ -127,7 +127,7 @@ const ProductDetailsContent: React.FC = () => {
                   fontWeight={400}
                   className="text-body"
                 >
-                  $3,799
+                  ৳3,799
                 </Typography>
               </Box>
 

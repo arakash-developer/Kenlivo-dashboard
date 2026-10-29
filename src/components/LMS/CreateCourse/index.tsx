@@ -145,7 +145,7 @@ const CreateCourse: React.FC = () => {
 
                       <TextField
                         label="Enter price"
-                        placeholder="E.g. $90"
+                        placeholder="E.g. ৳90"
                         variant="filled"
                         id="price"
                         name="price"

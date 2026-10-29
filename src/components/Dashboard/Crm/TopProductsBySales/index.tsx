@@ -124,7 +124,7 @@ const TopProductsBySales: React.FC = () => {
               fontWeight={500}
               className="text-black"
             >
-              $96,455
+              ৳96,455
             </Typography>
           </Box>
 
@@ -179,7 +179,7 @@ const TopProductsBySales: React.FC = () => {
             </Box>
 
             <Typography component="div" fontWeight={500} className="text-black">
-              $89,670
+              ৳89,670
             </Typography>
           </Box>
 
@@ -234,7 +234,7 @@ const TopProductsBySales: React.FC = () => {
             </Box>
 
             <Typography component="div" fontWeight={500} className="text-black">
-              $75,329
+              ৳75,329
             </Typography>
           </Box>
 
@@ -289,7 +289,7 @@ const TopProductsBySales: React.FC = () => {
             </Box>
 
             <Typography component="div" fontWeight={500} className="text-black">
-              $98,256
+              ৳98,256
             </Typography>
           </Box>
 
@@ -344,7 +344,7 @@ const TopProductsBySales: React.FC = () => {
             </Box>
 
             <Typography component="div" fontWeight={500} className="text-black">
-              $65,987
+              ৳65,987
             </Typography>
           </Box>
         </Box>

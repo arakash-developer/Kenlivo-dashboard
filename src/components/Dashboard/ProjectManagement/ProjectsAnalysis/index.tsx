@@ -113,7 +113,7 @@ const ProjectsAnalysis: React.FC = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
       },
     },

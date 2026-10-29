@@ -124,8 +124,8 @@ const rows = [
     "/ecommerce/products-list/details",
     "08 Jun 2024",
     1,
-    "$35.00",
-    "$2,625"
+    "৳35.00",
+    "৳2,625"
   ),
   createData(
     "#JAN-1323",
@@ -134,8 +134,8 @@ const rows = [
     "/ecommerce/products-list/details",
     "07 Jun 2024",
     3,
-    "$150.00",
-    "$450.00"
+    "৳150.00",
+    "৳450.00"
   ),
   createData(
     "#DEC-1234",
@@ -154,8 +154,8 @@ const rows = [
     "/ecommerce/products-list/details",
     "05 Jun 2024",
     5,
-    "$15.00",
-    "$75.00"
+    "৳15.00",
+    "৳75.00"
   ),
   createData(
     "#DEC-1098",
@@ -164,8 +164,8 @@ const rows = [
     "/ecommerce/products-list/details",
     "04 Jun 2024",
     2,
-    "$35.00",
-    "$50.00"
+    "৳35.00",
+    "৳50.00"
   ),
 ].sort((b, a) => (a.orderID < b.orderID ? -1 : 1));
 

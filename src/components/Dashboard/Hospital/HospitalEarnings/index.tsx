@@ -92,7 +92,7 @@ const HospitalEarnings: React.FC = () => {
       // min: 0,
       labels: {
         formatter: (val: any) => {
-          return "$" + val + "k";
+          return "৳" + val + "k";
         },
         style: {
           colors: "#64748B",
@@ -249,7 +249,7 @@ const HospitalEarnings: React.FC = () => {
                     lineHeight: "normal",
                   }}
                 >
-                  $120,000
+                  ৳120,000
                 </Typography>
 
                 <Box
@@ -301,7 +301,7 @@ const HospitalEarnings: React.FC = () => {
                     lineHeight: "normal",
                   }}
                 >
-                  $80,000
+                  ৳80,000
                 </Typography>
 
                 <Box
@@ -359,7 +359,7 @@ const HospitalEarnings: React.FC = () => {
                       gap: "5px",
                     }}
                   >
-                    $900,000
+                    ৳900,000
                     <Typography
                       component="span"
                       className="text-success"

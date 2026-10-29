@@ -89,7 +89,7 @@ const Bitcoin: React.FC = () => {
           fontSize: "12px",
         },
         formatter: (val: any) => {
-          return "$" + val + "K";
+          return "৳" + val + "K";
         },
       },
       axisBorder: {
@@ -183,7 +183,7 @@ const Bitcoin: React.FC = () => {
                 gap: "10px",
               }}
             >
-              $27,500
+              ৳27,500
               <Typography
                 component="span"
                 sx={{
@@ -248,7 +248,7 @@ const Bitcoin: React.FC = () => {
             >
               Market Cap:
             </Typography>
-            $520B
+            ৳520B
           </Box>
 
           <Box
@@ -270,7 +270,7 @@ const Bitcoin: React.FC = () => {
             >
               Volume (24h):
             </Typography>
-            $35B
+            ৳35B
           </Box>
         </Box>
       </Box>

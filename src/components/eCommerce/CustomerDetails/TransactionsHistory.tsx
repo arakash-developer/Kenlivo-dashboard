@@ -113,26 +113,26 @@ function createData(
 }
 
 const rows = [
-  createData("#JAN-121", "Pending", "$6,855.00", "$12.00", "14 Jan 2024"),
-  createData("#JAN-120", "Successful", "$258.00", "$9.00", "13 Jan 2024"),
-  createData("#JAN-119", "Rejected", "$3,890.00", "$11.00", "12 Jan 2024"),
-  createData("#JAN-118", "Successful", "$2,500.00", "$23.42", "11 Jan 2024"),
-  createData("#JAN-117", "Successful", "$8,200.00", "$10.84", "10 Jan 2024"),
-  createData("#JAN-116", "Rejected", "$640.00", "$3.21", "09 Jan 2024"),
-  createData("#JAN-115", "Successful", "$9,100.00", "$43.21", "08 Jan 2024"),
-  createData("#JAN-114", "Pending", "$7,300.00", "$42.42", "07 Jan 2024"),
-  createData("#JAN-113", "Successful", "$2,800.00", "$11.21", "06 Jan 2024"),
-  createData("#JAN-112", "Successful", "$6,600.00", "$14.32", "05 Jan 2024"),
-  createData("#JAN-111", "Successful", "$2,800.00", "'$11.21", "04 Jan 2024"),
-  createData("#JAN-110", "Pending", "$6,855.00", "$12.00", "14 Jan 2024"),
-  createData("#JAN-109", "Successful", "$258.00", "$9.00", "13 Jan 2024"),
-  createData("#JAN-108", "Rejected", "$3,890.00", "$11.00", "12 Jan 2024"),
-  createData("#JAN-107", "Successful", "$2,500.00", "$23.42", "11 Jan 2024"),
-  createData("#JAN-106", "Successful", "$8,200.00", "$10.84", "10 Jan 2024"),
-  createData("#JAN-105", "Rejected", "$640.00", "$3.21", "09 Jan 2024"),
-  createData("#JAN-104", "Successful", "$9,100.00", "$43.21", "08 Jan 2024"),
-  createData("#JAN-103", "Pending", "$7,300.00", "$42.42", "07 Jan 2024"),
-  createData("#JAN-102", "Successful", "$2,800.00", "$11.21", "06 Jan 2024"),
+  createData("#JAN-121", "Pending", "৳6,855.00", "৳12.00", "14 Jan 2024"),
+  createData("#JAN-120", "Successful", "৳258.00", "৳9.00", "13 Jan 2024"),
+  createData("#JAN-119", "Rejected", "৳3,890.00", "৳11.00", "12 Jan 2024"),
+  createData("#JAN-118", "Successful", "৳2,500.00", "৳23.42", "11 Jan 2024"),
+  createData("#JAN-117", "Successful", "৳8,200.00", "৳10.84", "10 Jan 2024"),
+  createData("#JAN-116", "Rejected", "৳640.00", "৳3.21", "09 Jan 2024"),
+  createData("#JAN-115", "Successful", "৳9,100.00", "৳43.21", "08 Jan 2024"),
+  createData("#JAN-114", "Pending", "৳7,300.00", "৳42.42", "07 Jan 2024"),
+  createData("#JAN-113", "Successful", "৳2,800.00", "৳11.21", "06 Jan 2024"),
+  createData("#JAN-112", "Successful", "৳6,600.00", "৳14.32", "05 Jan 2024"),
+  createData("#JAN-111", "Successful", "৳2,800.00", "'$11.21", "04 Jan 2024"),
+  createData("#JAN-110", "Pending", "৳6,855.00", "৳12.00", "14 Jan 2024"),
+  createData("#JAN-109", "Successful", "৳258.00", "৳9.00", "13 Jan 2024"),
+  createData("#JAN-108", "Rejected", "৳3,890.00", "৳11.00", "12 Jan 2024"),
+  createData("#JAN-107", "Successful", "৳2,500.00", "৳23.42", "11 Jan 2024"),
+  createData("#JAN-106", "Successful", "৳8,200.00", "৳10.84", "10 Jan 2024"),
+  createData("#JAN-105", "Rejected", "৳640.00", "৳3.21", "09 Jan 2024"),
+  createData("#JAN-104", "Successful", "৳9,100.00", "৳43.21", "08 Jan 2024"),
+  createData("#JAN-103", "Pending", "৳7,300.00", "৳42.42", "07 Jan 2024"),
+  createData("#JAN-102", "Successful", "৳2,800.00", "৳11.21", "06 Jan 2024"),
 ].sort((b, a) => (a.id < b.id ? -1 : 1));
 
 const TransactionsHistory: React.FC = () => {
@@ -310,7 +310,7 @@ const TransactionsHistory: React.FC = () => {
                       }}
                       className="border-bottom"
                     >
-                      <div className={`kenlivo-badge ${row.status}`}>
+                      <div className={`kenlivo-badge ৳{row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

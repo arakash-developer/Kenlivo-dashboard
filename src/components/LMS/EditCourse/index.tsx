@@ -148,8 +148,8 @@ const EditCourse: React.FC = () => {
 
                       <TextField
                         label="Enter price"
-                        placeholder="E.g. $90"
-                        defaultValue="$90"
+                        placeholder="E.g. ৳90"
+                        defaultValue="৳90"
                         variant="filled"
                         id="price"
                         name="price"

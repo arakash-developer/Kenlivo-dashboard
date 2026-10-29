@@ -263,7 +263,7 @@ const UsersList: React.FC = () => {
                       {row.email}
                     </TableCell>
                     <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
-                      {row.phone || "—"}
+                      {row.phone || "�"}
                     </TableCell>
                     <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
                       <span style={{
@@ -275,12 +275,12 @@ const UsersList: React.FC = () => {
                       </span>
                     </TableCell>
                     <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
-                      <div className={`kenlivo-badge ${row.isActive !== false ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                      <div className={`kenlivo-badge ৳{row.isActive !== false ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
                         {row.isActive !== false ? "Active" : "Inactive"}
                       </div>
                     </TableCell>
                     <TableCell sx={{ padding: "14px 20px", fontSize: "14px" }} className="border-bottom">
-                      {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : "—"}
+                      {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : "�"}
                     </TableCell>
                     <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
                       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -327,7 +327,7 @@ const UsersList: React.FC = () => {
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f6f7f9", padding: { xs: "15px 20px", md: "25px" } }} className="rmu-modal-header">
             <Typography variant="h6" sx={{ fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }} className="text-black">
-              Change Password — {pwUserName}
+              Change Password � {pwUserName}
             </Typography>
             <IconButton aria-label="remove" size="small" onClick={() => setPwOpen(false)}><ClearIcon /></IconButton>
           </Box>

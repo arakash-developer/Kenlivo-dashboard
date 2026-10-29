@@ -442,7 +442,7 @@ const RecentOrders: React.FC = () => {
                     }}
                     className="text-black border-bottom"
                   >
-                    ${row.total}
+                    ৳{row.total}
                   </TableCell>
 
                   <TableCell
@@ -451,7 +451,7 @@ const RecentOrders: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    <div className={`kenlivo-badge ${row.status}`}>
+                    <div className={`kenlivo-badge ৳{row.status}`}>
                       {row.status}
                     </div>
                   </TableCell>
