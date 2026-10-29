@@ -464,7 +464,7 @@ const PatientAppointments: React.FC = () => {
                     className="text-black border-bottom"
                   >
                     <Box
-                      className={`kenlivo-badge ৳{row.status}`}
+                      className={`kenlivo-badge ${row.status}`}
                       sx={{ textTransform: "capitalize" }}
                     >
                       {row.status}

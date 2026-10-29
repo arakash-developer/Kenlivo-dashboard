@@ -9,6 +9,7 @@ import {
   CircularProgress,
   FormControl,
   Grid,
+  InputAdornment,
   InputLabel,
   ListItemText,
   MenuItem,
@@ -61,6 +62,7 @@ const CreateProduct: React.FC = () => {
   const [vendor, setVendor] = useState("");
   const [collection, setCollection] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [volume, setVolume] = useState("");
   const [primaryImage, setPrimaryImage] = useState("");
   const [secondaryImages, setSecondaryImages] = useState(["", "", "", ""]);
   const [metaTitle, setMetaTitle] = useState("");
@@ -108,7 +110,7 @@ const CreateProduct: React.FC = () => {
         body: JSON.stringify({
           name: productTitle.trim(),
           description: description.trim() || metaDescription.trim(),
-          tagline: "",
+          volume: volume ? Number(volume) : 0,
           price,
           discountPercentage,
           category,
@@ -207,6 +209,35 @@ const CreateProduct: React.FC = () => {
                         {productTypeOptions.length === 0 && <MenuItem disabled value="">Loading�</MenuItem>}
                         {productTypeOptions.map((t) => <MenuItem key={t._id} value={t._id}>{t.name}</MenuItem>)}
                       </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} md={12} lg={12} xl={6}>
+                  <Box>
+                    <FormControl fullWidth>
+                      <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
+                        Volume (mL)
+                      </Typography>
+                      <TextField
+                        label="Enter Volume"
+                        placeholder="E.g. 100"
+                        variant="filled"
+                        id="volume"
+                        name="volume"
+                        type="number"
+                        inputProps={{ min: 0, step: "0.1" }}
+                        value={volume}
+                        onChange={(e) => setVolume(e.target.value)}
+                        InputProps={{
+                          endAdornment: <InputAdornment position="end">mL</InputAdornment>,
+                        }}
+                        sx={{
+                          "& .MuiInputBase-root": { border: "1px solid #D5D9E2", backgroundColor: "#fff", borderRadius: "7px" },
+                          "& .MuiInputBase-root::before": { border: "none" },
+                          "& .MuiInputBase-root:hover::before": { border: "none" },
+                        }}
+                      />
                     </FormControl>
                   </Box>
                 </Grid>

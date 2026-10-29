@@ -649,7 +649,7 @@ const ManageReviews: React.FC = () => {
                     }}
                     className="border-bottom"
                   >
-                    <div className={`kenlivo-badge ৳{row.status}`}>
+                    <div className={`kenlivo-badge ${row.status}`}>
                       {row.status}
                     </div>
                   </TableCell>

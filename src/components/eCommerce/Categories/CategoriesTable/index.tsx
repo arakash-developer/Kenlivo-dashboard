@@ -352,7 +352,7 @@ const CategoriesTable: React.FC = () => {
                     </TableCell>
 
                     <TableCell sx={{ padding: "15px 20px" }} className="border-bottom">
-                      <div className={`kenlivo-badge ৳{row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                      <div className={`kenlivo-badge ${row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
                         {row.isActive ? "Active" : "Inactive"}
                       </div>
                     </TableCell>

@@ -541,7 +541,7 @@ const PerformanceOfAgents: React.FC = () => {
                     >
                       <Box
                         sx={{
-                          background: `conic-gradient(#605DFF 0% ৳{row.satisfactionRate}%, #f1f1f1 ৳{row.satisfactionRate}%)`,
+                          background: `conic-gradient(#605DFF 0% ${row.satisfactionRate}%, #f1f1f1 ${row.satisfactionRate}%)`,
                           position: "relative",
                           width: "40px",
                           height: "40px",

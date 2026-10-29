@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
   const {
     name,
     description,
-    tagline = "",
+    volume = 0,
     price,
     discountPercentage = 0,
     category,
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
     name,
     slug,
     description,
-    tagline,
+    volume: Number(volume),
     price: Number(price),
     discountPercentage: Number(discountPercentage),
     finalPrice,
@@ -100,7 +100,7 @@ export async function PUT(req: NextRequest) {
   }
 
   const {
-    id, name, description = "", tagline = "", price, discountPercentage = 0,
+    id, name, description = "", volume = 0, price, discountPercentage = 0,
     category, images = [], stock = 0, isActive = true,
   } = body;
 
@@ -118,7 +118,7 @@ export async function PUT(req: NextRequest) {
     { _id: oid },
     {
       $set: {
-        name: name.trim(), slug, description, tagline, price: Number(price),
+        name: name.trim(), slug, description, volume: Number(volume), price: Number(price),
         discountPercentage: Number(discountPercentage), finalPrice,
         category: categoryOid, images, stock: Number(stock), isActive,
         updatedAt: new Date(),

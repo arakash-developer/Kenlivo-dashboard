@@ -8,6 +8,7 @@ import {
   CircularProgress,
   FormControl,
   Grid,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -39,7 +40,7 @@ const EditProduct: React.FC<EditProductProps> = ({ id }) => {
   // Form state
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [tagline, setTagline] = useState("");
+  const [volume, setVolume] = useState("");
   const [price, setPrice] = useState("");
   const [discountPercentage, setDiscountPercentage] = useState("0");
   const [stock, setStock] = useState("0");
@@ -83,7 +84,7 @@ const EditProduct: React.FC<EditProductProps> = ({ id }) => {
         const p = j.data;
         setName(p.name ?? "");
         setDescription(p.description ?? "");
-        setTagline(p.tagline ?? "");
+        setVolume(p.volume != null ? String(p.volume) : "");
         setPrice(String(p.price ?? ""));
         setDiscountPercentage(String(p.discountPercentage ?? 0));
         setStock(String(p.stock ?? 0));
@@ -121,7 +122,7 @@ const EditProduct: React.FC<EditProductProps> = ({ id }) => {
           id,
           name: name.trim(),
           description,
-          tagline: tagline.trim(),
+          volume: volume ? Number(volume) : 0,
           price: Number(price),
           discountPercentage: Number(discountPercentage),
           category,
@@ -184,9 +185,20 @@ const EditProduct: React.FC<EditProductProps> = ({ id }) => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">
-                  Tagline
+                  Volume (mL)
                 </Typography>
-                <TextField fullWidth placeholder="Short tagline" value={tagline} onChange={(e) => setTagline(e.target.value)} InputProps={{ style: { borderRadius: 8 } }} />
+                <TextField
+                  fullWidth
+                  type="number"
+                  placeholder="E.g. 100"
+                  value={volume}
+                  onChange={(e) => setVolume(e.target.value)}
+                  inputProps={{ min: 0, step: "0.1" }}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">mL</InputAdornment>,
+                    style: { borderRadius: 8 },
+                  }}
+                />
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography component="label" sx={{ fontWeight: "500", fontSize: "14px", mb: "10px", display: "block" }} className="text-black">

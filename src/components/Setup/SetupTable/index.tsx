@@ -308,7 +308,7 @@ const SetupTable: React.FC<Props> = ({ entity, label }) => {
                     <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">{row.slug}</TableCell>
                     <TableCell sx={{ padding: "15px 20px", fontSize: "14px" }} className="border-bottom">{row.description || "�"}</TableCell>
                     <TableCell sx={{ padding: "15px 20px" }} className="border-bottom">
-                      <div className={`kenlivo-badge ৳{row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                      <div className={`kenlivo-badge ${row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
                         {row.isActive ? "Active" : "Inactive"}
                       </div>
                     </TableCell>

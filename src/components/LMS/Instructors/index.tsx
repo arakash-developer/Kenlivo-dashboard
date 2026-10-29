@@ -910,7 +910,7 @@ const Instructors: React.FC = () => {
                       className="text-black border-bottom"
                     >
                       <div
-                        className={`kenlivo-badge ৳{row.status}`}
+                        className={`kenlivo-badge ${row.status}`}
                         style={{ textTransform: "capitalize" }}
                       >
                         {row.status}

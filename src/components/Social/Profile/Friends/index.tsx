@@ -331,7 +331,7 @@ const Friends: React.FC = () => {
                           style={{ borderRadius: "100px" }}
                         />
                         <Box
-                          bgcolor={`৳{row.activeStatus}.main`}
+                          bgcolor={`${row.activeStatus}.main`}
                           sx={{
                             width: "10px",
                             height: "10px",

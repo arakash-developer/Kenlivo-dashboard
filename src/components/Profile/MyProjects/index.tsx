@@ -716,7 +716,7 @@ const MyProjects: React.FC = () => {
                       }}
                       className="text-black border-bottom"
                     >
-                      <div className={`kenlivo-badge ৳{row.status}`}>
+                      <div className={`kenlivo-badge ${row.status}`}>
                         {row.status}
                       </div>
                     </TableCell>

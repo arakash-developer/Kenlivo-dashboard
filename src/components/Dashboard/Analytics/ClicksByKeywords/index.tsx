@@ -457,7 +457,7 @@ const ClicksByKeywords: React.FC = () => {
                       }}
                     >
                       <i
-                        className={`bx ৳{row.impressionsIcon}`}
+                        className={`bx ${row.impressionsIcon}`}
                         style={{
                           fontSize: "20px",
                           lineHeight: 0,
@@ -486,7 +486,7 @@ const ClicksByKeywords: React.FC = () => {
                       }}
                     >
                       <i
-                        className={`bx ৳{row.clicksIcon}`}
+                        className={`bx ${row.clicksIcon}`}
                         style={{
                           fontSize: "20px",
                           lineHeight: 0,

@@ -386,8 +386,8 @@ const TeamMembers: React.FC = () => {
                       >
                         <Box
                           sx={{
-                            bgcolor: `৳{row.statusProgressBg}.main`,
-                            width: `৳{row.statusProgress}%`,
+                            bgcolor: `${row.statusProgressBg}.main`,
+                            width: `${row.statusProgress}%`,
                             height: "4px",
                           }}
                         ></Box>

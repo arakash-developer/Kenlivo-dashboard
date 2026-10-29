@@ -166,18 +166,18 @@ const ProductsList: React.FC = () => {
                     {row.rating ? `${row.rating} ⭐ (${row.numReviews ?? 0})` : "-"}
                   </TableCell>
                   <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
-                    <div className={`kenlivo-badge ৳{row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                    <div className={`kenlivo-badge ${row.isActive ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
                       {row.isActive ? "Active" : "Inactive"}
                     </div>
                   </TableCell>
                   <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Link href={`/ecommerce/products-list/৳{row._id}/`}>
+                      <Link href={`/ecommerce/products-list/${row._id}/`}>
                         <IconButton aria-label="view" color="primary" sx={{ padding: "5px" }}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>visibility</i>
                         </IconButton>
                       </Link>
-                      <Link href={`/ecommerce/edit-product/৳{row._id}/`}>
+                      <Link href={`/ecommerce/edit-product/${row._id}/`}>
                         <IconButton aria-label="edit" color="secondary" sx={{ padding: "5px" }}>
                           <i className="material-symbols-outlined" style={{ fontSize: "16px" }}>edit</i>
                         </IconButton>

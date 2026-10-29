@@ -275,7 +275,7 @@ const UsersList: React.FC = () => {
                       </span>
                     </TableCell>
                     <TableCell sx={{ padding: "14px 20px" }} className="border-bottom">
-                      <div className={`kenlivo-badge ৳{row.isActive !== false ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
+                      <div className={`kenlivo-badge ${row.isActive !== false ? "active" : "Deactive"}`} style={{ textTransform: "capitalize" }}>
                         {row.isActive !== false ? "Active" : "Inactive"}
                       </div>
                     </TableCell>

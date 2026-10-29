@@ -561,7 +561,7 @@ const TransactionHistory: React.FC = () => {
                     }}
                     className="text-black border-bottom"
                   >
-                    <Box className={`th-badge ৳{row.type}`}>{row.type}</Box>
+                    <Box className={`th-badge ${row.type}`}>{row.type}</Box>
                   </TableCell>
 
                   <TableCell

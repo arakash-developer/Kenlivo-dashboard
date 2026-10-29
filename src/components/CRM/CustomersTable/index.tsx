@@ -712,7 +712,7 @@ const CustomersTable: React.FC = () => {
                       className="border-bottom"
                     >
                       <Box
-                        className={`kenlivo-badge ৳{row.status}`}
+                        className={`kenlivo-badge ${row.status}`}
                         sx={{ textTransform: "capitalize" }}
                       >
                         {row.status}
