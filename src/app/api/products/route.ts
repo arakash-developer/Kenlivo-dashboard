@@ -22,6 +22,7 @@ export async function GET() {
         $addFields: {
           _id: { $toString: "$_id" },
           categoryName: { $ifNull: [{ $arrayElemAt: ["$categoryDoc.name", 0] }, ""] },
+          collection: { $toString: "$collection" },
         },
       },
       { $project: { categoryDoc: 0 } },
@@ -49,6 +50,7 @@ export async function POST(req: NextRequest) {
     price,
     discountPercentage = 0,
     category,
+    collection = "",
     images = [],
     stock = 0,
     isActive = true,
@@ -58,11 +60,20 @@ export async function POST(req: NextRequest) {
   if (!categoryOid) {
     return NextResponse.json({ success: false, message: "Invalid category id" }, { status: 400 });
   }
+  const collectionOid = collection
+    ? (() => { try { return new ObjectId(collection); } catch { return null; } })()
+    : null;
+  if (collection && !collectionOid) {
+    return NextResponse.json({ success: false, message: "Invalid collection id" }, { status: 400 });
+  }
 
   const db = await getDb();
   const catExists = await db.collection("categories").findOne({ _id: categoryOid });
   if (!catExists) {
     return NextResponse.json({ success: false, message: "Category not found" }, { status: 404 });
+  }
+  if (collectionOid && !(await db.collection("collections").findOne({ _id: collectionOid }))) {
+    return NextResponse.json({ success: false, message: "Collection not found" }, { status: 404 });
   }
 
   const finalPrice = Number((price * (1 - discountPercentage / 100)).toFixed(2));
@@ -78,6 +89,7 @@ export async function POST(req: NextRequest) {
     discountPercentage: Number(discountPercentage),
     finalPrice,
     category: categoryOid,
+    collection: collectionOid,
     images,
     stock: Number(stock),
     rating: 0,
@@ -101,7 +113,7 @@ export async function PUT(req: NextRequest) {
 
   const {
     id, name, description = "", volume = 0, price, discountPercentage = 0,
-    category, images = [], stock = 0, isActive = true,
+    category, collection, images = [], stock = 0, isActive = true,
   } = body;
 
   const oid = (() => { try { return new ObjectId(id); } catch { return null; } })();
@@ -109,18 +121,32 @@ export async function PUT(req: NextRequest) {
 
   const categoryOid = (() => { try { return new ObjectId(category); } catch { return null; } })();
   if (!categoryOid) return NextResponse.json({ success: false, message: "Invalid category id" }, { status: 400 });
+  let collectionOid: ObjectId | null | undefined;
+  if (collection !== undefined) {
+    collectionOid = collection
+      ? (() => { try { return new ObjectId(collection); } catch { return null; } })()
+      : null;
+    if (collection && !collectionOid) {
+      return NextResponse.json({ success: false, message: "Invalid collection id" }, { status: 400 });
+    }
+  }
 
   const finalPrice = Number((Number(price) * (1 - Number(discountPercentage) / 100)).toFixed(2));
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
   const db = await getDb();
+  if (collectionOid && !(await db.collection("collections").findOne({ _id: collectionOid }))) {
+    return NextResponse.json({ success: false, message: "Collection not found" }, { status: 404 });
+  }
   const { matchedCount } = await db.collection("products").updateOne(
     { _id: oid },
     {
       $set: {
         name: name.trim(), slug, description, volume: Number(volume), price: Number(price),
         discountPercentage: Number(discountPercentage), finalPrice,
-        category: categoryOid, images, stock: Number(stock), isActive,
+        category: categoryOid,
+        ...(collectionOid !== undefined ? { collection: collectionOid } : {}),
+        images, stock: Number(stock), isActive,
         updatedAt: new Date(),
       },
     },

@@ -30,6 +30,7 @@ export async function GET(
         $addFields: {
           _id: { $toString: "$_id" },
           category: { $toString: "$category" },
+          collection: { $toString: "$collection" },
           categoryName: { $ifNull: [{ $arrayElemAt: ["$categoryDoc.name", 0] }, ""] },
         },
       },
