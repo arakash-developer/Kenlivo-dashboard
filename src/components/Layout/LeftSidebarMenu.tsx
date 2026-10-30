@@ -268,35 +268,26 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
-              <Accordion
-                expanded={expanded === "panel_orders"}
-                onChange={handleChange("panel_orders")}
-                className="mat-accordion"
+              <Typography
+                className="sub-title"
+                sx={{
+                  display: "block",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                }}
               >
-                <AccordionSummary
-                  className="mat-summary"
-                  aria-controls="panel-orders-content"
-                  id="panel-orders-header"
-                >
-                  <i className="material-symbols-outlined">receipt_long</i>
-                  <span className="title">Orders</span>
-                </AccordionSummary>
+                Orders
+              </Typography>
 
-                <AccordionDetails className="mat-details">
-                  <ul className="sidebar-sub-menu">
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/ecommerce/orders/"
-                        className={`sidemenu-link ${
-                          pathname.startsWith("/ecommerce/orders/") ? "active" : ""
-                        }`}
-                      >
-                        Orders
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
+              <Link
+                href="/ecommerce/orders/"
+                className={`sidebar-menu-link ${
+                  pathname.startsWith("/ecommerce/orders/") ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">receipt_long</i>
+                <span className="title">Orders</span>
+              </Link>
 
               <Link
                 href="/ecommerce/shipping-settings/"
