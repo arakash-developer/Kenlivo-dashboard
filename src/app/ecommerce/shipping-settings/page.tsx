@@ -119,7 +119,15 @@ export default function ShippingSettingsPage() {
             <CircularProgress size={28} />
           </Box>
         ) : (
-          <Box component="form" onSubmit={saveFees} sx={{ display: "grid", gap: 2 }}>
+          <Box
+            component="form"
+            onSubmit={saveFees}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "repeat(2, minmax(0, 1fr))" },
+              gap: 2,
+            }}
+          >
             <TextField
               label="Inside Kurigram charge (৳)"
               type="number"
@@ -146,7 +154,12 @@ export default function ShippingSettingsPage() {
               inputProps={{ min: 0, step: 1 }}
               required
             />
-            <Button type="submit" variant="contained" disabled={saving}>
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={saving}
+              sx={{ gridColumn: { xs: "auto", md: "1 / -1" } }}
+            >
               {saving ? "Saving..." : "Save delivery charges"}
             </Button>
           </Box>
