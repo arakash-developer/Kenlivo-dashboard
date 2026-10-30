@@ -268,6 +268,45 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                 </AccordionDetails>
               </Accordion>
 
+              <Accordion
+                expanded={expanded === "panel_orders"}
+                onChange={handleChange("panel_orders")}
+                className="mat-accordion"
+              >
+                <AccordionSummary
+                  className="mat-summary"
+                  aria-controls="panel-orders-content"
+                  id="panel-orders-header"
+                >
+                  <i className="material-symbols-outlined">receipt_long</i>
+                  <span className="title">Orders</span>
+                </AccordionSummary>
+
+                <AccordionDetails className="mat-details">
+                  <ul className="sidebar-sub-menu">
+                    <li className="sidemenu-item">
+                      <Link
+                        href="/ecommerce/orders/"
+                        className={`sidemenu-link ${
+                          pathname.startsWith("/ecommerce/orders/") ? "active" : ""
+                        }`}
+                      >
+                        Orders
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionDetails>
+              </Accordion>
+
+              <Link
+                href="/ecommerce/shipping-settings/"
+                className={`sidebar-menu-link ${
+                  pathname === "/ecommerce/shipping-settings/" ? "active" : ""
+                }`}
+              >
+                <i className="material-symbols-outlined">local_shipping</i>
+                <span className="title">Delivery Charges</span>
+              </Link>
 
               <Typography
                 className="sub-title"
@@ -612,17 +651,6 @@ const LeftSidebarMenu: React.FC<LeftSidebarProps> = ({ toggleActive }) => {
                         }`}
                       >
                         Checkout
-                      </Link>
-                    </li>
-
-                    <li className="sidemenu-item">
-                      <Link
-                        href="/ecommerce/orders/"
-                        className={`sidemenu-link ${
-                          pathname === "/ecommerce/orders/" ? "active" : ""
-                        }`}
-                      >
-                        Orders
                       </Link>
                     </li>
 
