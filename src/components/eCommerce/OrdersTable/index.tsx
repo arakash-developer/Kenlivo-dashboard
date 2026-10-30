@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   MenuItem,
   Paper,
   Select,
@@ -236,7 +237,7 @@ const OrdersTable: React.FC = () => {
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={8} align="center" sx={{ py: 5 }}>
-                    Loading orders...
+                    <CircularProgress size={28} aria-label="Loading orders" />
                   </TableCell>
                 </TableRow>
               ) : orders.length === 0 ? (
