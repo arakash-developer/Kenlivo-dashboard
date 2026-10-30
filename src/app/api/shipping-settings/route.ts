@@ -63,10 +63,12 @@ export async function PUT(req: NextRequest) {
   const body = (await req.json().catch(() => null)) as
     | { insideKurigram?: unknown; outsideKurigram?: unknown }
     | null;
-  const insideKurigram = Number(body?.insideKurigram);
-  const outsideKurigram = Number(body?.outsideKurigram);
+  const insideKurigram = body?.insideKurigram;
+  const outsideKurigram = body?.outsideKurigram;
   if (
     !body ||
+    typeof insideKurigram !== "number" ||
+    typeof outsideKurigram !== "number" ||
     !Number.isSafeInteger(insideKurigram) ||
     !Number.isSafeInteger(outsideKurigram) ||
     insideKurigram < 0 ||
