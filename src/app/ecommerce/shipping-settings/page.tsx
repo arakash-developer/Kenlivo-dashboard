@@ -102,7 +102,7 @@ export default function ShippingSettingsPage() {
         </ul>
       </div>
 
-      <Card sx={{ maxWidth: 720, p: { xs: 2, sm: 3 }, boxShadow: "none" }} className="rmui-card">
+      <Card sx={{ width: "100%", p: { xs: 2, sm: 3 }, boxShadow: "none" }} className="rmui-card">
         <Typography variant="h6" sx={{ mb: 1 }}>
           Kurigram delivery rates
         </Typography>
