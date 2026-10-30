@@ -1,15 +1,14 @@
 "use client";
 
-import styles from "@/components/eCommerce/Search.module.css";
-import AddIcon from "@mui/icons-material/Add";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import NextLink from "next/link";
+import * as React from "react";
 import {
   Box,
   Button,
   Card,
-  IconButton,
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -20,368 +19,177 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import Image from "next/image";
-import * as React from "react";
+import styles from "@/components/eCommerce/Search.module.css";
 
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number,
-  ) => void;
+const ORDER_STATUSES = [
+  "pending",
+  "paid",
+  "processing",
+  "shipped",
+  "delivered",
+  "cancelled",
+] as const;
+
+type OrderStatus = (typeof ORDER_STATUSES)[number];
+
+interface DashboardOrder {
+  _id: string;
+  user?: string;
+  items: Array<{ name: string; quantity: number }>;
+  shippingAddress?: { fullName?: string; phone?: string };
+  paymentMethod?: string;
+  grandTotal?: number;
+  status: OrderStatus;
+  createdAt?: string;
 }
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page + 1);
-  };
-
-  return (
-    <Box
-      sx={{
-        flexShrink: 0,
-        display: "flex",
-        gap: "10px",
-        padding: "14px 20px",
-      }}
-    >
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
-        className="border"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-        sx={{
-          borderRadius: "4px",
-          padding: "6px",
-        }}
-        className="border"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-    </Box>
-  );
+interface OrdersResponse {
+  success: boolean;
+  message?: string;
+  data: DashboardOrder[];
+  meta?: { total: number };
 }
-
-function createData(
-  orderID: string,
-  customerImage: string,
-  customerName: string,
-  items: string,
-  created: string,
-  total: string,
-  vendor: string,
-  status: string,
-) {
-  return {
-    orderID,
-    customerImage,
-    customerName,
-    items,
-    created,
-    total,
-    vendor,
-    status,
-  };
-}
-
-const rows = [
-  createData(
-    "#JAN-2345",
-    "/images/users/user1.jpg",
-    "Sarah Johnson",
-    "120",
-    "12 Jun 2024",
-    "৳10,490",
-    "Dennis Matthews",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2346",
-    "/images/users/user2.jpg",
-    "Michael Smith",
-    "62",
-    "11 Jun 2024",
-    "৳6,575",
-    "Kathryn Turner",
-    "Confirmed",
-  ),
-  createData(
-    "#JAN-2347",
-    "/images/users/user3.jpg",
-    "Emily Brow",
-    "49",
-    "10 Jun 2024",
-    "৳12,870",
-    "John Valdez",
-    "Pending",
-  ),
-  createData(
-    "#JAN-2348",
-    "/images/users/user4.jpg",
-    "Jason Lee",
-    "25",
-    "09 Jun 2024",
-    "৳7,89",
-    "Douglas Harvey",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2349",
-    "/images/users/user5.jpg",
-    "Ashley Davis",
-    "82",
-    "08 Jun 2024",
-    "৳4,680",
-    "Susan Rader",
-    "Rejected",
-  ),
-  createData(
-    "#JAN-2350",
-    "/images/users/user4.jpg",
-    "Sarah Johnson",
-    "120",
-    "12 Jun 2024",
-    "৳10,490",
-    "Dennis Matthews",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2351",
-    "/images/users/user5.jpg",
-    "Michael Smith",
-    "62",
-    "11 Jun 2024",
-    "৳6,575",
-    "Kathryn Turner",
-    "Confirmed",
-  ),
-  createData(
-    "#JAN-2352",
-    "/images/users/user6.jpg",
-    "Emily Brow",
-    "49",
-    "10 Jun 2024",
-    "৳12,870",
-    "John Valdez",
-    "Pending",
-  ),
-  createData(
-    "#JAN-2353",
-    "/images/users/user7.jpg",
-    "Jason Lee",
-    "25",
-    "09 Jun 2024",
-    "৳7,89",
-    "Douglas Harvey",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2354",
-    "/images/users/user8.jpg",
-    "Ashley Davis",
-    "82",
-    "08 Jun 2024",
-    "৳4,680",
-    "Susan Rader",
-    "Rejected",
-  ),
-  createData(
-    "#JAN-2355",
-    "/images/users/user9.jpg",
-    "Sarah Johnson",
-    "120",
-    "12 Jun 2024",
-    "৳10,490",
-    "Dennis Matthews",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2356",
-    "/images/users/user10.jpg",
-    "Michael Smith",
-    "62",
-    "11 Jun 2024",
-    "৳6,575",
-    "Kathryn Turner",
-    "Confirmed",
-  ),
-  createData(
-    "#JAN-2357",
-    "/images/users/user11.jpg",
-    "Emily Brow",
-    "49",
-    "10 Jun 2024",
-    "৳12,870",
-    "John Valdez",
-    "Pending",
-  ),
-  createData(
-    "#JAN-2358",
-    "/images/users/user12.jpg",
-    "Jason Lee",
-    "25",
-    "09 Jun 2024",
-    "৳7,89",
-    "Douglas Harvey",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2359",
-    "/images/users/user13.jpg",
-    "Ashley Davis",
-    "82",
-    "08 Jun 2024",
-    "৳4,680",
-    "Susan Rader",
-    "Rejected",
-  ),
-  createData(
-    "#JAN-2360",
-    "/images/users/user14.jpg",
-    "Sarah Johnson",
-    "120",
-    "12 Jun 2024",
-    "৳10,490",
-    "Dennis Matthews",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2361",
-    "/images/users/user15.jpg",
-    "Michael Smith",
-    "62",
-    "11 Jun 2024",
-    "৳6,575",
-    "Kathryn Turner",
-    "Confirmed",
-  ),
-  createData(
-    "#JAN-2362",
-    "/images/users/user16.jpg",
-    "Emily Brow",
-    "49",
-    "10 Jun 2024",
-    "৳12,870",
-    "John Valdez",
-    "Pending",
-  ),
-  createData(
-    "#JAN-2363",
-    "/images/users/user17.jpg",
-    "Jason Lee",
-    "25",
-    "09 Jun 2024",
-    "৳7,89",
-    "Douglas Harvey",
-    "Shipped",
-  ),
-  createData(
-    "#JAN-2364",
-    "/images/users/user18.jpg",
-    "Ashley Davis",
-    "82",
-    "08 Jun 2024",
-    "৳4,680",
-    "Susan Rader",
-    "Rejected",
-  ),
-].sort((b, a) => (a.orderID < b.orderID ? -1 : 1));
 
 const OrdersTable: React.FC = () => {
-  // Table
+  const [orders, setOrders] = React.useState<DashboardOrder[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [total, setTotal] = React.useState(0);
+  const [searchText, setSearchText] = React.useState("");
+  const [search, setSearch] = React.useState("");
+  const [statusFilter, setStatusFilter] = React.useState("");
+  const [updatingId, setUpdatingId] = React.useState<string | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState("");
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  React.useEffect(() => {
+    let active = true;
+    const params = new URLSearchParams({
+      page: String(page + 1),
+      limit: String(rowsPerPage),
+    });
+    if (search) params.set("search", search);
+    if (statusFilter) params.set("status", statusFilter);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
+    setLoading(true);
+    setError("");
+    fetch(`/api/orders/?${params.toString()}`)
+      .then(async (response) => {
+        const result = (await response.json()) as OrdersResponse;
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Could not load orders.");
+        }
+        return result;
+      })
+      .then((result) => {
+        if (!active) return;
+        setOrders(result.data);
+        setTotal(result.meta?.total ?? result.data.length);
+      })
+      .catch((requestError: unknown) => {
+        if (active) {
+          setError(requestError instanceof Error ? requestError.message : "Could not load orders.");
+        }
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [page, rowsPerPage, search, statusFilter]);
+
+  const changeStatus = async (orderId: string, status: OrderStatus) => {
+    setUpdatingId(orderId);
+    setError("");
+    try {
+      const response = await fetch("/api/orders/", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: orderId, status }),
+      });
+      const result = (await response.json()) as { success: boolean; message?: string };
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Could not update order status.");
+      }
+      setOrders((current) =>
+        current.map((order) => (order._id === orderId ? { ...order, status } : order)),
+      );
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Could not update order status.");
+    } finally {
+      setUpdatingId(null);
+    }
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+  const submitSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setPage(0);
+    setSearch(searchText.trim());
   };
 
   return (
-    <>
-      <Card
-        sx={{
-          boxShadow: "none",
-          borderRadius: "7px",
-          mb: "25px",
-          padding: { xs: "18px", sm: "20px", lg: "25px" },
-        }}
-        className="rmui-card"
-      >
-        <Box>
+    <Card
+      sx={{
+        boxShadow: "none",
+        borderRadius: "7px",
+        mb: "25px",
+        padding: { xs: "18px", sm: "20px", lg: "25px" },
+      }}
+      className="rmui-card"
+    >
+      <Box>
+        <Box
+          sx={{
+            display: { xs: "block", sm: "flex" },
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "16px",
+            mb: "25px",
+          }}
+        >
           <Box
-            sx={{
-              display: { xs: "block", sm: "flex" },
-              alignItems: "center",
-              justifyContent: "space-between",
-              mb: "25px",
-            }}
+            component="form"
+            onSubmit={submitSearch}
+            className={styles.searchBox}
+            sx={{ width: "265px" }}
           >
-            <Box
-              component="form"
-              className={styles.searchBox}
-              sx={{
-                width: "265px",
-              }}
-            >
-              <label>
-                <i className="material-symbols-outlined">search</i>
-              </label>
-              <input
-                type="text"
-                className={styles.inputSearch}
-                placeholder="Search order here....."
-              />
-            </Box>
+            <label htmlFor="orders-search">
+              <i className="material-symbols-outlined">search</i>
+            </label>
+            <input
+              id="orders-search"
+              type="search"
+              className={styles.inputSearch}
+              placeholder="Search order or customer..."
+              value={searchText}
+              onChange={(event) => setSearchText(event.target.value)}
+            />
+          </Box>
 
+          <Box sx={{ display: "flex", alignItems: "center", gap: "12px", mt: { xs: "14px", sm: 0 } }}>
+            <Select
+              size="small"
+              value={statusFilter}
+              onChange={(event) => {
+                setPage(0);
+                setStatusFilter(event.target.value);
+              }}
+              displayEmpty
+              aria-label="Filter orders by status"
+              sx={{ minWidth: "150px", textTransform: "capitalize" }}
+            >
+              <MenuItem value="">All statuses</MenuItem>
+              {ORDER_STATUSES.map((status) => (
+                <MenuItem key={status} value={status} sx={{ textTransform: "capitalize" }}>
+                  {status}
+                </MenuItem>
+              ))}
+            </Select>
             <Button
+              component={NextLink}
+              href="/ecommerce/orders/create/"
               variant="outlined"
               sx={{
                 textTransform: "capitalize",
@@ -389,320 +197,129 @@ const OrdersTable: React.FC = () => {
                 fontWeight: "500",
                 fontSize: "13px",
                 padding: "6px 13px",
+                whiteSpace: "nowrap",
               }}
               color="primary"
             >
-              <AddIcon sx={{ fontSize: "17px" }} /> Add New Order
+              Create order
             </Button>
           </Box>
-
-          {/* Table */}
-          <TableContainer
-            component={Paper}
-            sx={{
-              boxShadow: "none",
-              borderRadius: "7px",
-            }}
-            className="rmui-table border"
-          >
-            <Table sx={{ minWidth: 1250 }} aria-label="Table">
-              <TableHead className="bg-f6f7f9">
-                <TableRow>
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Order ID
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Customer
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Items
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Created
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Total
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Vendor
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Status
-                  </TableCell>
-
-                  <TableCell
-                    sx={{
-                      fontWeight: "500",
-                      padding: "10px 20px",
-                      fontSize: "14px",
-                    }}
-                    className="text-black border-bottom"
-                  >
-                    Action
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? rows.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage,
-                    )
-                  : rows
-                ).map((row) => (
-                  <TableRow key={row.orderID}>
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.orderID}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="border-bottom"
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "13px",
-                        }}
-                      >
-                        <Box sx={{ flexShrink: "0" }}>
-                          <Image
-                            src={row.customerImage}
-                            alt="Product"
-                            width={40}
-                            height={40}
-                            style={{ borderRadius: "7px" }}
-                          />
-                        </Box>
-
-                        <Box>
-                          <Typography
-                            sx={{
-                              fontSize: "15px",
-                              fontWeight: "500",
-                            }}
-                            className="text-black"
-                          >
-                            {row.customerName}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.items}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.created}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.total}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                        fontSize: "14px",
-                      }}
-                      className="text-black border-bottom"
-                    >
-                      {row.vendor}
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        borderBottom: "1px solid #eceef2",
-                        padding: "14px 20px",
-                      }}
-                      className="border-bottom"
-                    >
-                      <div className={`kenlivo-badge ${row.status}`}>
-                        {row.status}
-                      </div>
-                    </TableCell>
-
-                    <TableCell
-                      sx={{
-                        padding: "14px 20px",
-                      }}
-                      className="border-bottom"
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <IconButton
-                          aria-label="view"
-                          color="primary"
-                          sx={{ padding: "5px" }}
-                        >
-                          <i
-                            className="material-symbols-outlined"
-                            style={{ fontSize: "16px" }}
-                          >
-                            visibility
-                          </i>
-                        </IconButton>
-
-                        <IconButton
-                          aria-label="edit"
-                          color="secondary"
-                          sx={{ padding: "5px" }}
-                        >
-                          <i
-                            className="material-symbols-outlined"
-                            style={{ fontSize: "16px" }}
-                          >
-                            edit
-                          </i>
-                        </IconButton>
-
-                        <IconButton
-                          aria-label="delete"
-                          color="error"
-                          sx={{ padding: "5px" }}
-                        >
-                          <i
-                            className="material-symbols-outlined"
-                            style={{ fontSize: "16px" }}
-                          >
-                            delete
-                          </i>
-                        </IconButton>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={8} />
-                  </TableRow>
-                )}
-              </TableBody>
-
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[
-                      5,
-                      10,
-                      25,
-                      { label: "All", value: -1 },
-                    ]}
-                    colSpan={8}
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    slotProps={{
-                      select: {
-                        inputProps: {
-                          "aria-label": "rows per page",
-                        },
-                        native: true,
-                      },
-                    }}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                    sx={{
-                      border: "none",
-                    }}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </TableContainer>
         </Box>
-      </Card>
-    </>
+
+        {error && (
+          <Typography role="alert" color="error" sx={{ mb: 2, fontSize: "14px" }}>
+            {error}
+          </Typography>
+        )}
+
+        <TableContainer
+          component={Paper}
+          sx={{ boxShadow: "none", borderRadius: "7px" }}
+          className="rmui-table border"
+        >
+          <Table sx={{ minWidth: 950 }} aria-label="Orders">
+            <TableHead className="bg-f6f7f9">
+              <TableRow>
+                {["Order ID", "Customer", "Items", "Created", "Total", "Payment", "Status", "Manage"].map((heading) => (
+                  <TableCell
+                    key={heading}
+                    sx={{ fontWeight: "500", padding: "10px 20px", fontSize: "14px" }}
+                    className="text-black border-bottom"
+                  >
+                    {heading}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={8} align="center" sx={{ py: 5 }}>
+                    Loading orders...
+                  </TableCell>
+                </TableRow>
+              ) : orders.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={8} align="center" sx={{ py: 5 }}>
+                    No orders found.
+                  </TableCell>
+                </TableRow>
+              ) : (
+                orders.map((order) => (
+                  <TableRow key={order._id}>
+                    <TableCell className="text-black border-bottom" sx={{ padding: "14px 20px", fontSize: "13px" }}>
+                      #{order._id.slice(-8).toUpperCase()}
+                    </TableCell>
+                    <TableCell className="border-bottom" sx={{ padding: "14px 20px" }}>
+                      <Typography className="text-black" sx={{ fontSize: "14px", fontWeight: 500 }}>
+                        {order.shippingAddress?.fullName || "Customer"}
+                      </Typography>
+                      {order.shippingAddress?.phone && (
+                        <Typography color="text.secondary" sx={{ fontSize: "12px" }}>
+                          {order.shippingAddress.phone}
+                        </Typography>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-black border-bottom" sx={{ padding: "14px 20px", fontSize: "13px" }}>
+                      {order.items.reduce((quantity, item) => quantity + item.quantity, 0)} item(s)
+                    </TableCell>
+                    <TableCell className="text-black border-bottom" sx={{ padding: "14px 20px", fontSize: "13px" }}>
+                      {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : "—"}
+                    </TableCell>
+                    <TableCell className="text-black border-bottom" sx={{ padding: "14px 20px", fontSize: "13px" }}>
+                      ৳{Number(order.grandTotal ?? 0).toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-black border-bottom" sx={{ padding: "14px 20px", fontSize: "13px", textTransform: "capitalize" }}>
+                      {(order.paymentMethod || "—").replaceAll("_", " ")}
+                    </TableCell>
+                    <TableCell className="border-bottom" sx={{ padding: "14px 20px" }}>
+                      <span className="kenlivo-badge" style={{ textTransform: "capitalize" }}>
+                        {order.status}
+                      </span>
+                    </TableCell>
+                    <TableCell className="border-bottom" sx={{ padding: "10px 12px" }}>
+                      <Select
+                        size="small"
+                        value={order.status}
+                        disabled={updatingId === order._id}
+                        onChange={(event) => changeStatus(order._id, event.target.value as OrderStatus)}
+                        aria-label={`Update status for order ${order._id}`}
+                        sx={{ minWidth: "135px", textTransform: "capitalize", fontSize: "13px" }}
+                      >
+                        {ORDER_STATUSES.map((status) => (
+                          <MenuItem key={status} value={status} sx={{ textTransform: "capitalize" }}>
+                            {status}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  colSpan={8}
+                  count={total}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={(_event, newPage) => setPage(newPage)}
+                  onRowsPerPageChange={(event) => {
+                    setRowsPerPage(Number.parseInt(event.target.value, 10));
+                    setPage(0);
+                  }}
+                  sx={{ border: "none" }}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </TableContainer>
+      </Box>
+    </Card>
   );
 };
 
